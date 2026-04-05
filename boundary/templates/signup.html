@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - Avatar</title>
+    <title>Sign Up - Avatar</title>
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -90,26 +90,30 @@
             line-height: 1.7;
         }
 
-        .brand-stats {
+        .brand-features {
             margin-top: 2.5rem;
+            text-align: left;
+        }
+
+        .brand-feature {
             display: flex;
-            gap: 2rem;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .brand-feature .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
             justify-content: center;
-        }
-
-        .brand-stat {
-            text-align: center;
-        }
-
-        .brand-stat .number {
-            font-size: 1.6rem;
-            font-weight: 800;
-        }
-
-        .brand-stat .label {
-            font-size: 0.8rem;
-            opacity: 0.7;
-            margin-top: 0.2rem;
+            font-size: 1rem;
+            flex-shrink: 0;
         }
 
         /* ── Right Panel (Form) ── */
@@ -125,7 +129,7 @@
 
         .form-container {
             width: 100%;
-            max-width: 400px;
+            max-width: 440px;
         }
 
         .form-header {
@@ -169,6 +173,12 @@
         }
 
         /* ── Form Fields ── */
+        .name-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
         .form-group {
             margin-bottom: 1.25rem;
         }
@@ -203,6 +213,12 @@
             color: #a0aec0;
         }
 
+        .form-group .hint {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+
         /* ── Submit Button ── */
         .btn-submit {
             width: 100%;
@@ -227,6 +243,26 @@
 
         .btn-submit:active {
             transform: translateY(0);
+        }
+
+        /* ── Divider ── */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider span {
+            padding: 0 1rem;
         }
 
         /* ── Footer Link ── */
@@ -274,12 +310,23 @@
                 font-size: 1.5rem;
             }
 
-            .brand-stats {
+            .brand-features {
                 display: none;
             }
 
             .form-panel {
                 padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .brand-content h2 {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -290,20 +337,20 @@
     <div class="brand-panel">
         <div class="brand-content">
             <a href="{% url 'landing' %}" class="brand-logo">Ava<span>tar</span></a>
-            <h2>Welcome back</h2>
-            <p>Sign in to manage your campaigns, track donations, and see your impact grow.</p>
-            <div class="brand-stats">
-                <div class="brand-stat">
-                    <div class="number">$2.4M+</div>
-                    <div class="label">Raised</div>
+            <h2>Start making a difference today</h2>
+            <p>Join a community of changemakers who believe in the power of giving.</p>
+            <div class="brand-features">
+                <div class="brand-feature">
+                    <div class="icon">&#9913;</div>
+                    <span>Browse and support verified campaigns</span>
                 </div>
-                <div class="brand-stat">
-                    <div class="number">12K+</div>
-                    <div class="label">Donors</div>
+                <div class="brand-feature">
+                    <div class="icon">&#9830;</div>
+                    <span>Track your donations and impact in real time</span>
                 </div>
-                <div class="brand-stat">
-                    <div class="number">350+</div>
-                    <div class="label">Campaigns</div>
+                <div class="brand-feature">
+                    <div class="icon">&#10003;</div>
+                    <span>100% transparent fund allocation</span>
                 </div>
             </div>
         </div>
@@ -313,8 +360,8 @@
     <div class="form-panel">
         <div class="form-container">
             <div class="form-header">
-                <h1>Sign in</h1>
-                <p>Don't have an account? <a href="{% url 'signup' %}">Create one</a></p>
+                <h1>Create your account</h1>
+                <p>Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
             </div>
 
             {% if error %}
@@ -324,17 +371,34 @@
             <form method="post">
                 {% csrf_token %}
 
+                <div class="name-row">
+                    <div class="form-group">
+                        <label for="first_name">First name</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="John" value="{{ first_name|default:'' }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last name</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Doe" value="{{ last_name|default:'' }}" required>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" value="{{ email|default:'' }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    <div class="hint">Must be at least 8 characters</div>
                 </div>
 
-                <button type="submit" class="btn-submit">Sign In</button>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Create Account</button>
             </form>
 
             <div class="form-footer">

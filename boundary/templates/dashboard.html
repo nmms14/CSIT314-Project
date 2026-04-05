@@ -1,13 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard - Fundraising Platform</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Avatar</title>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d6a4f;
+            --primary-dark: #1b4332;
+            --bg: #f0f2f5;
+            --text: #2b2d42;
+            --text-light: #555b6e;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .welcome {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .logout-btn {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: inherit;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45,106,79,0.3);
+        }
+    </style>
 </head>
 <body>
-    <h1>Platform Manager Dashboard</h1>
-    <p>Welcome, {{ name }}</p>
-    <p>Role: {{ role }}</p>
-    <hr>
-    <a href="{% url 'logout' %}">Logout</a>
+    <h1 class="welcome">Welcome, {{ name }}</h1>
+    <a href="{% url 'logout' %}" class="logout-btn">Sign Out</a>
 </body>
 </html>
