@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import django; print\\(django.get_version\\(\\)\\)\")",
+      "Bash(where python3:*)",
+      "Bash(where py:*)",
+      "Bash(python3 -c \"import django; print\\(django.get_version\\(\\)\\)\")",
+      "Bash(C:/Users/Terence01/AppData/Local/Python/bin/python3:*)",
+      "Bash(mkdir:*)"
+    ]
+  }
+}
