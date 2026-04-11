@@ -10,7 +10,9 @@
       "Bash(grep -E \"\\\\.py$\")",
       "Bash(python:*)",
       "Bash(python3:*)",
-      "Bash(/c/Users/Terence01/AppData/Local/Python/bin/python3:*)"
+      "Bash(/c/Users/Terence01/AppData/Local/Python/bin/python3:*)",
+      "Bash(py -c \"import django; print\\(django.get_version\\(\\)\\)\")",
+      "Bash(py manage.py check)"
     ]
   }
 }
