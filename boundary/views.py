@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 
 from control.auth_manager import AuthenticationManager
 
@@ -24,7 +25,10 @@ def login_view(request):
         if success:
             return redirect('dashboard')
 
-    return render(request, 'login.html', {'error': error})
+    return render(request, 'login.html', {
+        'error': error,
+        'logged_out': request.GET.get('logged_out') == '1',
+    })
 
 
 def dashboard_view(request):
@@ -40,6 +44,6 @@ def dashboard_view(request):
 
 
 def logout_view(request):
-    """Boundary layer: Handles logout and redirects to login."""
+    """Boundary layer: Handles logout and redirects to login with confirmation flag."""
     auth_manager.logout(request)
-    return redirect('login')
+    return redirect(f"{reverse('login')}?logged_out=1")
