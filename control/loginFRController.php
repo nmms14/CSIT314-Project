@@ -16,11 +16,7 @@ class loginFRController {
 
         $_SESSION['user_id'] = $fr->id;
         $_SESSION['username'] = $fr->username;
-<<<<<<< Updated upstream
-        $_SESSION['role'] = 'fundraiser';
-=======
         $_SESSION['role'] = 'fund_raiser';
->>>>>>> Stashed changes
         return true;
     }
 }

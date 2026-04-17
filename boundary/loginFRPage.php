@@ -1,13 +1,10 @@
 <?php
 
 class loginFRPage {
-<<<<<<< Updated upstream
-=======
     public function displayLoginForm(?string $error = null, ?string $message = null): void {
         include __DIR__ . '/views/login.view.php';
     }
 
->>>>>>> Stashed changes
     public function login(string $username, string $password): ?string {
         $controller = new loginFRController();
         if ($controller->login($username, $password)) {
