@@ -11,7 +11,7 @@ class Donee {
 
     public function login(string $username, string $password): bool {
         $stmt = $this->db->prepare(
-            "SELECT id, password FROM users WHERE username = ? AND role = 'donee' LIMIT 1"
+            "SELECT id, password FROM users WHERE username = ? AND profile = 'donee' LIMIT 1"
         );
         $stmt->bind_param('s', $username);
         $stmt->execute();

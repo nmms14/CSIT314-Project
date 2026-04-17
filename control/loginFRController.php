@@ -16,7 +16,7 @@ class loginFRController {
 
         $_SESSION['user_id'] = $fr->id;
         $_SESSION['username'] = $fr->username;
-        $_SESSION['role'] = 'fund_raiser';
+        $_SESSION['profile'] = 'fund_raiser';
         return true;
     }
 }

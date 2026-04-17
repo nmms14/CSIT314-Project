@@ -2,7 +2,7 @@
 
 session_start();
 
-if (($_SESSION['role'] ?? null) !== 'user_admin') {
+if (($_SESSION['profile'] ?? null) !== 'user_admin') {
     header('Location: index.php');
     exit;
 }

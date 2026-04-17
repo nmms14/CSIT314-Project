@@ -14,7 +14,7 @@ Foundation is already built. This project has **two shared user stories** — lo
 1. User visits `http://localhost/CSIT314/` → sees the shared login form.
 2. User enters username + password, clicks **Login**.
 3. `index.php` loops through `$loginPages = [loginPMPage, loginUAPage, loginFRPage, loginDNPage]`.
-4. Each boundary calls its controller, which calls its entity, which queries the `users` table filtered by its role.
+4. Each boundary calls its controller, which calls its entity, which queries the `users` table filtered by its profile.
 5. First one that authenticates wins — sets `$_SESSION`, returns a dashboard URL.
 6. `index.php` redirects the user to that dashboard.
 7. On failure → error `"Invalid username or password."` shown below the form.
@@ -119,7 +119,7 @@ Boundary → Controller → Entity → DB. Do not skip layers.
 | Shared class (not per-role) | PascalCase | `LogoutPage`, `LogoutController`, `Session` |
 | Root entry file | `snake_case.php` — role suffix | `dashboard_dn.php` |
 | View file | `snake_case.view.php` inside `boundary/views/` | `dashboard_dn.view.php` |
-| DB role value | lowercase snake | `'donee'`, `'fund_raiser'`, `'user_admin'` |
+| DB profile value | lowercase snake | `'donee'`, `'fund_raiser'`, `'user_admin'` |
 
 **Role abbreviations:**
 | Abbrev | Role slug | Entity class |
@@ -138,10 +138,10 @@ After successful login, these session keys are set by the controller:
 ```php
 $_SESSION['user_id']  = <int>       // primary key from users table
 $_SESSION['username'] = <string>    // the logged-in username
-$_SESSION['role']     = '<role>'    // 'platform_manager' | 'user_admin' | 'fund_raiser' | 'donee'
+$_SESSION['profile']  = '<profile>' // 'platform_manager' | 'user_admin' | 'fund_raiser' | 'donee'
 ```
 
-Dashboard guards check `$_SESSION['role']` and redirect back to `index.php` if the wrong role.
+Dashboard guards check `$_SESSION['profile']` and redirect back to `index.php` if the wrong profile.
 
 Logout clears all session state via `Session::destroy()`.
 
@@ -159,7 +159,7 @@ Open `entity/<YourRole>.php` and add a method for the data operation:
 
 ```php
 public function fetchAll(): array {
-    $result = $this->db->query("SELECT id, username, role FROM users");
+    $result = $this->db->query("SELECT id, username, profile FROM users");
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 ```
@@ -200,7 +200,7 @@ Pure HTML with `<?= $var ?>` holes. Copy styling from `dashboard_pm.view.php` to
 <?php
 session_start();
 // autoload ...
-if (($_SESSION['role'] ?? null) !== 'platform_manager') {
+if (($_SESSION['profile'] ?? null) !== 'platform_manager') {
     header('Location: index.php'); exit;
 }
 (new viewUsersPMPage())->display();
@@ -222,7 +222,7 @@ Add a button / card in your `boundary/views/dashboard_<xx>.view.php` linking to 
 - **Always** use prepared statements (`$db->prepare(...)->bind_param(...)`). No string concatenation into SQL.
 - **Always** escape output in views with `htmlspecialchars(...)`.
 - **Always** start every root `.php` file with `session_start();` before anything else.
-- **Always** guard role-specific entry files (check `$_SESSION['role']` matches).
+- **Always** guard role-specific entry files (check `$_SESSION['profile']` matches).
 
 ---
 
@@ -231,12 +231,12 @@ Add a button / card in your `boundary/views/dashboard_<xx>.view.php` linking to 
 1. XAMPP running (Apache + MySQL)
 2. Project folder: `C:\xampp\htdocs\CSIT314\`
 3. Import DB: phpMyAdmin → Import → select `sql/schema.sql` → Go
-4. Seed test users via SQL tab (only `manager` is seeded by default):
+4. Seed extra test users via SQL tab (all four profiles are seeded by `schema.sql`):
    ```sql
-   INSERT INTO users (username, password, role) VALUES
-   ('admin1',  'admin123',  'user_admin'),
-   ('fr1',     'fr123',     'fund_raiser'),
-   ('donee1',  'donee123',  'donee');
+   INSERT INTO users (name, username, email, phone_number, password, profile) VALUES
+   ('Admin One',    'admin1', 'admin1@example.com', '98000001', 'admin123', 'user_admin'),
+   ('FundRaiser 1', 'fr1',    'fr1@example.com',    '98000002', 'fr123',    'fund_raiser'),
+   ('Donee One',    'donee1', 'donee1@example.com', '98000003', 'donee123', 'donee');
    ```
 5. Open `http://localhost/CSIT314/`
 6. Login with any seeded user.
@@ -251,7 +251,7 @@ DROP DATABASE csit314;
 ## 8. Common pitfalls
 
 - **"Class not found"** → filename must match class name exactly. The autoloader in `index.php` looks in `boundary/`, `control/`, `entity/`, `config/`.
-- **Dashboard keeps redirecting to index** → `$_SESSION['role']` doesn't match the dashboard's guard check.
-- **Login always fails** → confirm the `role` value in the DB row matches exactly what your entity's SQL filters on.
+- **Dashboard keeps redirecting to index** → `$_SESSION['profile']` doesn't match the dashboard's guard check.
+- **Login always fails** → confirm the `profile` value in the DB row matches exactly what your entity's SQL filters on.
 - **Modal doesn't appear / changes not showing** → Apache/browser caching; hard refresh (Ctrl+F5).
 - **Logout redirects to wrong page** → `LogoutPage::requestLogout()` returns `index.php?logged_out=1` — don't change it, the query param triggers the success message.

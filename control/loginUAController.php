@@ -16,7 +16,7 @@ class loginUAController {
 
         $_SESSION['user_id'] = $ua->id;
         $_SESSION['username'] = $ua->username;
-        $_SESSION['role'] = 'user_admin';
+        $_SESSION['profile'] = 'user_admin';
         return true;
     }
 }

@@ -16,7 +16,7 @@ class loginDNController {
 
         $_SESSION['user_id'] = $dn->id;
         $_SESSION['username'] = $dn->username;
-        $_SESSION['role'] = 'donee';
+        $_SESSION['profile'] = 'donee';
         return true;
     }
 }

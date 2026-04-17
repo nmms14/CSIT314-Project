@@ -2,7 +2,7 @@
 
 session_start();
 
-if (($_SESSION['role'] ?? null) !== 'platform_manager') {
+if (($_SESSION['profile'] ?? null) !== 'platform_manager') {
     header('Location: index.php');
     exit;
 }

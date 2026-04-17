@@ -20,8 +20,8 @@ $dashboards = [
     'donee'            => 'dashboard_dn.php',
 ];
 
-if (isset($_SESSION['role'], $dashboards[$_SESSION['role']])) {
-    header('Location: ' . $dashboards[$_SESSION['role']]);
+if (isset($_SESSION['profile'], $dashboards[$_SESSION['profile']])) {
+    header('Location: ' . $dashboards[$_SESSION['profile']]);
     exit;
 }
 

@@ -2,7 +2,7 @@
 
 session_start();
 
-if (($_SESSION['role'] ?? null) !== 'fund_raiser') {
+if (($_SESSION['profile'] ?? null) !== 'fund_raiser') {
     header('Location: index.php');
     exit;
 }

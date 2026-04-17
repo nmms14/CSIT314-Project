@@ -16,7 +16,7 @@ class loginPMController {
 
         $_SESSION['user_id'] = $pm->id;
         $_SESSION['username'] = $pm->username;
-        $_SESSION['role'] = 'platform_manager';
+        $_SESSION['profile'] = 'platform_manager';
         return true;
     }
 }

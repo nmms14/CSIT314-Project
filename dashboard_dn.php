@@ -2,7 +2,7 @@
 
 session_start();
 
-if (($_SESSION['role'] ?? null) !== 'donee') {
+if (($_SESSION['profile'] ?? null) !== 'donee') {
     header('Location: index.php');
     exit;
 }

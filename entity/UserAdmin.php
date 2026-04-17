@@ -11,7 +11,7 @@ class UserAdmin {
 
     public function login(string $username, string $password): bool {
         $stmt = $this->db->prepare(
-            "SELECT id, password FROM users WHERE username = ? AND role = 'user_admin' LIMIT 1"
+            "SELECT id, password FROM users WHERE username = ? AND profile = 'user_admin' LIMIT 1"
         );
         $stmt->bind_param('s', $username);
         $stmt->execute();
