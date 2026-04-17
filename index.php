@@ -15,6 +15,7 @@ spl_autoload_register(function (string $class): void {
 
 $dashboards = [
     'platform_manager' => 'dashboard_pm.php',
+    'fundraiser'       => 'dashboard_fr.php',
     // 'user_admin'    => 'dashboard_ua.php',
     // 'cleaner'       => 'dashboard_cl.php',
     // 'home_owner'    => 'dashboard_ho.php',
@@ -27,6 +28,7 @@ if (isset($_SESSION['role'], $dashboards[$_SESSION['role']])) {
 
 $loginPages = [
     'loginPMPage',
+    'loginFRPage',
     // 'loginUAPage',
     // 'loginCLPage',
     // 'loginHOPage',
