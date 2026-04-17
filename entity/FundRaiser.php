@@ -23,7 +23,72 @@ class FundRaiser {
             $stmt->close();
             return true;
         }
+
         $stmt->close();
         return false;
     }
+
+    public function createFRA($fraName, $category, $description, $doneeInfo, $goalAmount, $endDate)
+    {
+        $sql = "INSERT INTO fundraising_activity
+                (fra_name, category, description, donee_info, end_date, goal_amount, raised_amount, status)
+                VALUES (?, ?, ?, ?, ?, ?, 0, 'Ongoing')";
+
+        $stmt = $this->db->prepare($sql);
+        if (!$stmt) {
+            die("Prepare failed: " . $this->db->error);
+        }
+
+        $stmt->bind_param("sssssd", $fraName, $category, $description, $doneeInfo, $endDate, $goalAmount);
+
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        }
+
+        return true;
+    }
+
+    public function getAllFRA()
+    {
+        $sql = "SELECT * FROM fundraising_activity ORDER BY created_at DESC";
+        $result = $this->db->query($sql);
+
+        if (!$result) {
+            die("Query failed: " . $this->db->error);
+        }
+
+        return $result;
+    }
+
+    public function getFRAByPage($limit, $offset)
+{
+    $sql = "SELECT * FROM fundraising_activity ORDER BY created_at DESC LIMIT ? OFFSET ?";
+    $stmt = $this->db->prepare($sql);
+
+    if (!$stmt) {
+        die("Prepare failed: " . $this->db->error);
+    }
+
+    $stmt->bind_param("ii", $limit, $offset);
+
+    if (!$stmt->execute()) {
+        die("Execute failed: " . $stmt->error);
+    }
+
+    return $stmt->get_result();
 }
+
+public function countAllFRA()
+{
+    $sql = "SELECT COUNT(*) AS total FROM fundraising_activity";
+    $result = $this->db->query($sql);
+
+    if (!$result) {
+        die("Count query failed: " . $this->db->error);
+    }
+
+    $row = $result->fetch_assoc();
+    return (int)$row['total'];
+}
+}
+?>
