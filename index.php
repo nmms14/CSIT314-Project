@@ -15,10 +15,16 @@ spl_autoload_register(function (string $class): void {
 
 $dashboards = [
     'platform_manager' => 'dashboard_pm.php',
+<<<<<<< Updated upstream
     'fundraiser'       => 'dashboard_fr.php',
     // 'user_admin'    => 'dashboard_ua.php',
     // 'cleaner'       => 'dashboard_cl.php',
     // 'home_owner'    => 'dashboard_ho.php',
+=======
+    'user_admin'       => 'dashboard_ua.php',
+    'fund_raiser'      => 'dashboard_fr.php',
+    'donee'            => 'dashboard_dn.php',
+>>>>>>> Stashed changes
 ];
 
 if (isset($_SESSION['role'], $dashboards[$_SESSION['role']])) {
@@ -28,13 +34,21 @@ if (isset($_SESSION['role'], $dashboards[$_SESSION['role']])) {
 
 $loginPages = [
     'loginPMPage',
+<<<<<<< Updated upstream
     'loginFRPage',
     // 'loginUAPage',
     // 'loginCLPage',
     // 'loginHOPage',
+=======
+    'loginUAPage',
+    'loginFRPage',
+    'loginDNPage',
+>>>>>>> Stashed changes
 ];
 
 $error = null;
+$message = isset($_GET['logged_out']) ? 'Successfully logged out.' : null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
@@ -49,4 +63,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = 'Invalid username or password.';
 }
 
-include __DIR__ . '/boundary/views/login.view.php';
+(new loginPMPage())->displayLoginForm($error, $message);

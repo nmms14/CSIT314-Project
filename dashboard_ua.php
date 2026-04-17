@@ -2,11 +2,11 @@
 
 session_start();
 
-if (($_SESSION['role'] ?? null) !== 'platform_manager') {
+if (($_SESSION['role'] ?? null) !== 'user_admin') {
     header('Location: index.php');
     exit;
 }
 
 $username = htmlspecialchars($_SESSION['username'] ?? '');
 
-include __DIR__ . '/boundary/views/dashboard_pm.view.php';
+include __DIR__ . '/boundary/views/dashboard_ua.view.php';

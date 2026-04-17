@@ -1,17 +1,14 @@
 <?php
 
-class loginFRPage {
-<<<<<<< Updated upstream
-=======
+class loginUAPage {
     public function displayLoginForm(?string $error = null, ?string $message = null): void {
         include __DIR__ . '/views/login.view.php';
     }
 
->>>>>>> Stashed changes
     public function login(string $username, string $password): ?string {
-        $controller = new loginFRController();
+        $controller = new loginUAController();
         if ($controller->login($username, $password)) {
-            return 'dashboard_fr.php';
+            return 'dashboard_ua.php';
         }
         return null;
     }

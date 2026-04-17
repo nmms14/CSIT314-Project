@@ -2,12 +2,17 @@
 
 session_start();
 
+<<<<<<< Updated upstream
 if (($_SESSION['role'] ?? null) !== 'fundraiser') {
+=======
+if (($_SESSION['role'] ?? null) !== 'fund_raiser') {
+>>>>>>> Stashed changes
     header('Location: index.php');
     exit;
 }
 
 $username = htmlspecialchars($_SESSION['username'] ?? '');
+<<<<<<< Updated upstream
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,3 +30,7 @@ $username = htmlspecialchars($_SESSION['username'] ?? '');
     <p><a href="logout.php">Logout</a></p>
 </body>
 </html>
+=======
+
+include __DIR__ . '/boundary/views/dashboard_fr.view.php';
+>>>>>>> Stashed changes
