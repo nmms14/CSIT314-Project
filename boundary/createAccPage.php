@@ -14,7 +14,7 @@
 			$password = $_POST['password'];
 			$profile = $_POST['profile'];
 			
-		$success = $controller->create($name, $username, $email, $phone, $password, $profile);
+		$success = $controller->createAcc($name, $username, $email, $phone, $password, $profile);
 
 		if ($success) {
 			$message = "Account created successfully!";
