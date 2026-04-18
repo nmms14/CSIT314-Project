@@ -25,7 +25,7 @@
 			}
 
 			$db = DBConnection::getInstance();
-			$ua = new UserAdmin($db);
+			$ua = new UserAccount($db);
 			$status = 'Active';
 			$success = $ua->createUser($name, $username, $email, $phone, $password, $profile, $status);
 
