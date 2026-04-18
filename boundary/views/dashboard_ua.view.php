@@ -24,6 +24,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            gap: 1.25rem;
         }
 
         .logo {
@@ -36,6 +37,26 @@
             justify-content: center;
             font-size: .8rem;
             color: #6b7280;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: .25rem;
+        }
+
+        .nav a {
+            display: block;
+            padding: .55rem .75rem;
+            font-size: .9rem;
+            color: #111827;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .nav a:hover {
+            background: #f3f4f6;
         }
 
         .main {
@@ -158,6 +179,10 @@
     <div class="layout">
         <aside class="sidebar">
             <div class="logo">Avatar</div>
+            <nav class="nav">
+                <a href="#">Manage Profiles</a>
+                <a href="#">Manage Accounts</a>
+            </nav>
         </aside>
 
         <main class="main">
