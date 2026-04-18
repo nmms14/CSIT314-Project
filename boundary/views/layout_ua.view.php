@@ -386,7 +386,7 @@ $contentView = $contentView ?? '';
         <nav class="menu">
             <a href="dashboard_ua.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">Dashboard</a>
             <a href="manage_profiles.php">Manage Profiles</a>
-            <a href="create_acc.php" class="<?= $activePage === 'create_acc' ? 'active' : '' ?>">Manage Accounts</a>
+            <a href="view_acc.php" class="<?= $activePage === 'view_acc' ? 'active' : '' ?>">Manage Accounts</a>
         </nav>
     </aside>
 
