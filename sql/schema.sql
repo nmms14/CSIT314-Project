@@ -19,6 +19,13 @@ INSERT INTO users (name, username, email, phone_number, password, profile, statu
 ('Donee',            'donee',      'donee@example.com',      '93456789', 'donee123',      'donee', 'Active'),
 ('User Admin',       'useradmin',  'useradmin@example.com',  '94567890', 'useradmin123',  'user_admin', 'Active');
 
+CREATE TABLE IF NOT EXISTS user_profiles (
+    profile_id   INT AUTO_INCREMENT PRIMARY KEY,
+    profile_name ENUM('platform_manager','donee','fund_raiser','user_admin') NOT NULL UNIQUE,
+    description  TEXT         NOT NULL,
+    created_at   TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS fundraising_activity (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     fra_name       VARCHAR(150) NOT NULL,

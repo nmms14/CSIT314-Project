@@ -244,6 +244,10 @@ $contentView = $contentView ?? '';
 			padding: 12px;
 			align-items: center;
 		}
+		.header-row.prof-row,
+		.user-main.prof-row {
+			grid-template-columns: 1fr 2fr 1fr 1fr;
+		}
 		.user-row {
 			border-bottom: 1px solid #e5e7eb;
 			position: relative;
@@ -385,7 +389,7 @@ $contentView = $contentView ?? '';
         <div class="logo">Avatar</div>
         <nav class="menu">
             <a href="dashboard_ua.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">Dashboard</a>
-            <a href="manage_profiles.php">Manage Profiles</a>
+            <a href="view_prof.php" class="<?= $activePage === 'view_prof' ? 'active' : '' ?>">Manage Profiles</a>
             <a href="view_acc.php" class="<?= $activePage === 'view_acc' ? 'active' : '' ?>">Manage Accounts</a>
         </nav>
     </aside>
