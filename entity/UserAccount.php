@@ -8,7 +8,7 @@ class UserAccount {
     public string $name;
     public string $username;
     public string $email;
-    public ?string $phone;
+    public string $phone;
     public string $profile;
     public string $status;
 
