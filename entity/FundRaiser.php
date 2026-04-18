@@ -28,25 +28,25 @@ class FundRaiser {
         return false;
     }
 
-    public function createFRA($fraName, $category, $description, $doneeInfo, $goalAmount, $endDate)
-    {
-        $sql = "INSERT INTO fundraising_activity
-                (fra_name, category, description, donee_info, end_date, goal_amount, raised_amount, status)
-                VALUES (?, ?, ?, ?, ?, ?, 0, 'Ongoing')";
+    public function createFRA($fraName, $category, $description, $endDate, $goalAmount, $doneeName, $phone)
+{
+    $sql = "INSERT INTO fundraising_activity
+            (fra_name, category, description, end_date, goal_amount, donee_name, phone, raised_amount, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, 0, 'Ongoing')";
 
-        $stmt = $this->db->prepare($sql);
-        if (!$stmt) {
-            die("Prepare failed: " . $this->db->error);
-        }
-
-        $stmt->bind_param("sssssd", $fraName, $category, $description, $doneeInfo, $endDate, $goalAmount);
-
-        if (!$stmt->execute()) {
-            die("Execute failed: " . $stmt->error);
-        }
-
-        return true;
+    $stmt = $this->db->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: " . $this->db->error);
     }
+
+    $stmt->bind_param("ssssdss", $fraName, $category, $description, $endDate, $goalAmount, $doneeName, $phone);
+
+    if (!$stmt->execute()) {
+        die("Execute failed: " . $stmt->error);
+    }
+
+    return true;
+}
 
     public function getAllFRA()
     {

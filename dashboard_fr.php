@@ -9,4 +9,4 @@ if (($_SESSION['profile'] ?? null) !== 'fund_raiser') {
 
 $username = htmlspecialchars($_SESSION['username'] ?? '');
 
-include __DIR__ . '/boundary/views/dashboard_fr.view.php';
+include __DIR__ . '/control/dashboardFRController.php';

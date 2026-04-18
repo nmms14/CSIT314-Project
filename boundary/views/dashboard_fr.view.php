@@ -64,7 +64,6 @@
         }
 
         .menu a.active {
-            background: transparent;
             border-color: #2563eb;
             color: #2563eb;
             font-weight: 600;
@@ -202,7 +201,7 @@
 
         .table-wrap {
             margin-top: 1.5rem;
-            max-width: 1000px;
+            max-width: 1100px;
         }
 
         table {
@@ -221,17 +220,71 @@
             font-weight: 700;
         }
 
-        .message-box {
-            margin-bottom: 1rem;
-            padding: .75rem 1rem;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            background: #f9fafb;
-        }
-
         .pagination {
             text-align: center;
             margin-top: 1rem;
+        }
+
+        .page-link {
+            display: inline-block;
+            margin: 0 .25rem;
+            padding: .35rem .7rem;
+            text-decoration: none;
+            color: #111827;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            background: #f9fafb;
+            font-size: .95rem;
+        }
+
+        .page-link:hover {
+            background: #e5e7eb;
+        }
+
+        .active-page {
+            background: #e5e7eb;
+            color: #111827;
+            border-color: #d1d5db;
+            font-weight: 600;
+        }
+
+        .alert-popup {
+            max-width: 900px;
+            margin-bottom: 1rem;
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+        }
+
+        .alert-popup.success {
+            background: #ecfdf3;
+            border-color: #86efac;
+            color: #166534;
+        }
+
+        .alert-popup.error {
+            background: #fef2f2;
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+
+        .alert-text {
+            font-size: .95rem;
+            font-weight: 500;
+        }
+
+        .alert-close {
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            color: inherit;
+            padding: 0;
         }
 
         .modal {
@@ -283,73 +336,6 @@
         .btn-danger:hover {
             background: #b91c1c;
         }
-
-        .pagination {
-    text-align: center;
-    margin-top: 1rem;
-}
-
-        .page-link {
-    display: inline-block;
-    margin: 0 .25rem;
-    padding: .35rem .7rem;
-    text-decoration: none;
-    color: #111827;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    background: #f9fafb;
-    font-size: .95rem;
-}
-
-        .page-link:hover {
-    background: #e5e7eb;
-}
-
-        .active-page {
-    background: #e5e7eb;
-    color: #111827;
-    border-color: #d1d5db;
-    font-weight: 600;
-}
-
-    .alert-popup {
-    max-width: 900px;
-    margin-bottom: 1rem;
-    padding: 1rem 1.25rem;
-    border-radius: 10px;
-    border: 1px solid;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-}
-
-.alert-popup.success {
-    background: #ecfdf3;
-    border-color: #86efac;
-    color: #166534;
-}
-
-.alert-popup.error {
-    background: #fef2f2;
-    border-color: #fca5a5;
-    color: #991b1b;
-}
-
-.alert-text {
-    font-size: .95rem;
-    font-weight: 500;
-}
-
-.alert-close {
-    background: transparent;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    color: inherit;
-    padding: 0;
-}
     </style>
 </head>
 <body>
@@ -359,12 +345,12 @@
 
             <nav class="menu">
                 <a href="dashboard_fr.php?page=create_fra"
-                   class="<?= (isset($_GET['page']) && $_GET['page'] === 'create_fra') ? 'active' : '' ?>">
+                   class="<?= ($page === 'create_fra') ? 'active' : '' ?>">
                    Create FRA
                 </a>
 
                 <a href="dashboard_fr.php?page=view_fra"
-                   class="<?= (isset($_GET['page']) && $_GET['page'] === 'view_fra') ? 'active' : '' ?>">
+                   class="<?= ($page === 'view_fra') ? 'active' : '' ?>">
                    View FRA
                 </a>
             </nav>
@@ -385,78 +371,18 @@
             </header>
 
             <section class="content">
-                <?php
-                require_once __DIR__ . '/../../config/DBConnection.php';
-                require_once __DIR__ . '/../../entity/FundRaiser.php';
-
-                $db = DBConnection::getInstance();
-                $fundRaiser = new FundRaiser($db);
-
-                $page = $_GET['page'] ?? '';
-                $message = '';
-                $messageType = '';
-
-                if ($_SERVER['REQUEST_METHOD'] === 'POST' && $page === 'create_fra') {
-                    $fraName = trim($_POST['campaign_title'] ?? '');
-                    $category = trim($_POST['category'] ?? '');
-                    $description = trim($_POST['description'] ?? '');
-                    $doneeInfo = trim($_POST['donee_info'] ?? '');
-                    $goalAmount = trim($_POST['target_amount'] ?? '');
-                    $endDate = trim($_POST['end_date'] ?? '');
-
-                    if (
-                        $fraName !== '' &&
-                        $category !== '' &&
-                        $description !== '' &&
-                        $doneeInfo !== '' &&
-                        $goalAmount !== '' &&
-                        $endDate !== ''
-                    ) {
-                        $created = $fundRaiser->createFRA(
-                            $fraName,
-                            $category,
-                            $description,
-                            $doneeInfo,
-                            $goalAmount,
-                            $endDate
-                        );
-
-                        if ($created) {
-                            $message = 'FRA created successfully.';
-                            $messageType = 'success';
-                        } else {
-                            $message = 'Failed to create FRA.';
-                            $messageType = 'error';
-                        }   
-                    } else {
-                        $message = 'Please fill in all fields.';
-                        $messageType = 'error';
-                    }
-                }
-
-                $recordsPerPage = 3;
-                $currentPage = isset($_GET['p']) ? max(1, (int)$_GET['p']) : 1;
-                $offset = ($currentPage - 1) * $recordsPerPage;
-
-                $totalRecords = $fundRaiser->countAllFRA();
-                $totalPages = (int) ceil($totalRecords / $recordsPerPage);
-
-                $result = $fundRaiser->getFRAByPage($recordsPerPage, $offset);
-                ?>
-
                 <?php if ($page === 'create_fra'): ?>
 
                     <?php if (!empty($message)): ?>
-    <div class="alert-popup <?= htmlspecialchars($messageType) ?>" id="fraAlert">
-        <div class="alert-text"><?= htmlspecialchars($message) ?></div>
-        <button type="button" class="alert-close" onclick="document.getElementById('fraAlert').style.display='none'">×</button>
-    </div>
-<?php endif; ?>
+                        <div class="alert-popup <?= htmlspecialchars($messageType) ?>" id="fraAlert">
+                            <div class="alert-text"><?= htmlspecialchars($message) ?></div>
+                            <button type="button" class="alert-close" onclick="document.getElementById('fraAlert').style.display='none'">×</button>
+                        </div>
+                    <?php endif; ?>
 
                     <h1>FRA Creation</h1>
 
                     <form method="POST" action="" enctype="multipart/form-data" class="form-card">
-
                         <div class="form-grid">
                             <div class="form-group">
                                 <label>Campaign Title</label>
@@ -483,7 +409,13 @@
                                 <label>Target Amount</label>
                                 <div class="money-input">
                                     <span>$</span>
-                                    <input type="number" name="target_amount" step="0.01" required>
+                                    <input
+                                        type="text"
+                                        name="target_amount"
+                                        placeholder="Enter amount"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        required
+                                    >
                                 </div>
                             </div>
 
@@ -498,22 +430,33 @@
                             <textarea name="description" rows="5" class="form-control" required></textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label>Donee Information</label>
-                            <textarea
-                                name="donee_info"
-                                rows="4"
-                                class="form-control"
-                                placeholder="Enter donee name, contact details, background, and support needed"
-                                required
-                            ></textarea>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Donee Name</label>
+                                <input type="text" name="donee_name" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input
+                                    type="text"
+                                    name="phone"
+                                    class="form-control"
+                                    placeholder="Enter 8-digit phone number"
+                                    pattern="[89][0-9]{7}"
+                                    title="Phone number must be 8 digits and start with 8 or 9"
+                                    maxlength="8"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,8)"
+                                    required
+                                >
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label>Upload Supporting Documents</label>
 
                             <input type="file" id="supporting_documents" name="supporting_documents[]" multiple
-                                style="display:none;" onchange="handleFiles(this)">
+                                   style="display:none;" onchange="handleFiles(this)">
 
                             <button type="button" class="btn" onclick="document.getElementById('supporting_documents').click()">
                                 Choose Files
@@ -540,11 +483,13 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th style="text-align:center;">Campaign</th>
-                                    <th style="text-align:center;">Category</th>
-                                    <th style="text-align:center;">Raised</th>
-                                    <th style="text-align:center;">Progress</th>
-                                    <th style="text-align:center;">Status</th>
+                                    <th>Campaign</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>End Date</th>
+                                    <th>Description</th>
+                                    <th>Donee</th>
+                                    <th>Phone</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -553,45 +498,37 @@
                                         <tr>
                                             <td><?= htmlspecialchars($row['fra_name'] ?? '-') ?></td>
                                             <td><?= htmlspecialchars($row['category'] ?? '-') ?></td>
-                                            <td>
-                                                $<?= number_format((float)($row['raised_amount'] ?? 0), 0) ?> /
-                                                $<?= number_format((float)($row['goal_amount'] ?? 0), 0) ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $raised = (float)($row['raised_amount'] ?? 0);
-                                                $goal = (float)($row['goal_amount'] ?? 0);
-                                                $progress = $goal > 0 ? round(($raised / $goal) * 100) : 0;
-                                                echo $progress . '%';
-                                                ?>
-                                            </td>
-                                            <td><?= htmlspecialchars($row['status'] ?? 'Ongoing') ?></td>
+                                            <td>$<?= number_format((int)($row['goal_amount'] ?? 0)) ?></td>
+                                            <td><?= date('d/m/Y', strtotime($row['end_date'])) ?></td>
+                                            <td><?= htmlspecialchars($row['description'] ?? '-') ?></td>
+                                            <td><?= htmlspecialchars($row['donee_name'] ?? '-') ?></td>
+                                            <td><?= htmlspecialchars($row['phone'] ?? '-') ?></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td colspan="5" style="text-align:center;">No campaigns found.</td>
+                                        <td colspan="7" style="text-align:center;">No campaigns found.</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>
 
                         <div class="pagination">
-    <?php if ($currentPage > 1): ?>
-        <a href="dashboard_fr.php?page=view_fra&p=<?= $currentPage - 1 ?>" class="page-link">&lt;&lt;</a>
-    <?php endif; ?>
+                            <?php if ($currentPage > 1): ?>
+                                <a href="dashboard_fr.php?page=view_fra&p=<?= $currentPage - 1 ?>" class="page-link">&lt;&lt;</a>
+                            <?php endif; ?>
 
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <a href="dashboard_fr.php?page=view_fra&p=<?= $i ?>"
-           class="page-link <?= ($i === $currentPage) ? 'active-page' : '' ?>">
-            <?= $i ?>
-        </a>
-    <?php endfor; ?>
+                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                <a href="dashboard_fr.php?page=view_fra&p=<?= $i ?>"
+                                   class="page-link <?= ($i === $currentPage) ? 'active-page' : '' ?>">
+                                    <?= $i ?>
+                                </a>
+                            <?php endfor; ?>
 
-    <?php if ($currentPage < $totalPages): ?>
-        <a href="dashboard_fr.php?page=view_fra&p=<?= $currentPage + 1 ?>" class="page-link">Next &gt;&gt;</a>
-    <?php endif; ?>
-</div>
+                            <?php if ($currentPage < $totalPages): ?>
+                                <a href="dashboard_fr.php?page=view_fra&p=<?= $currentPage + 1 ?>" class="page-link">Next &gt;&gt;</a>
+                            <?php endif; ?>
+                        </div>
                     </div>
 
                 <?php else: ?>
@@ -687,14 +624,13 @@
         }
 
         renderFileList();
+
+        const fraAlert = document.getElementById('fraAlert');
+        if (fraAlert) {
+            setTimeout(() => {
+                fraAlert.style.display = 'none';
+            }, 3000);
+        }
     </script>
-    <script>
-    const fraAlert = document.getElementById('fraAlert');
-    if (fraAlert) {
-        setTimeout(() => {
-            fraAlert.style.display = 'none';
-        }, 3000);
-    }
-</script>
 </body>
 </html>
