@@ -195,6 +195,188 @@ $contentView = $contentView ?? '';
             box-sizing: border-box;
         }
         select.form-control { cursor: pointer; }
+
+        /*View Account CSS*/
+		.header-top {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+		.search-form {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+		}
+		.search-form input {
+			padding: 6px 10px;
+			border: 1px solid #d1d5db;
+			border-radius: 6px;
+		}
+
+		.search-form button {
+			padding: 6px 10px;
+			border: 1px solid #d1d5db;
+			border-radius: 6px;
+			background: white;
+			cursor: pointer;
+		}
+		.header-box {
+			border: 2px solid #d1d5db;
+			border-radius: 10px;
+			overflow: hidden;
+		}
+		.body-box {
+			border: 2px solid #d1d5db;
+			border-radius: 10px;
+			overflow: visible;
+		}
+		.header-row {
+			display: grid;
+			grid-template-columns: 1fr 2fr 1fr 1fr;
+			padding: 12px;
+			font-weight: bold;
+			background: #f9fafb;
+		}
+		.user-main {
+			display: grid;
+			grid-template-columns: 1fr 2fr 1fr 1fr;
+			padding: 12px;
+			align-items: center;
+		}
+		.user-row {
+			border-bottom: 1px solid #e5e7eb;
+			position: relative;
+		}
+		.user-row:last-child {
+			border-bottom: none;
+		}
+		.user-row:hover {
+			background: #f9fafb;
+		}
+		.user-row::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 100%;
+			width: 20px;   /* bridge width */
+			height: 100%;
+		}
+		.hover-card {
+			margin-left: 0;
+			display: none;
+			position: absolute;
+			top: 50%;
+			right: 10px;
+			transform: translateY(-50%);
+			z-index: 999;
+		}
+		.hover-card:hover {
+			display: block;
+		}
+		.user-row:hover .hover-card {
+			display: block;
+		}
+		.card-content {
+			width: 180px;
+			background: #ffffff;
+			border: 1px solid #e5e7eb;
+			border-radius: 10px;
+			padding: 12px;
+			text-align: center;
+
+			box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+		}
+		.avatar {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background: #f3f4f6;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: bold;
+			margin: 0 auto 10px;
+		}
+		.create-container {
+			position: absolute;
+			bottom: 20px;
+			right: 20px;
+		}
+
+		.create-btn {
+			padding: 10px 16px;
+			font-weight: bold;
+		}
+		
+		/*View Account Details CSS*/
+		.details-content {
+			display: flex;
+			gap: 40px;
+			min-height: 500px; 
+			align-items: center;
+			justify-content: center;
+		}
+		.left-panel {
+			width: 300px;
+			display: flex;
+			flex-direction: column; 
+			align-items: center;
+		}
+		.action-buttons {
+			margin-top: 10px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			width: 100%;
+		}
+		.action-buttons .btn {
+			width: 100%;
+		}
+		.avatar-large {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			background: #eef2ff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 28px;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+		.form-box {
+			border: 2px solid #d1d5db;
+			border-radius: 16px;
+			padding: 20px;
+			width: 700px;
+		}
+		.form-group input {
+			 margin-bottom: 14px;
+		}
+		.form-group label {
+			display: block;
+			font-size: 14px;
+			margin-bottom: 4px;
+		}
+		.form-group input {
+			width: 100%;
+			padding: 8px 10px;
+			border: 2px solid #d1d5db;  
+			border-radius: 6px;
+			font-size: 14px;
+		}
+		.back-container {
+			position: relative;
+			top: 20px;
+			left: 20px;
+		}
+
+		.back-btn {
+			font-size: 24px;
+			text-decoration: none;
+			color: #111827;
+		}
     </style>
 </head>
 <body>
