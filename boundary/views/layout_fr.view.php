@@ -350,7 +350,7 @@ $contentView = $contentView ?? '';
 
     <main class="main">
         <header class="topbar">
-            <h2>Dashboard</a></h2>
+            <h2>Dashboard</h2>
 
             <div class="topbar-right">
                 <div class="avatar-small">FR</div>
