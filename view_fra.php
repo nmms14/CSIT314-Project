@@ -6,7 +6,7 @@ if (($_SESSION['profile'] ?? null) !== 'fund_raiser') {
     exit;
 }
 
-require_once __DIR__ . '/boundary/dashboardFRPage.php';
+require_once __DIR__ . '/boundary/viewFRAPage.php';
 
-$page = new dashboardFRPage();
+$page = new viewFRAPage();
 $page->display();
