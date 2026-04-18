@@ -6,7 +6,7 @@ if (($_SESSION['profile'] ?? null) !== 'user_admin') {
     exit;
 }
 
-require_once __DIR__ . '/boundary/dashboardUAPage.php';
+require_once __DIR__ . '/boundary/createAccPage.php';
 
-$page = new dashboardUAPage();
-$page->display();
+$page = new createAccPage();
+$page->handle();
