@@ -10,27 +10,27 @@
 <form method="POST" class="form-card">
     <div class="form-group">
         <label>Name *</label>
-        <input type="text" name="name" class="form-control" required value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
+        <input type="text" name="name" class="form-control" placeholder="Enter full name" required value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
     </div>
 
     <div class="form-group">
         <label>Username *</label>
-        <input type="text" name="username" class="form-control" required value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
+        <input type="text" name="username" class="form-control" placeholder="Enter username" required value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
     </div>
 
     <div class="form-group">
         <label>Email *</label>
-        <input type="email" name="email" class="form-control" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+        <input type="email" name="email" class="form-control" placeholder="Enter email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
     </div>
 
     <div class="form-group">
         <label>Phone Number</label>
-        <input type="text" name="phone" class="form-control" value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>">
+        <input type="text" name="phone" class="form-control" placeholder="Enter 8-digit phone number" value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>">
     </div>
 
     <div class="form-group">
         <label>Password *</label>
-        <input type="password" name="password" class="form-control" required>
+        <input type="password" name="password" class="form-control" placeholder="Min. 6 characters" required>
     </div>
 
     <div class="form-group">
