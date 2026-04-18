@@ -63,6 +63,6 @@
 
 <div class="create-container">
 	<a href="create_acc.php" class="btn create-btn">
-		+ Create
+		+ Create New
 	</a>
 </div>
