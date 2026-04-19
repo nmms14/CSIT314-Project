@@ -38,6 +38,6 @@
 
 <div class="create-container">
 	<a href="create_prof.php" class="btn create-btn">
-		+ Create
+		+ Create New
 	</a>
 </div>
