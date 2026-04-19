@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+<<<<<<< Updated upstream
 INSERT INTO users (name, username, email, phone_number, password, profile, status) VALUES
 ('Platform Manager', 'manager',    'manager@example.com',    '91234567', 'manager123',    'platform_manager', 'Active'),
 ('Fund Raiser',      'fundraiser', 'fundraiser@example.com', '92345678', 'fundraiser123', 'fund_raiser', 'Active'),
@@ -25,16 +26,24 @@ CREATE TABLE IF NOT EXISTS user_profiles (
     description  TEXT         NOT NULL,
     created_at   TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
 );
-
+=======
 CREATE TABLE IF NOT EXISTS fundraising_activity (
-    id             INT AUTO_INCREMENT PRIMARY KEY,
-    fra_name       VARCHAR(150) NOT NULL,
-    category       VARCHAR(50)  NOT NULL,
-    description    TEXT         NOT NULL,
-    donee_info     TEXT         NOT NULL,
-    end_date       DATE         NOT NULL,
-    goal_amount    DECIMAL(12,2) NOT NULL,
-    raised_amount  DECIMAL(12,2) NOT NULL DEFAULT 0,
-    status         ENUM('Ongoing','Completed','Cancelled') NOT NULL DEFAULT 'Ongoing',
-    created_at     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
+    id              INT AUTO_INCREMENT PRIMARY KEY,
+    campaign_title  VARCHAR(255) NOT NULL,
+    category        VARCHAR(100) NOT NULL,
+    description     TEXT NOT NULL,
+    end_date        DATE NOT NULL,
+    goal_amount     DECIMAL(12,2) NOT NULL,
+    donee_name      VARCHAR(255),
+    phone           VARCHAR(20),
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO users (name, username, email, phone_number, password, profile) VALUES
+('Platform Manager', 'manager',    'manager@example.com',    '91234567', 'manager123',    'platform_manager'),
+('Fund Raiser',      'fundraiser', 'fundraiser@example.com', '92345678', 'fundraiser123', 'fund_raiser'),
+('Donee',            'donee',      'donee@example.com',      '93456789', 'donee123',      'donee'),
+('User Admin',       'useradmin',  'useradmin@example.com',  '94567890', 'useradmin123',  'user_admin');
+>>>>>>> Stashed changes
+
+
