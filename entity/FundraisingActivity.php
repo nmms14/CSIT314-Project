@@ -55,4 +55,17 @@ class FundraisingActivity
 
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+
+public function deleteFRA(int $id): bool
+{
+    $sql = "DELETE FROM fundraising_activity WHERE id = ?";
+    $stmt = $this->db->prepare($sql);
+
+    if (!$stmt) {
+        return false;
+    }
+
+    $stmt->bind_param("i", $id);
+    return $stmt->execute();
+}
 }

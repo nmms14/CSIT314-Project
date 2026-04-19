@@ -226,6 +226,12 @@ $contentView = $contentView ?? '';
             cursor: pointer;
         }
 
+        .alert-popup.cancel {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+            color: #4b5563;
+        }
+
         .form-card {
             max-width: 920px;
             margin-top: 24px;
@@ -305,17 +311,12 @@ $contentView = $contentView ?? '';
             overflow-x: auto;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #ffffff;
-        }
-
         th, td {
             border: 1px solid #111827;
             padding: 12px;
-            text-align: left;
+            text-align: center;
             vertical-align: top;
+            
         }
 
         th {
@@ -335,6 +336,83 @@ $contentView = $contentView ?? '';
 .desc-header {
     text-align: center;
 }
+
+.delete-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.delete-modal-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.delete-modal-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.delete-btn-confirm {
+    background: #dc2626;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.delete-btn-confirm:hover {
+    background: #b91c1c;
+}
+
+.delete-btn-cancel {
+    background: #ccc;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background: #ef4444;          /* red */
+    color: #ffffff;
+    border: none;
+    padding: 5px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #dc2626;          /* darker red */
+    transform: translateY(-1px);  /* slight lift */
+}
+
+.delete-btn:active {
+    transform: scale(0.95);
+}
+
+.fra-table {
+    width: 85%;
+    border-collapse: collapse;
+}
+
     </style>
 </head>
 <body>
@@ -345,6 +423,10 @@ $contentView = $contentView ?? '';
         <nav class="menu">
             <a href="create_fra.php" class="<?= $activePage === 'create_fra' ? 'active' : '' ?>">Create FRA</a>
             <a href="view_fra.php" class="<?= $activePage === 'view_fra' ? 'active' : '' ?>">View FRA</a>
+            <a href="update_fra.php" class="<?= ($page ?? '') === 'update_fra' ? 'active' : '' ?>">Update FRA</a>
+            <a href="delete_fra.php" class="<?= ($page ?? '') === 'delete_fra' ? 'active' : '' ?>">Delete FRA</a>
+            <a href="search_fra.php" class="<?= ($page ?? '') === 'search_fra' ? 'active' : '' ?>">Search FRA</a>
+            <a href="settings.php" class="<?= ($page ?? '') === 'settings' ? 'active' : '' ?>">Settings</a>
         </nav>
     </aside>
 
@@ -359,7 +441,7 @@ $contentView = $contentView ?? '';
         </header>
 
         <section class="content">
-            <?php include $contentView; ?>
+            <?php if (isset($contentView)) include $contentView; ?>
         </section>
     </main>
 </div>
