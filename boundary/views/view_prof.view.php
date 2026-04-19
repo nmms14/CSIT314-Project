@@ -28,7 +28,7 @@
                     <span><?= htmlspecialchars($p->description) ?></span>
                     <span><?= (int)$p->userCount ?></span>
                     <span>
-                        <a class="btn" href="view_prof_detail.php?profile_id=<?= (int)$p->profileID ?>">View</a>
+                        <a class="btn" href="view_prof_detail.php?profile_id=<?= (int)$p->profileID ?>">Edit|Suspend</a>
                     </span>
                 </div>
             </div>
