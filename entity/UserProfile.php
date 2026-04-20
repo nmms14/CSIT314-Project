@@ -4,11 +4,6 @@ require_once __DIR__ . '/../config/DBConnection.php';
 class UserProfile {
     private mysqli $db;
 
-    public int $profileID;
-    public string $profileName;
-    public string $description;
-    public int $userCount = 0;
-
     public function __construct(mysqli $db) {
         $this->db = $db;
     }
@@ -32,58 +27,15 @@ class UserProfile {
         return $success;
     }
 
-    // Convert a DB row to a UserProfile object
-    private function dbRowToProfile(array $row): UserProfile {
-        $p = new UserProfile($this->db);
-        $p->profileID   = (int)$row['profile_id'];
-        $p->profileName = $row['profile_name'];
-        $p->description = $row['description'];
-        $p->userCount   = (int)($row['user_count'] ?? 0);
-        return $p;
-    }
-
     public function getAllProfiles(): array {
-        $sql = "SELECT  u.profile                   AS profile_name,
-                        COALESCE(p.profile_id, 0)   AS profile_id,
-                        COALESCE(p.description, '') AS description,
-                        COUNT(u.id)                 AS user_count
-                FROM    users u
-                LEFT JOIN user_profiles p ON p.profile_name = u.profile
-                GROUP BY u.profile, p.profile_id, p.description
-                ORDER BY u.profile";
+        $sql = "SELECT p.profile_id, p.profile_name, p.description,
+                       COUNT(u.id) AS user_count
+                FROM user_profiles p
+                LEFT JOIN users u ON u.profile = p.profile_name
+                GROUP BY p.profile_id, p.profile_name, p.description
+                ORDER BY p.profile_name";
         $result = $this->db->query($sql);
 
-        $profiles = [];
-        if ($result && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $profiles[] = $this->dbRowToProfile($row);
-            }
-        }
-        return $profiles;
-    }
-
-    public function viewUserProfile(int $profileID): ?UserProfile {
-        $stmt = $this->db->prepare(
-            "SELECT p.profile_id, p.profile_name, p.description,
-                    (SELECT COUNT(*) FROM users u WHERE u.profile = p.profile_name) AS user_count
-             FROM user_profiles p
-             WHERE p.profile_id = ?
-             LIMIT 1"
-        );
-
-        if (!$stmt) return null;
-
-        $stmt->bind_param('i', $profileID);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-
-        $stmt->close();
-
-        if (!$row) return null;
-
-        return $this->dbRowToProfile($row);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
-?>

@@ -21,7 +21,7 @@ INSERT INTO users (name, username, email, phone_number, password, profile, statu
 
 CREATE TABLE IF NOT EXISTS user_profiles (
     profile_id   INT AUTO_INCREMENT PRIMARY KEY,
-    profile_name ENUM('platform_manager','donee','fund_raiser','user_admin') NOT NULL UNIQUE,
+    profile_name VARCHAR(50) NOT NULL UNIQUE,
     description  TEXT NOT NULL,
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

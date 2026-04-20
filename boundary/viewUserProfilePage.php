@@ -1,10 +1,8 @@
 <?php
 require_once __DIR__ . '/../control/viewUserProfileController.php';
 
-class viewUserProfilePage
-{
-    public function clickViewUserProfile(): void
-    {
+class viewUserProfilePage {
+    public function clickViewUserProfile(): void {
         $controller = new viewUserProfileController();
         $profiles = $controller->viewUserProfiles();
 
@@ -12,8 +10,8 @@ class viewUserProfilePage
         if ($search !== '') {
             $needle = strtolower($search);
             $profiles = array_values(array_filter($profiles, function ($p) use ($needle) {
-                return strpos(strtolower($p->profileName), $needle) !== false
-                    || strpos(strtolower($p->description), $needle) !== false;
+                return strpos(strtolower($p['profile_name']), $needle) !== false
+                    || strpos(strtolower($p['description']), $needle) !== false;
             }));
         }
 

@@ -24,11 +24,12 @@
         <?php foreach ($profiles as $p): ?>
             <div class="user-row">
                 <div class="user-main prof-row">
-                    <span><?= htmlspecialchars($p->profileName) ?></span>
-                    <span><?= htmlspecialchars($p->description) ?></span>
-                    <span><?= (int)$p->userCount ?></span>
+                    <span><?= htmlspecialchars($p['profile_name']) ?></span>
+                    <span><?= htmlspecialchars($p['description']) ?></span>
+                    <span><?= (int)$p['user_count'] ?></span>
                     <span>
-                        <a class="btn" href="view_prof_detail.php?profile_id=<?= (int)$p->profileID ?>">View</a>
+                        <a class="btn" href="edit_prof.php?profile_id=<?= (int)$p['profile_id'] ?>">Edit</a>
+                        <a class="btn" href="suspend_prof.php?profile_id=<?= (int)$p['profile_id'] ?>">Suspend</a>
                     </span>
                 </div>
             </div>
@@ -37,7 +38,7 @@
 </div>
 
 <div class="create-container">
-	<a href="create_prof.php" class="btn create-btn">
-		+ Create New
-	</a>
+    <a href="create_prof.php" class="btn create-btn">
+        + Create New
+    </a>
 </div>
