@@ -33,16 +33,22 @@
         <input type="password" name="password" class="form-control" placeholder="Min. 6 characters" required>
     </div>
 
-    <div class="form-group">
-        <label>Profile *</label>
-        <select name="profile" class="form-control" required>
-            <option value="">Select a role..</option>
-            <option value="platform_manager" <?= (($_POST['profile'] ?? '') === 'platform_manager') ? 'selected' : '' ?>>Platform Manager</option>
-            <option value="user_admin" <?= (($_POST['profile'] ?? '') === 'user_admin') ? 'selected' : '' ?>>User Admin</option>
-            <option value="fund_raiser" <?= (($_POST['profile'] ?? '') === 'fund_raiser') ? 'selected' : '' ?>>Fund Raiser</option>
-            <option value="donee" <?= (($_POST['profile'] ?? '') === 'donee') ? 'selected' : '' ?>>Donee</option>
-        </select>
-    </div>
+    <?php
+		$controller = new createAccController();
+		$profiles = $controller->loadProfiles();
+	?>
+
+	<label>Profile *</label>
+	<select name="profile" class="form-control" required>
+		<option value="">Select a role..</option>
+
+		<?php while ($row = $profiles->fetch_assoc()): ?>
+			<option value="<?= $row['profile_name'] ?>"
+				<?= (($_POST['profile'] ?? '') === $row['profile_name']) ? 'selected' : '' ?>>
+				<?= ucfirst($row['profile_name']) ?>
+			</option>
+		<?php endwhile; ?>
+	</select>
 
     <div style="display:flex; gap:12px;">
         <button type="submit" class="btn">Create</button>
