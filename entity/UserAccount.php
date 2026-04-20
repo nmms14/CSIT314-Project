@@ -34,6 +34,11 @@ class UserAccount {
         $stmt->close();
         return $success;
     }
+
+	public function getProfiles() {
+		$sql = "SELECT profile_name FROM user_profiles";
+        return $this->db->query($sql);
+	}
     
     // Converting the database row to object
 	private function dbRowToUser(array $row): UserAccount {
