@@ -35,5 +35,11 @@
 
 			return ['type' => 'error', 'message' => 'Username already exists.'];
 		}
+
+		public function loadProfiles() {
+			$db = DBConnection::getInstance();
+			$ua = new UserAccount($db);
+			return $ua->getProfiles();
+		}
 	}
 ?>
