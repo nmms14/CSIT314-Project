@@ -26,6 +26,12 @@ CREATE TABLE IF NOT EXISTS user_profiles (
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT INTO user_profiles (profile_name, description) VALUES
+('Platform Manager', 'Manages the platform and oversees system operations.'),
+('User Admin', 'Responsible for creating and managing user accounts and user profiles.'),
+('Fundraiser', 'Creates and manages fundraising activities.'),
+('Donee', 'Receives funds and searches for fundraising activities.');
+
 CREATE TABLE IF NOT EXISTS fundraising_activity (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     campaign_title  VARCHAR(255) NOT NULL,
