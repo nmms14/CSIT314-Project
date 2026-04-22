@@ -114,5 +114,82 @@ class UserAccount {
 		
 		return $users;
 	}
+
+	public function updateAcc(int $id, array $data) {
+		$fields = [];
+		$values = [];
+
+		if (!empty($data['name'])) {
+			$fields[] = "name = ?";
+			$values[] = $data['name'];
+		}
+
+		if (!empty($data['username'])) {
+			$fields[] = "username = ?";
+			$values[] = $data['username'];
+		}
+
+		if (!empty($data['email'])) {
+			$fields[] = "email = ?";
+			$values[] = $data['email'];
+		}
+
+		if (!empty($data['phone'])) {
+			$fields[] = "phone_number = ?";
+			$values[] = $data['phone'];
+		}
+
+		if (!empty($data['password'])) {
+			$fields[] = "password = ?";
+			$values[] = $data['password'];
+		}
+
+		if (isset($data['profile']) && $data['profile'] !== '') {
+			$fields[] = "profile = ?";
+			$values[] = $data['profile'];
+		}
+
+		if (empty($fields)) {
+			return false; // admin typed nothing
+		}
+
+		$sql = "UPDATE users SET " . implode(", ", $fields) . " WHERE id = ?";
+
+		$values[] = $id;
+
+		$stmt = $this->db->prepare($sql);
+
+		$types = str_repeat("s", count($values) - 1) . "i";
+		$stmt->bind_param($types, ...$values);
+
+		return $stmt->execute();
+	}
+	
+	public function getUserById(int $id): ?UserAccount {
+		$stmt = $this->db->prepare(
+			"SELECT id, name, username, email, phone_number, profile, status 
+			 FROM users 
+			 WHERE id = ? 
+			 LIMIT 1"
+		);
+
+		if (!$stmt) {
+			return null;
+		}
+
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+
+		$stmt->close();
+
+		if (!$row) {
+			return null;
+		}
+
+		return $this->dbRowToUser($row);
+	}
 }
 ?>
