@@ -43,3 +43,9 @@ CREATE TABLE IF NOT EXISTS fundraising_activity (
     phone           VARCHAR(20),
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO fundraising_activity
+(campaign_title, category, description, end_date, goal_amount, donee_name, phone)
+VALUES
+('Food Drive','Social','Providing food supplies to low-income families','2026-12-31', 3000.00, 'Stella','91234567'), 
+('School Supplier', 'Education', 'Supplying school materials to student', '2026-11-30', 4000.00, 'John Tan', '98765432');

@@ -311,22 +311,83 @@ $contentView = $contentView ?? '';
             overflow-x: auto;
         }
 
-        th, td {
-            border: 1px solid #111827;
-            padding: 12px;
-            text-align: center;
-            vertical-align: top;
-            
-        }
-
-        th {
-            font-weight: 700;
-            text-align: center;
-        }
-
         .topbar-link {
     color: inherit;
     text-decoration: none;
+}
+
+.create-form-card {
+    max-width: 760px;
+    margin: 24px 0 0;
+    padding: 28px;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.create-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.create-form-group {
+    margin-bottom: 18px;
+}
+
+.create-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.create-form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.create-cancel-btn,
+.create-save-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.create-cancel-btn {
+    background: #d1d5db;
+    color: #111827;
+}
+
+.create-save-btn {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.create-save-btn:hover {
+    background: #1d4ed8;
+}
+
+.create-file-input {
+    display: block;
+    width: auto;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    font: inherit;
+}
+
+.create-file-note {
+    margin-top: 10px;
+    color: #6b7280;
+    font-size: 0.95rem;
 }
 
 .topbar-link:hover {
@@ -408,12 +469,135 @@ $contentView = $contentView ?? '';
     transform: scale(0.95);
 }
 
-.fra-table {
-    width: 85%;
-    border-collapse: collapse;
+.edit-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-    </style>
+.edit-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px); 
+}
+
+.update-form-card {
+    max-width: 760px;
+    margin: 24px 0 0;
+    padding: 28px;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.update-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.update-form-group {
+    margin-bottom: 18px;
+}
+
+.update-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.update-form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.update-cancel-btn,
+.update-save-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.update-cancel-btn {
+    background: #d1d5db;
+    color: #111827;
+}
+
+.update-save-btn {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.update-save-btn:hover {
+    background: #1d4ed8;
+}
+
+.table-wrap {
+    max-width: 1100px;
+    margin-top: 24px;
+    overflow-x: auto;
+}
+
+/* shared base table style */
+.table-base {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+.table-base th,
+.table-base td {
+    border: 1px solid #111827;
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-base th {
+    font-weight: 700;
+}
+
+/* FRA View table */
+.view-fra-table {
+    width: 100%;
+}
+
+/* Delete FRA table */
+.delete-fra-table {
+    width: 100%;
+}
+
+.delete-fra-table th:last-child,
+.delete-fra-table td:last-child {
+    width: 110px;
+}
+
+/* Update FRA list table */
+.update-fra-table {
+    width: 100%;
+}
+
+.update-fra-table th:last-child,
+.update-fra-table td:last-child {
+    width: 110px;
+}
+
+/* description column for update table */
+.update-fra-table td:nth-child(5) {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+</style>
 </head>
 <body>
 <div class="layout">

@@ -10,7 +10,7 @@ class createFRAController
         $category = trim($data['category'] ?? '');
         $description = trim($data['description'] ?? '');
         $endDate = trim($data['end_date'] ?? '');
-        $goalAmount = trim($data['target_amount'] ?? '');
+        $goalAmount = trim($data['goal_amount'] ?? '');
         $doneeName = trim($data['donee_name'] ?? '');
         $phone = trim($data['phone'] ?? '');
 
@@ -24,8 +24,7 @@ class createFRAController
             ];
         }
 
-        $db = DBConnection::getInstance();
-        $fra = new FundraisingActivity($db);
+        $fra = new FundraisingActivity();
 
         $success = $fra->createFRA(
             $campaignTitle,

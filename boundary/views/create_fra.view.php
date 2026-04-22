@@ -7,140 +7,126 @@
 
 <h1>FRA Creation</h1>
 
-<form method="POST" enctype="multipart/form-data" class="form-card">
-    <div class="form-grid">
-        <div class="form-group">
-            <label>Campaign Title</label>
-            <input type="text" name="campaign_title" class="form-control" required>
-        </div>
+<div class="create-form-card">
+    <form method="POST" enctype="multipart/form-data">
+        <div class="create-form-grid">
+            <div class="create-form-group">
+                <label for="campaign_title">Campaign Title</label>
+                <input
+                    type="text"
+                    id="campaign_title"
+                    name="campaign_title"
+                    class="form-control"
+                    value="<?= htmlspecialchars($_POST['campaign_title'] ?? '') ?>"
+                    required
+                >
+            </div>
 
-        <div class="form-group">
-            <label>Category</label>
-            <select name="category" class="form-control" required>
-                <option value="">-- Select Category --</option>
-                <option value="Medical">Medical</option>
-                <option value="Education">Education</option>
-                <option value="Social">Social</option>
-                <option value="Disaster Relief">Disaster Relief</option>
-                <option value="Animal Welfare">Animal Welfare</option>
-                <option value="Community">Community</option>
-                <option value="Others">Others</option>
-            </select>
-        </div>
-    </div>
+            <div class="create-form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" class="form-control" required>
+                    <option value="">-- Select Category --</option>
+                    <option value="Medical" <?= (($_POST['category'] ?? '') === 'Medical') ? 'selected' : '' ?>>Medical</option>
+                    <option value="Education" <?= (($_POST['category'] ?? '') === 'Education') ? 'selected' : '' ?>>Education</option>
+                    <option value="Social" <?= (($_POST['category'] ?? '') === 'Social') ? 'selected' : '' ?>>Social</option>
+                    <option value="Disaster Relief" <?= (($_POST['category'] ?? '') === 'Disaster Relief') ? 'selected' : '' ?>>Disaster Relief</option>
+                    <option value="Animal Welfare" <?= (($_POST['category'] ?? '') === 'Animal Welfare') ? 'selected' : '' ?>>Animal Welfare</option>
+                    <option value="Community" <?= (($_POST['category'] ?? '') === 'Community') ? 'selected' : '' ?>>Community</option>
+                    <option value="Others" <?= (($_POST['category'] ?? '') === 'Others') ? 'selected' : '' ?>>Others</option>
+                </select>
+            </div>
 
-    <div class="form-grid">
-        <div class="form-group">
-            <label>Target Amount</label>
-            <div class="money-input">
-                <span>$</span>
-                <input type="text" name="target_amount" placeholder="Enter amount"
-                       oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+            <div class="create-form-group">
+                <label for="goal_amount">Target Amount</label>
+                <input
+                    type="text"
+                    id="goal_amount"
+                    name="goal_amount"
+                    class="form-control"
+                    value="<?= htmlspecialchars($_POST['goal_amount'] ?? '') ?>"
+                    inputmode="decimal"
+                    oninput="
+                        this.value = this.value
+                            .replace(/[^0-9.]/g, '')
+                            .replace(/(\..*)\./g, '$1');
+                    "
+                    required
+                >
+            </div>
+
+            <div class="create-form-group">
+                <label for="end_date">End Date</label>
+                <input
+                    type="date"
+                    id="end_date"
+                    name="end_date"
+                    class="form-control"
+                    value="<?= htmlspecialchars($_POST['end_date'] ?? '') ?>"
+                    required
+                >
             </div>
         </div>
 
-        <div class="form-group">
-            <label>End Date</label>
-            <input type="date" name="end_date" class="form-control" required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Description</label>
-        <textarea name="description" rows="5" class="form-control" required></textarea>
-    </div>
-
-    <div class="form-grid">
-        <div class="form-group">
-            <label>Donee Name</label>
-            <input type="text" name="donee_name" class="form-control" required>
+        <div class="create-form-group">
+            <label for="description">Description</label>
+            <textarea
+                id="description"
+                name="description"
+                class="form-control"
+                rows="5"
+                required
+            ><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
         </div>
 
-        <div class="form-group">
-            <label>Phone</label>
-            <input type="text" name="phone" class="form-control"
-                   placeholder="Enter 8-digit phone number"
-                   pattern="[89][0-9]{7}"
-                   title="Phone number must be 8 digits and start with 8 or 9"
-                   maxlength="8"
-                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,8)"
-                   required>
+        <div class="create-form-grid">
+            <div class="create-form-group">
+                <label for="donee_name">Donee Name</label>
+                <input
+                    type="text"
+                    id="donee_name"
+                    name="donee_name"
+                    class="form-control"
+                    value="<?= htmlspecialchars($_POST['donee_name'] ?? '') ?>"
+                >
+            </div>
+
+            <div class="create-form-group">
+                <label for="phone">Phone</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="form-control"
+                    value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>"
+                    placeholder="Enter 8-digit phone number"
+                    inputmode="numeric"
+                    maxlength="8"
+                    pattern="[89][0-9]{7}"
+                    oninput="
+                        this.value = this.value
+                            .replace(/[^0-9]/g, '')
+                            .slice(0, 8);
+
+                        if (this.value.length > 0 &&
+                            this.value[0] !== '8' &&
+                            this.value[0] !== '9') {
+                            this.value = '';
+                        }
+                    "
+                    required
+                >
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Upload Supporting Documents</label>
-        <input type="file" id="supporting_documents" name="supporting_documents[]" multiple
-               style="display:none;" onchange="handleFiles(this)">
-        <button type="button" class="btn" onclick="document.getElementById('supporting_documents').click()">
-            Choose Files
-        </button>
-
-        <div id="fileList" class="file-list"></div>
-
-        <small style="color:#6b7280;">
-            You may upload multiple supporting files and remove any before submission.
-        </small>
-    </div>
-
-    <div style="display:flex; gap:12px;">
-        <button type="submit" class="btn">Create FRA</button>
-        <a href="dashboard_fr.php" class="btn">Cancel</a>
-    </div>
-</form>
+        <div class="create-form-actions">
+            <button type="submit" class="create-save-btn">Create FRA</button>
+            <a href="create_fra.php" class="create-cancel-btn">Cancel</a>
+        </div>
+    </form>
+</div>
 
 <script>
-    let selectedFiles = [];
 
-    function handleFiles(input) {
-        const newFiles = Array.from(input.files);
-
-        newFiles.forEach(file => {
-            const exists = selectedFiles.some(
-                f => f.name === file.name && f.size === file.size && f.lastModified === file.lastModified
-            );
-            if (!exists) {
-                selectedFiles.push(file);
-            }
-        });
-
-        updateFileInput();
-        renderFileList();
-    }
-
-    function removeFile(index) {
-        selectedFiles.splice(index, 1);
-        updateFileInput();
-        renderFileList();
-    }
-
-    function updateFileInput() {
-        const dataTransfer = new DataTransfer();
-        selectedFiles.forEach(file => dataTransfer.items.add(file));
-        document.getElementById('supporting_documents').files = dataTransfer.files;
-    }
-
-    function renderFileList() {
-        const fileList = document.getElementById('fileList');
-        fileList.innerHTML = '';
-
-        if (selectedFiles.length === 0) {
-            fileList.innerHTML = '<p style="color:#6b7280; margin:0;">No files selected.</p>';
-            return;
-        }
-
-        selectedFiles.forEach((file, index) => {
-            const item = document.createElement('div');
-            item.className = 'file-item';
-            item.innerHTML = `
-                <span>${file.name}</span>
-                <button type="button" class="btn" onclick="removeFile(${index})">Remove</button>
-            `;
-            fileList.appendChild(item);
-        });
-    }
-
-    renderFileList();
 
     const fraAlert = document.getElementById('fraAlert');
     if (fraAlert) {
