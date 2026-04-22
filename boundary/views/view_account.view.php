@@ -1,12 +1,22 @@
 <div class="header-top">
-    <h1>User Accounts</h1>
+    <div>
+        <?php if (!empty($_GET['keywords'])): ?>
+            <h1>Result for "<?= htmlspecialchars($_GET['keywords']) ?>"</h1>
+            <?php if (!empty($users)): ?>
+                <p><?= count($users) ?> matches found</p>
+            <?php endif; ?>
+        <?php else: ?>
+            <h1>User Accounts</h1>
+        <?php endif; ?>
+    </div>
 
     <form method="GET" class="search-form">
-        <input type="text" name="search" placeholder="Search users...">
+        <input type="text" name="keywords" placeholder="Search users..." value="<?= htmlspecialchars($_GET['keywords'] ?? '') ?>">
         <button type="submit">🔍</button>
     </form>
 </div>
 
+<?php if (!empty($users)): ?>
 <div class="header-box">
     <div class="header-row">
         <span>Username</span>
@@ -16,11 +26,16 @@
     </div>
 </div>
 <br>
+<?php endif; ?>
 
 <div class="body-box">
 
     <?php if (empty($users)): ?>
-        <p>No users found.</p>
+        <?php if (!empty($_GET['keywords'])): ?>
+            <p style="padding: 12px;">No accounts match your search.</p>
+        <?php else: ?>
+            <p>No users found.</p>
+        <?php endif; ?>
     <?php else: ?>
 
         <div class="user-list">

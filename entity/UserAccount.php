@@ -93,5 +93,26 @@ class UserAccount {
 
 		return $this->dbRowToUser($row);
 	}
+
+	public function searchAcc(string $keywords): array {
+		$stmt = $this->db->prepare(
+			"SELECT id, name, username, email, phone_number, profile, status 
+			FROM users 
+			WHERE username LIKE ? OR email LIKE ? OR profile = ? OR status = ?"
+		);
+		
+		$search = '%' . $keywords . '%';
+		$stmt->bind_param('ssss', $search, $search, $keywords, $keywords);
+		$stmt->execute();
+		
+		$result = $stmt->get_result();
+		$users = [];
+		
+		while ($row = $result->fetch_assoc()) {
+			$users[] = $this->dbRowToUser($row);
+		}
+		
+		return $users;
+	}
 }
 ?>

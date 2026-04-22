@@ -1,12 +1,20 @@
 <?php
 	require_once __DIR__ . '/../control/ViewAccController.php';
+	require_once __DIR__ . '/../control/searchAccController.php';
 
 	class ViewAccPage
 	{
 		public function display(): void
 		{
 			$controller = new ViewAccController();
-			$users = $controller->viewAccounts();
+			$keywords = trim($_GET['keywords'] ?? '');
+
+			if ($keywords !== '') {
+				$searchController = new searchAccController();
+				$users = $searchController->searchAcc($keywords);
+			} else {
+				$users = $controller->viewAccounts();
+			}
 
 			$pageTitle = 'User Accounts';
 			$activePage = 'view_accounts';
