@@ -1,7 +1,7 @@
 <h1>FRA View</h1>
 
 <div class="table-wrap">
-    <table class="fra-table">
+    <table class="table-base view-fra-table">
         <thead>
             <tr>
                 <th>Campaign Title</th>

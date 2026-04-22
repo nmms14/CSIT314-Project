@@ -13,7 +13,7 @@
 
 
 <div class="table-wrap">
-    <table class="fra-table">
+    <table class="table-base delete-fra-table">
         <thead>
             <tr>
                 <th>Campaign Title</th>

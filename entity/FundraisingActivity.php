@@ -68,4 +68,67 @@ public function deleteFRA(int $id): bool
     $stmt->bind_param("i", $id);
     return $stmt->execute();
 }
+
+public function getFRAById(int $id): ?array
+{
+    $sql = "SELECT id, campaign_title, category, description, end_date, goal_amount, donee_name, phone
+            FROM fundraising_activity
+            WHERE id = ?";
+
+    $stmt = $this->db->prepare($sql);
+
+    if (!$stmt) {
+        return null;
+    }
+
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    return $row ?: null;
+}
+
+public function updateFRA(
+    int $id,
+    string $campaignTitle,
+    string $category,
+    string $goalAmount,
+    string $endDate,
+    string $description,
+    string $doneeName,
+    string $phone
+): bool
+{
+    $sql = "UPDATE fundraising_activity
+            SET campaign_title = ?,
+                category = ?,
+                goal_amount = ?,
+                end_date = ?,
+                description = ?,
+                donee_name = ?,
+                phone = ?
+            WHERE id = ?";
+
+    $stmt = $this->db->prepare($sql);
+
+    if (!$stmt) {
+        return false;
+    }
+
+    $stmt->bind_param(
+        "sssssssi",
+        $campaignTitle,
+        $category,
+        $goalAmount,
+        $endDate,
+        $description,
+        $doneeName,
+        $phone,
+        $id
+    );
+
+    return $stmt->execute();
+}
 }
