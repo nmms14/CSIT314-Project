@@ -15,7 +15,9 @@
         <p class="status">Status: <?= htmlspecialchars($user->status) ?></p>
 
         <div class="action-buttons">
-            <button class="btn">Update</button>
+            <a href="update_acc.php?id=<?= $user->id ?>" class="btn btn-link-button">
+				Update
+			</a>
 
             <form method="POST">
                 <input type="hidden" name="id" value="<?= $user->id ?>">
