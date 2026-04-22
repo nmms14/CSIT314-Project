@@ -406,6 +406,7 @@ $contentView = $contentView ?? '';
 			display: inline-block;
 			text-decoration: none;
 			color: inherit;
+			 text-align: center;
 		}
     </style>
 </head>
