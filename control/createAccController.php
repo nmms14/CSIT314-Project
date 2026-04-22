@@ -27,7 +27,7 @@
 			$db = DBConnection::getInstance();
 			$ua = new UserAccount($db);
 			$status = 'Active';
-			$success = $ua->createUser($name, $username, $email, $phone, $password, $profile, $status);
+			$success = $ua->createAcc($name, $username, $email, $phone, $password, $profile, $status);
 
 			if ($success) {
 				return ['type' => 'success', 'message' => 'Account created successfully!'];
