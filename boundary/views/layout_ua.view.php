@@ -400,6 +400,13 @@ $contentView = $contentView ?? '';
 			text-decoration: none;
 			color: #111827;
 		}
+		
+		/*Update Account*/
+		.btn-link-button {
+			display: inline-block;
+			text-decoration: none;
+			color: inherit;
+		}
     </style>
 </head>
 <body>
