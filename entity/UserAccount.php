@@ -16,7 +16,7 @@ class UserAccount {
         $this->db = $db;
     }
 
-    public function createUser(string $name, string $username, string $email, string $phone, string $password, string $profile, string $status): bool {
+    public function createAcc(string $name, string $username, string $email, string $phone, string $password, string $profile, string $status): bool {
         $stmt = $this->db->prepare(
             "INSERT INTO users (name, username, email, phone_number, password, profile, status) VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
