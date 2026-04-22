@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 
 INSERT INTO user_profiles (profile_name, description) VALUES
 ('Platform Manager', 'Manages the platform and oversees system operations.'),
-('User Admin', 'Responsible for creating and managing user accounts and user profiles.'),
+('User Admin', 'Creates and manages user accounts and user profiles.'),
 ('Fundraiser', 'Creates and manages fundraising activities.'),
 ('Donee', 'Receives funds and searches for fundraising activities.');
 
