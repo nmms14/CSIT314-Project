@@ -15,7 +15,7 @@
         <p class="status">Status: <?= htmlspecialchars($user->status) ?></p>
 
         <div class="action-buttons">
-            <button class="btn">Edit</button>
+            <button class="btn">Update</button>
 
             <form method="POST">
                 <input type="hidden" name="id" value="<?= $user->id ?>">
