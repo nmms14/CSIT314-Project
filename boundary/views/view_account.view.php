@@ -11,9 +11,14 @@
     </div>
 
     <form method="GET" class="search-form">
-        <input type="text" name="keywords" placeholder="Search users..." value="<?= htmlspecialchars($_GET['keywords'] ?? '') ?>">
-        <button type="submit">🔍</button>
-    </form>
+    <div class="search-wrapper">
+        <input type="text" name="keywords" id="searchInput" placeholder="Search users..." value="<?= htmlspecialchars($_GET['keywords'] ?? '') ?>">
+        <?php if (!empty($_GET['keywords'])): ?>
+            <span class="clear-btn" onclick="window.location.href='view_acc.php'">×</span>
+        <?php endif; ?>
+    </div>
+    <button type="submit">🔍</button>
+</form>
 </div>
 
 <?php if (!empty($users)): ?>

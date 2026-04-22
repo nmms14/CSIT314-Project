@@ -312,6 +312,25 @@ $contentView = $contentView ?? '';
 			padding: 10px 16px;
 			font-weight: bold;
 		}
+        .search-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .search-wrapper input {
+            padding-right: 28px;
+        }
+        .clear-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6b7280;
+            font-size: 1rem;
+        }
+        .clear-btn:hover {
+            color: #111827;
+        }
 		
 		/*View Account Details CSS*/
 		.details-content {
