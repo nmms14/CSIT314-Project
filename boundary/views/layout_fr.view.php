@@ -597,6 +597,86 @@ $contentView = $contentView ?? '';
     overflow: hidden;
 }
 
+.search-fra-toolbar {
+    margin: 18px 0 20px;
+}
+
+.search-fra-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-fra-input {
+    width: 260px;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font: inherit;
+    background: #ffffff;
+}
+
+.search-fra-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #111827;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-fra-btn:hover {
+    background: #1f2937;
+}
+
+.search-fra-table td {
+    vertical-align: middle;
+}
+
+.search-fra-table tr:hover {
+    background: #f9fafb;
+}
+
+/* description column for search table */
+.search-fra-table td:nth-child(5) {
+    max-width: 240px;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.search-fra-input {
+    width: 260px;
+    padding: 10px 38px 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font: inherit;
+    background: #ffffff;
+}
+
+.search-clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    color: #6b7280;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.search-clear-btn:hover {
+    color: #111827;
+}
+
 </style>
 </head>
 <body>

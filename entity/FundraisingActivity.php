@@ -131,4 +131,38 @@ public function updateFRA(
 
     return $stmt->execute();
 }
+
+public function getMatchingFRA(string $keyword): array
+{
+    $sql = "SELECT id, campaign_title, category, goal_amount, end_date, description, donee_name, phone
+            FROM fundraising_activity
+            WHERE campaign_title LIKE ?
+               OR category LIKE ?
+               OR description LIKE ?
+               OR donee_name LIKE ?
+               OR phone LIKE ?
+            ORDER BY id DESC";
+
+    $stmt = $this->db->prepare($sql);
+
+    if (!$stmt) {
+        return [];
+    }
+
+    $searchTerm = '%' . $keyword . '%';
+
+    $stmt->bind_param(
+        "sssss",
+        $searchTerm,
+        $searchTerm,
+        $searchTerm,
+        $searchTerm,
+        $searchTerm
+    );
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 }
