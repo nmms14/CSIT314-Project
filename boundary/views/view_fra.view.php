@@ -11,6 +11,7 @@
                 <th class="desc-header">Description</th>
                 <th>Donee</th>
                 <th>Phone</th>
+                <th>Fundraiser</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,7 @@
                         <td><?= htmlspecialchars($row['description'] ?? '-') ?></td>
                         <td><?= htmlspecialchars($row['donee_name'] ?? '-') ?></td>
                         <td><?= htmlspecialchars($row['phone'] ?? '-') ?></td>
+                        <td><?= htmlspecialchars(($row['fundraiser_name'] ?? '') !== '' ? $row['fundraiser_name'] : '-') ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

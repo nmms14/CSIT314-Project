@@ -18,12 +18,13 @@ class FundraisingActivity
     string $endDate,
     string $goalAmount,
     string $doneeName,
-    string $phone
+    string $phone,
+    string $fundraiserName
 ): bool
 {
     $sql = "INSERT INTO fundraising_activity
-            (campaign_title, category, description, end_date, goal_amount, donee_name, phone)
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+            (campaign_title, category, description, end_date, goal_amount, donee_name, phone, fundraiser_name)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $this->db->prepare($sql);
 
@@ -32,14 +33,15 @@ class FundraisingActivity
     }
 
     $stmt->bind_param(
-        "ssssdss",
+        "ssssdsss",
         $campaignTitle,
         $category,
         $description,
         $endDate,
         $goalAmount,
         $doneeName,
-        $phone
+        $phone,
+        $fundraiserName
     );
 
     return $stmt->execute();
@@ -47,9 +49,9 @@ class FundraisingActivity
 
     public function getAllFRA(): array
 {
-    $sql = "SELECT id, campaign_title, category, goal_amount, end_date, description, donee_name, phone
-            FROM fundraising_activity
-            ORDER BY id DESC";
+    $sql = "SELECT id, campaign_title, category, goal_amount, end_date, description, donee_name, phone, fundraiser_name
+        FROM fundraising_activity
+        ORDER BY id DESC";
 
     $result = $this->db->query($sql);
 
@@ -71,9 +73,9 @@ public function deleteFRA(int $id): bool
 
 public function getFRAById(int $id): ?array
 {
-    $sql = "SELECT id, campaign_title, category, description, end_date, goal_amount, donee_name, phone
-            FROM fundraising_activity
-            WHERE id = ?";
+$sql = "SELECT id, campaign_title, category, description, end_date, goal_amount, donee_name, phone, fundraiser_name
+        FROM fundraising_activity
+        WHERE id = ?";
 
     $stmt = $this->db->prepare($sql);
 
@@ -134,14 +136,15 @@ public function updateFRA(
 
 public function getMatchingFRA(string $keyword): array
 {
-    $sql = "SELECT id, campaign_title, category, goal_amount, end_date, description, donee_name, phone
-            FROM fundraising_activity
-            WHERE campaign_title LIKE ?
-               OR category LIKE ?
-               OR description LIKE ?
-               OR donee_name LIKE ?
-               OR phone LIKE ?
-            ORDER BY id DESC";
+    $sql = "SELECT id, campaign_title, category, goal_amount, end_date, description, donee_name, phone, fundraiser_name
+        FROM fundraising_activity
+        WHERE campaign_title LIKE ?
+           OR category LIKE ?
+           OR description LIKE ?
+           OR donee_name LIKE ?
+           OR phone LIKE ?
+           OR fundraiser_name LIKE ?
+        ORDER BY id DESC";
 
     $stmt = $this->db->prepare($sql);
 
@@ -152,7 +155,8 @@ public function getMatchingFRA(string $keyword): array
     $searchTerm = '%' . $keyword . '%';
 
     $stmt->bind_param(
-        "sssss",
+        "ssssss",
+        $searchTerm,
         $searchTerm,
         $searchTerm,
         $searchTerm,

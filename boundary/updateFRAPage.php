@@ -95,18 +95,21 @@ class updateFRAPage
         $this->popupType = $type;
     }
 
-    public function render(): void
-    {
-        $popupMessage = $this->popupMessage;
-        $popupType = $this->popupType;
-        $mode = $this->mode;
-        $fra = $this->fra;
-        $fraList = $this->fraList;
+public function render(): void
+{
+    $popupMessage = $this->popupMessage;
+    $popupType = $this->popupType;
+    $mode = $this->mode;
+    $fra = $this->fra;
+    $fraList = $this->fraList;
 
-        $contentView = __DIR__ . '/views/update_fra.view.php';
+    $page = 'update_fra';
+    $pageTitle = 'Update FRA';
 
-        include __DIR__ . '/views/layout_fr.view.php';
-    }
+    $contentView = __DIR__ . '/views/update_fra.view.php';
+
+    include __DIR__ . '/views/layout_fr.view.php';
+}
 }
 
 $page = new updateFRAPage();

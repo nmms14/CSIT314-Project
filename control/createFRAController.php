@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../entity/FundraisingActivity.php';
 require_once __DIR__ . '/../config/DBConnection.php';
 
@@ -13,10 +14,12 @@ class createFRAController
         $goalAmount = trim($data['goal_amount'] ?? '');
         $doneeName = trim($data['donee_name'] ?? '');
         $phone = trim($data['phone'] ?? '');
+        $fundraiserName = trim($data['fundraiser_name'] ?? '');
 
         if (
             $campaignTitle === '' || $category === '' || $description === '' ||
-            $endDate === '' || $goalAmount === '' || $doneeName === '' || $phone === ''
+            $endDate === '' || $goalAmount === '' || $doneeName === '' ||
+            $phone === '' || $fundraiserName === ''
         ) {
             return [
                 'message' => 'All fields are required.',
@@ -33,7 +36,8 @@ class createFRAController
             $endDate,
             $goalAmount,
             $doneeName,
-            $phone
+            $phone,
+            $fundraiserName
         );
 
         if ($success) {

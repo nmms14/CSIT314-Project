@@ -44,6 +44,7 @@
                 <th>Description</th>
                 <th>Donee</th>
                 <th>Phone</th>
+                <th>Fundraiser</th>
             </tr>
         </thead>
         <tbody>
@@ -57,15 +58,16 @@
                         <td><?= htmlspecialchars($fra['description']) ?></td>
                         <td><?= htmlspecialchars($fra['donee_name']) ?></td>
                         <td><?= htmlspecialchars($fra['phone']) ?></td>
+                        <td><?= htmlspecialchars($fra['fundraiser_name'] ?? '-') ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php elseif ($searchKeyword !== ''): ?>
                 <tr>
-                    <td colspan="7">No FRA matches your search.</td>
+                    <td colspan="8">No FRA matches your search.</td>
                 </tr>
             <?php else: ?>
                 <tr>
-                    <td colspan="7">Enter a keyword to search fundraising activities.</td>
+                    <td colspan="8" >Enter a keyword to search fundraising activities.</td>
                 </tr>
             <?php endif; ?>
         </tbody>

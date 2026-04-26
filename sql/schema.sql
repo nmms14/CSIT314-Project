@@ -41,11 +41,12 @@ CREATE TABLE IF NOT EXISTS fundraising_activity (
     goal_amount     DECIMAL(12,2) NOT NULL,
     donee_name      VARCHAR(255),
     phone           VARCHAR(20),
+    fundraiser_name VARCHAR(255) NOT NULL,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO fundraising_activity
-(campaign_title, category, description, end_date, goal_amount, donee_name, phone)
+(campaign_title, category, description, end_date, goal_amount, donee_name, phone, fundraiser_name)
 VALUES
-('Food Drive','Social','Providing food supplies to low-income families','2026-12-31', 3000.00, 'Stella','91234567'), 
-('School Supplier', 'Education', 'Supplying school materials to student', '2026-11-30', 4000.00, 'John Tan', '98765432');
+('Food Drive', 'Social', 'Providing food supplies to low-income families', '2026-12-31', 3000.00, 'Stella', '91234567', 'fundraiser'),
+('School Supplier', 'Education', 'Supplying school materials to student', '2026-11-30', 4000.00, 'John Tan', '98765432', 'fundraiser');

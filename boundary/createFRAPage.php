@@ -1,4 +1,9 @@
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '/../control/createFRAController.php';
 
 class createFRAPage
@@ -10,6 +15,9 @@ class createFRAPage
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $controller = new createFRAController();
+
+            $_POST['fundraiser_name'] = $_SESSION['username'] ?? 'Unknown';
+
             $response = $controller->create($_POST, $_FILES);
 
             $message = $response['message'] ?? '';
