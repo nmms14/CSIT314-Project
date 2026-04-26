@@ -20,6 +20,7 @@
                 <th>Category</th>
                 <th>Amount</th>
                 <th>End Date</th>
+                <th>Donee</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                         <td><?= htmlspecialchars($fra['category']) ?></td>
                         <td>$<?= number_format((float)$fra['goal_amount'], 0) ?></td>
                         <td><?= htmlspecialchars(date('Y/m/d', strtotime($fra['end_date']))) ?></td>
+                        <td><?= htmlspecialchars($fra['donee_name']) ?></td>
                         <td>
                             <form method="POST" onsubmit="return confirm('Are you sure you want to delete this fundraising activity?');">
                                 <input type="hidden" name="delete_id" value="<?= (int)$fra['id'] ?>">
