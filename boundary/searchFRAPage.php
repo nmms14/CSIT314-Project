@@ -2,19 +2,45 @@
 
 require_once __DIR__ . '/../control/searchFRAController.php';
 
-$controller = new SearchFRAController();
+class searchFRAPage
+{
+    private SearchFRAController $controller;
+    private string $searchKeyword = '';
+    private array $results = [];
 
-$searchKeyword = trim($_GET['keyword'] ?? '');
+    public function __construct()
+    {
+        $this->controller = new SearchFRAController();
+    }
 
-$results = [];
+    public function handleSearchRequest(): void
+    {
+        $this->searchKeyword = trim($_GET['keyword'] ?? '');
 
-if ($searchKeyword !== '') {
-    $results = $controller->processSearch($searchKeyword);
+        if ($this->searchKeyword !== '') {
+            $this->displayMatchingResults();
+        }
+    }
+
+    public function displayMatchingResults(): void
+    {
+        $this->results = $this->controller->processSearch($this->searchKeyword);
+    }
+
+    public function render(): void
+    {
+        $searchKeyword = $this->searchKeyword;
+        $results = $this->results;
+
+        $page = 'search_fra';
+        $pageTitle = 'FRA Search';
+
+        $contentView = __DIR__ . '/views/search_fra.view.php';
+
+        include __DIR__ . '/views/layout_fr.view.php';
+    }
 }
 
-$page = 'search_fra';
-$pageTitle = 'FRA Search';
-
-$contentView = __DIR__ . '/views/search_fra.view.php';
-
-include __DIR__ . '/views/layout_fr.view.php';
+$pageObject = new searchFRAPage();
+$pageObject->handleSearchRequest();
+$pageObject->render();
