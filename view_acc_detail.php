@@ -9,4 +9,4 @@ if (($_SESSION['profile'] ?? null) !== 'user_admin') {
 require_once __DIR__ . '/boundary/viewAccDetailPage.php';
 
 $page = new viewAccDetailPage();
-$page->handle();
+$page->display();

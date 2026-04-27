@@ -16,24 +16,29 @@ class UserAccount {
         $this->db = $db;
     }
 
-    public function createAcc(string $name, string $username, string $email, string $phone, string $password, string $profile, string $status): bool {
-        $stmt = $this->db->prepare(
-            "INSERT INTO users (name, username, email, phone_number, password, profile, status) VALUES (?, ?, ?, ?, ?, ?, ?)"
-        );
+	public function createAcc(string $name, string $username, string $email, string $phone, string $password, string $profile, string $status): array {
+		$stmt = $this->db->prepare(
+			"INSERT INTO user_accounts (name, username, email, phone_number, password, profile, status) VALUES (?, ?, ?, ?, ?, ?, ?)"
+		);
 
-        if (!$stmt) return false;
+		if (!$stmt) return ['type' => 'error', 'message' => 'Failed to prepare statement.'];
 
-        $stmt->bind_param('sssssss', $name, $username, $email, $phone, $password, $profile, $status);
+		$stmt->bind_param('sssssss', $name, $username, $email, $phone, $password, $profile, $status);
 
-        try {
-            $success = $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
-            return false;
-        }
+		try {
+			$success = $stmt->execute();
+		} catch (mysqli_sql_exception $e) {
+			return ['type' => 'error', 'message' => 'Username already exists.'];
+		}
 
-        $stmt->close();
-        return $success;
-    }
+		$stmt->close();
+
+		if ($success) {
+			return ['type' => 'success', 'message' => 'Account created successfully!'];
+		}
+
+		return ['type' => 'error', 'message' => 'Failed to create account.'];
+	}
 
 	public function getProfiles() {
 		$sql = "SELECT profile_name FROM user_profiles";
@@ -57,7 +62,7 @@ class UserAccount {
 	
 	public function getAllAcc(): array {
 		$sql = "SELECT id, name, username, email, phone_number, profile, status 
-				FROM users";
+				FROM user_accounts";
 		$result = $this->db->query($sql);
 		
 		$users = [];
@@ -74,7 +79,7 @@ class UserAccount {
 	public function getAccDetail(string $username): ?UserAccount {
 		$stmt = $this->db->prepare(
 			"SELECT id, name, username, email, phone_number, profile, status 
-			FROM users WHERE username = ? LIMIT 1"
+			FROM user_accounts WHERE username = ? LIMIT 1"
 		);
 		
 		 if (!$stmt) {
@@ -97,7 +102,7 @@ class UserAccount {
 	public function searchAcc(string $keywords): array {
 		$stmt = $this->db->prepare(
 			"SELECT id, name, username, email, phone_number, profile, status 
-			FROM users 
+			FROM user_accounts 
 			WHERE username LIKE ? OR email LIKE ? OR profile = ? OR status = ?"
 		);
 		
@@ -115,7 +120,7 @@ class UserAccount {
 		return $users;
 	}
 
-	public function updateAcc(int $id, array $data) {
+	public function updateAcc(string $username, array $data): array {
 		$fields = [];
 		$values = [];
 
@@ -150,46 +155,48 @@ class UserAccount {
 		}
 
 		if (empty($fields)) {
-			return false; // admin typed nothing
+			return false;
 		}
+		
+		$sql = "UPDATE user_accounts SET " . implode(", ", $fields) . " WHERE username = ?";
 
-		$sql = "UPDATE users SET " . implode(", ", $fields) . " WHERE id = ?";
-
-		$values[] = $id;
+		$values[] = $username;
 
 		$stmt = $this->db->prepare($sql);
 
-		$types = str_repeat("s", count($values) - 1) . "i";
+		if (!$stmt) {
+			return [
+				'success' => false,
+				'message' => 'Prepare failed'
+			];
+		}
+
+		$types = str_repeat("s", count($values));
 		$stmt->bind_param($types, ...$values);
 
-		return $stmt->execute();
+		if ($stmt->execute()) {
+			return [
+				'success' => true,
+				'message' => 'Account updated successfully',
+				'affected_rows' => $stmt->affected_rows
+			];
+		}
+
+		return [
+			'success' => false,
+			'message' => 'Update failed'
+		];
 	}
 	
-	public function getUserById(int $id): ?UserAccount {
+	public function suspendAcc(string $username): bool {
 		$stmt = $this->db->prepare(
-			"SELECT id, name, username, email, phone_number, profile, status 
-			 FROM users 
-			 WHERE id = ? 
-			 LIMIT 1"
+			"UPDATE user_accounts SET status = 'suspended' WHERE username = ?"
 		);
 
-		if (!$stmt) {
-			return null;
-		}
+		if (!$stmt) return false;
 
-		$stmt->bind_param("i", $id);
-		$stmt->execute();
-
-		$result = $stmt->get_result();
-		$row = $result->fetch_assoc();
-
-		$stmt->close();
-
-		if (!$row) {
-			return null;
-		}
-
-		return $this->dbRowToUser($row);
+		$stmt->bind_param("s", $username);
+		return $stmt->execute();
 	}
 }
 ?>

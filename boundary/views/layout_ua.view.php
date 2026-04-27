@@ -145,7 +145,7 @@ $contentView = $contentView ?? '';
         }
         .btn-danger:hover { background: #b91c1c; }
         .alert-popup {
-            max-width: 920px;
+            max-width: 100%;
             margin-bottom: 16px;
             padding: 14px 16px;
             border-radius: 10px;
@@ -393,6 +393,9 @@ $contentView = $contentView ?? '';
 			position: relative;
 			top: 20px;
 			left: 20px;
+			display: block;
+			width: 100%;
+			margin-bottom: 20px
 		}
 
 		.back-btn {
@@ -408,6 +411,8 @@ $contentView = $contentView ?? '';
 			color: inherit;
 			 text-align: center;
 		}
+		
+		/*Suspend Popup*/
     </style>
 </head>
 <body>
