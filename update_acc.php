@@ -9,5 +9,5 @@ if (($_SESSION['profile'] ?? null) !== 'user_admin') {
 require_once __DIR__ . '/boundary/updateAccPage.php';
 
 $page = new updateAccPage();
-$page->handle();
+$page->display();
 ?>

@@ -8,52 +8,56 @@
 <h1>Account Update</h1>
 
 <form method="POST" class="form-card">
-	<input type="hidden" name="id" value="<?= htmlspecialchars($user->id) ?>">
+	<input type="hidden" name="currUsername" value="<?= htmlspecialchars($user->username) ?>">
+	
+	<?php $isDisabled = ($user->status === 'suspended'); ?>
 	
     <div class="form-group">
         <label>Name</label>
-        <input type="text" name="name" class="form-control" placeholder="Enter full name" value="<?= htmlspecialchars($user->name ?? '') ?>">
+        <input type="text" name="name" class="form-control" placeholder="Enter full name" value="<?= htmlspecialchars($user->name ?? '') ?>" 
+			<?= $isDisabled ? 'disabled' : '' ?>>
     </div>
 
     <div class="form-group">
         <label>Username</label>
-        <input type="text" name="username" class="form-control" placeholder="Enter username" value="<?= htmlspecialchars($user->username ?? '') ?>">
+        <input type="text" name="username" class="form-control" placeholder="Enter username" value="<?= htmlspecialchars($user->username ?? '') ?>"
+			<?= $isDisabled ? 'disabled' : '' ?>>
     </div>
 
     <div class="form-group">
         <label>Email</label>
-        <input type="email" name="email" class="form-control" placeholder="Enter email" value="<?= htmlspecialchars($user->email ?? '') ?>">
+        <input type="email" name="email" class="form-control" placeholder="Enter email" value="<?= htmlspecialchars($user->email ?? '') ?>"
+			<?= $isDisabled ? 'disabled' : '' ?>>
     </div>
 
     <div class="form-group">
         <label>Phone Number</label>
-        <input type="text" name="phone" class="form-control" placeholder="Enter 8-digit phone number" value="<?= htmlspecialchars($user->phone ?? '') ?>">
+        <input type="text" name="phone" class="form-control" placeholder="Enter 8-digit phone number" value="<?= htmlspecialchars($user->phone ?? '') ?>"
+			<?= $isDisabled ? 'disabled' : '' ?>>
     </div>
 
     <div class="form-group">
         <label>Password</label>
-        <input type="password" name="password" class="form-control" placeholder="Leave blank to keep current password">
+        <input type="password" name="password" class="form-control" placeholder="Leave blank to keep current password"
+			<?= $isDisabled ? 'disabled' : '' ?>>
     </div>
 
-    <?php
-		$controller = new updateAccController();
-		$profiles = $controller->loadProfiles();
-	?>
-
 	<label>Profile</label>
-	<select name="profile" class="form-control">
+	<select name="profile" class="form-control" <?= $isDisabled ? 'disabled' : '' ?>>
 		<option value="">Select a role..</option>
 
 		<?php while ($row = $profiles->fetch_assoc()): ?>
-			<option value="<?= strtolower(str_replace(' ', '_', $row['profile_name'])) ?>"
-				<?= (($user->profile ?? '') === strtolower(str_replace(' ', '_', $row['profile_name']))) ? 'selected' : '' ?>>
+			<option value="<?= $row['profile_name'] ?>"
+				<?= (($user->profile ?? '') === $row['profile_name']) ? 'selected' : '' ?>>
 				<?= $row['profile_name'] ?>
 			</option>
 		<?php endwhile; ?>
 	</select>
 
     <div style="display:flex; gap:12px;">
-        <button type="submit" class="btn">Update</button>
-        <a href="dashboard_ua.php" class="btn">Cancel</a>
+        <button type="submit" class="btn" <?= $isDisabled ? 'disabled' : '' ?>>Update</button>
+        <a href="view_acc_detail.php?username=<?= urlencode($user->username) ?>" class="btn">
+			Cancel
+		</a>
     </div>
 </form>
