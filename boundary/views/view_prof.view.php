@@ -1,10 +1,45 @@
-<div class="header-top">
-    <h1>User Profiles</h1>
+<?php if (isset($_GET['success'])): ?>
+    <div class="alert-popup success" id="profSuccessAlert">
+        Profile updated successfully!
+    </div>
+    <script>
+        setTimeout(() => {
+            const el = document.getElementById('profSuccessAlert');
+            if (el) el.style.display = 'none';
+        }, 3000);
+    </script>
+<?php endif; ?>
 
-    <form method="GET" class="search-form">
-        <input type="text" name="search" placeholder="Search profile.." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
-        <button type="submit">🔍</button>
-    </form>
+<div class="header-top">
+
+  <div>
+    <?php if (!empty($_GET['keywords'])): ?>
+      <h1>Result for "<?= htmlspecialchars($_GET['keywords']) ?>"</h1>
+
+      <?php if (!empty($profiles)): ?>
+        <p><?= count($profiles) ?> matches found</p>
+      <?php else: ?>
+        <p>No results found</p>
+      <?php endif; ?>
+
+    <?php else: ?>
+      <h1>User Profiles</h1>
+    <?php endif; ?>
+  </div>
+
+  <form method="GET" class="search-form">
+    <div class="search-wrapper">
+      <input type="text" name="keywords" id="searchInput"
+        placeholder="Search profiles..."
+        value="<?= htmlspecialchars($_GET['keywords'] ?? '') ?>">
+
+      <?php if (!empty($_GET['keywords'])): ?>
+        <a href="view_prof.php" class="clear-btn">×</a>
+      <?php endif; ?>
+    </div>
+
+    <button type="submit">🔍</button>
+  </form>
 </div>
 
 <div class="header-box">
@@ -28,7 +63,7 @@
                     <span><?= htmlspecialchars($p['description']) ?></span>
                     <span><?= (int)$p['user_count'] ?></span>
                     <span>
-                        <a class="btn" href="edit_prof.php?profile_id=<?= (int)$p['profile_id'] ?>">Edit</a>
+                        <a class="btn" href="update_prof.php?profile_id=<?= (int)$p['profile_id'] ?>&profile_name=<?= urlencode($p['profile_name']) ?>&description=<?= urlencode($p['description']) ?>">Edit</a>
                         <a class="btn" href="suspend_prof.php?profile_id=<?= (int)$p['profile_id'] ?>">Suspend</a>
                     </span>
                 </div>

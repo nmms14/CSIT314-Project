@@ -1,19 +1,20 @@
 <?php
 require_once __DIR__ . '/../control/viewUserProfileController.php';
+require_once __DIR__ . '/../control/searchUserProfileController.php';
 
 class viewUserProfilePage {
     public function clickViewUserProfile(): void {
         $controller = new viewUserProfileController();
         $profiles = $controller->viewUserProfiles();
 
-        $search = trim($_GET['search'] ?? '');
-        if ($search !== '') {
-            $needle = strtolower($search);
-            $profiles = array_values(array_filter($profiles, function ($p) use ($needle) {
-                return strpos(strtolower($p['profile_name']), $needle) !== false
-                    || strpos(strtolower($p['description']), $needle) !== false;
-            }));
-        }
+        $keywords = trim($_GET['keywords'] ?? '');
+
+    if ($keywords !== '') {
+      $searchController = new searchUserProfileController();
+      $profiles = $searchController->searchProfiles($keywords);
+    } else {
+      $profiles = $controller->viewUserProfiles();
+    }
 
         $pageTitle   = 'User Profiles';
         $activePage  = 'view_prof';
