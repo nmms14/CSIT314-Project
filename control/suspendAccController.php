@@ -15,13 +15,13 @@
 				return ['type' => 'error', 'message' => 'Account not found.'];
 			}
 
-			if ($user->status === 'suspended') {
+			if ($user->status === 'Suspended') {
 				return ['type' => 'error', 'message' => 'Account already suspended.'];
 			}
 
 			$success = $ua->suspendAcc($username);
 
-			if ($success) {
+			if ($success !== null) {
 				return ['type' => 'success', 'message' => 'Account suspended successfully.'];
 			}
 
