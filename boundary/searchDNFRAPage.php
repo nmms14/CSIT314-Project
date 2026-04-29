@@ -1,16 +1,16 @@
 <?php
 
-require_once __DIR__ . '/../control/doneeSearchFRAController.php';
+require_once __DIR__ . '/../control/searchDNFRAController.php';
 
-class doneeSearchFRAPage
+class searchDNFRAPage
 {
-    private doneeSearchFRAController $controller;
+    private searchDNFRAController $controller;
     private string $searchKeyword = '';
     private array $results = [];
 
     public function __construct()
     {
-        $this->controller = new doneeSearchFRAController();
+        $this->controller = new searchDNFRAController();
     }
 
     public function handleSearchRequest(): void
@@ -33,12 +33,12 @@ class doneeSearchFRAPage
         $activePage = 'browse_fra';
         $pageTitle = 'Browse FRA';
 
-        $contentView = __DIR__ . '/views/donee_search_fra.view.php';
+        $contentView = __DIR__ . '/views/search_dn_fra.view.php';
 
         include __DIR__ . '/views/layout_dn.view.php';
     }
 }
 
-$pageObject = new doneeSearchFRAPage();
+$pageObject = new searchDNFRAPage();
 $pageObject->handleSearchRequest();
 $pageObject->render();

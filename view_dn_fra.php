@@ -7,6 +7,6 @@ if (($_SESSION['profile'] ?? null) !== 'donee') {
 }
 
 $activePage = 'browse_fra';
-$pageTitle = 'Browse FRA';
+$pageTitle = 'View FRA Details';
 
-include __DIR__ . '/boundary/searchDNFRAPage.php';
+include __DIR__ . '/boundary/viewDNFRAPage.php';

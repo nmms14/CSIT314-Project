@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../entity/FundraisingActivity.php';
 
-class doneeSearchFRAController
+class searchDNFRAController
 {
     private FundraisingActivity $fundraisingActivity;
 

@@ -403,6 +403,70 @@ $contentView = $contentView ?? '';
 .save-btn:hover {
     background: #dcfce7;
 }
+
+.fra-detail-card {
+    max-width: 760px;
+    margin-top: 24px;
+    padding: 28px;
+    border: 1px solid #d1d5db;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.fra-detail-card h2 {
+    margin: -28px -28px 24px;
+    padding: 18px 28px;
+    background: #eff6ff;
+    border-bottom: 1px solid #bfdbfe;
+    border-radius: 16px 16px 0 0;
+    color: #1d4ed8;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.fra-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 28px;
+}
+
+.fra-detail-card p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.fra-description-box {
+    margin-top: 24px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.fra-description-box p {
+    margin-top: 10px;
+}
+
+.fra-detail-actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #1d4ed8;
+}
 </style>
 </head>
 <body>
