@@ -12,35 +12,64 @@ require_once __DIR__ . '/../control/updateAccController.php';
 			$currUsername = $_POST['currUsername'] ?? $_GET['username'] ?? null;
 			
 			if (!$currUsername) {
-				die("No username provided.");
+				die("Username not found.");
 			}
+			
+			$user = $controller->getAccDetail($currUsername);
 
+			// HANDLE FORM
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-				$result = $controller->updateAcc(
-					$currUsername,
-					$_POST['name']     ?? '',
-					$_POST['username'] ?? '',
-					$_POST['email']    ?? '',
-					$_POST['phone']    ?? '',
-					$_POST['password'] ?? '',
-					$_POST['profile']  ?? ''
-				);
-				
-				$message     = $result['message'] ?? '';
-				$messageType = $result['type'] ?? 'error';
-				
-				if ($messageType === 'success') {
-					// if username was changed, use new one
-					$newUsername = !empty($_POST['username']) 
-						? $_POST['username'] 
-						: $currUsername;
 
-					header("Location: view_acc_detail.php?username=" . urlencode($newUsername) . "&success=1");
-					exit;
+				// Get values
+				$name     = trim($_POST['name'] ?? '');
+				$username = trim($_POST['username'] ?? '');
+				$email    = trim($_POST['email'] ?? '');
+				$phone    = trim($_POST['phone'] ?? '');
+				$password = $_POST['password'] ?? '';
+				$profile  = $_POST['profile'] ?? '';
+
+				// Build data
+				$data = [];
+
+				if ($name !== '')     $data['name'] = $name;
+				if ($username !== '') $data['username'] = $username;
+				if ($email !== '')    $data['email'] = $email;
+				if ($phone !== '')    $data['phone'] = $phone;
+				if ($password !== '') $data['password'] = $password;
+				if ($profile !== '')  $data['profile'] = $profile;
+
+				if (empty($data)) {
+					$message = 'Please update at least one field.';
+					$messageType = 'error';
+
+				} elseif (isset($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+					$message = 'Invalid email format.';
+					$messageType = 'error';
+
+				} elseif (isset($data['phone']) && !preg_match('/^[0-9]{8}$/', $data['phone'])) {
+					$message = 'Phone number should be 8 digits.';
+					$messageType = 'error';
+
+				} elseif (isset($data['password']) && strlen($data['password']) < 6) {
+					$message = 'Password should be at least 6 characters.';
+					$messageType = 'error';
+
+				} else {
+					// Call controller with data
+					$result = $controller->updateAcc($currUsername, $data);
+
+					$message     = $result['message'] ?? '';
+					$messageType = $result['type'] ?? 'error';
+
+					if ($messageType === 'success') {
+						$newUsername = $data['username'] ?? $currUsername;
+
+						header("Location: view_acc_detail.php?username=" . urlencode($newUsername) . "&type=success&msg=" . urlencode($message));
+						exit;
+					}
 				}
 			}
 
-			$user = $controller->getAccDetail($currUsername);
 			$profiles = $controller->loadProfiles();
 			
 			if (!$user) {

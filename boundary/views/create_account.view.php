@@ -52,6 +52,6 @@
 
     <div style="display:flex; gap:12px;">
         <button type="submit" class="btn">Create</button>
-        <a href="dashboard_ua.php" class="btn">Cancel</a>
+        <a href="view_acc.php" class="btn">Cancel</a>
     </div>
 </form>

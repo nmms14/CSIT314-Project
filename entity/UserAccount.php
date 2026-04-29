@@ -12,8 +12,8 @@ class UserAccount {
     public string $profile;
     public string $status;
 
-    public function __construct(mysqli $db) {
-        $this->db = $db;
+    public function __construct() {
+        $this->db = DBConnection::getInstance();
     }
 
 	public function createAcc(string $name, string $username, string $email, string $phone, string $password, string $profile, string $status): array {
