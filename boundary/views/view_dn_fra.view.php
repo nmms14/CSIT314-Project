@@ -25,7 +25,15 @@
     </div>
 
     <div class="fra-detail-actions">
-        <a href="search_dn_fra.php" class="back-btn">Back</a>
+		<?php
+			$source = $_GET['source'] ?? 'browse';
+
+			$backUrl = ($source === 'fav') 
+				? 'view_dn_fav_fra.php' 
+				: 'search_dn_fra.php';
+		?>
+
+		<a href="<?= $backUrl ?>" class="back-btn">Back</a>
     </div>
 </div>
 

@@ -61,7 +61,7 @@ $results = $results ?? [];
                     <td><?= htmlspecialchars($fra['category'] ?? '') ?></td>
                     <td>$<?= number_format((float)($fra['goal_amount'] ?? 0), 0) ?></td>
                     <td>
-    <a href="view_dn_fra.php?id=<?= htmlspecialchars($fra['id']) ?>" class="view-btn">View</a>
+    <a href="view_dn_fra.php?id=<?= htmlspecialchars($fra['id']) ?>&source=browse" class="view-btn">View</a>
 
     <a href="save_dn_fra.php?id=<?= htmlspecialchars($fra['id']) ?>" class="save-btn">Save</a>
 </td>

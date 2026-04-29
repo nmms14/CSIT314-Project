@@ -478,7 +478,7 @@ $contentView = $contentView ?? '';
         <nav class="menu">
             <a href="dashboard_dn.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">🏠 Dashboard</a>
             <a href="search_dn_fra.php" class="<?= $activePage === 'browse_fra' ? 'active' : '' ?>">🔍 Browse FRA</a>
-            <a href="saved_fra.php" class="<?= $activePage === 'saved_fra' ? 'active' : '' ?>">⭐ Saved FRA</a>
+            <a href="view_dn_fav_fra.php" class="<?= $activePage === 'favourite_fra' ? 'active' : '' ?>">⭐ Saved FRA</a>
         </nav>
     </aside>
 
