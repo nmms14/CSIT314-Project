@@ -1,5 +1,5 @@
 <?php if (!empty($popupMessage)): ?>
-    <div id="fraAlert" class="alert-popup <?= $popupType ?>">
+    <div id="fraAlert" class="alert-popup <?= htmlspecialchars($popupType ?? '') ?>">
         <span><?= htmlspecialchars($popupMessage) ?></span>
         <button type="button" class="alert-close" onclick="closeStatusPopup()">&times;</button>
     </div>

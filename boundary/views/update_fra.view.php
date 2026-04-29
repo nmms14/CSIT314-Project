@@ -1,5 +1,5 @@
 <?php if (!empty($popupMessage)): ?>
-    <div id="fraAlert" class="alert-popup <?= htmlspecialchars($popupType) ?>">
+    <div id="fraAlert" class="alert-popup <?= htmlspecialchars($popupType ?? '') ?>">
         <span><?= htmlspecialchars($popupMessage) ?></span>
         <button type="button" class="alert-close" onclick="this.parentElement.style.display='none'">&times;</button>
     </div>
@@ -7,7 +7,8 @@
 
 <h1>FRA Update</h1>
 
-<?php if ($mode === 'list'): ?>
+<?php if (($mode ?? '') === 'list'): ?>
+
     <div class="table-wrap">
         <table class="table-base update-fra-table">
             <thead>
@@ -22,19 +23,27 @@
                     <th>Action</th>
                 </tr>
             </thead>
+
             <tbody>
                 <?php if (!empty($fraList)): ?>
                     <?php foreach ($fraList as $fraItem): ?>
                         <tr>
-                            <td><?= htmlspecialchars($fraItem['campaign_title']) ?></td>
-                            <td><?= htmlspecialchars($fraItem['category']) ?></td>
-                            <td>$<?= number_format((float)$fraItem['goal_amount'], 0) ?></td>
-                            <td><?= htmlspecialchars(date('Y/m/d', strtotime($fraItem['end_date']))) ?></td>
-                            <td><?= htmlspecialchars($fraItem['description']) ?></td>
-                            <td><?= htmlspecialchars($fraItem['donee_name']) ?></td>
-                            <td><?= htmlspecialchars($fraItem['phone']) ?></td>
+                            <td><?= htmlspecialchars($fraItem['campaign_title'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($fraItem['category'] ?? '') ?></td>
+                            <td>$<?= number_format((float)($fraItem['goal_amount'] ?? 0), 0) ?></td>
                             <td>
-                                <a href="update_fra.php?id=<?= (int)$fraItem['id'] ?>" class="edit-btn">Edit</a>
+                                <?= !empty($fraItem['end_date'])
+                                    ? htmlspecialchars(date('Y/m/d', strtotime($fraItem['end_date'])))
+                                    : ''
+                                ?>
+                            </td>
+                            <td><?= htmlspecialchars($fraItem['description'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($fraItem['donee_name'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($fraItem['phone'] ?? '') ?></td>
+                            <td>
+                                <a href="update_fra.php?id=<?= (int)($fraItem['id'] ?? 0) ?>" class="edit-btn">
+                                    Edit
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -47,10 +56,11 @@
         </table>
     </div>
 
-<?php elseif ($mode === 'form' && $fra): ?>
+<?php elseif (($mode ?? '') === 'form' && !empty($fra)): ?>
+
     <div class="update-form-card">
         <form method="POST">
-            <input type="hidden" name="id" value="<?= (int)$fra['id'] ?>">
+            <input type="hidden" name="id" value="<?= (int)($fra['id'] ?? 0) ?>">
 
             <div class="update-form-grid">
                 <div class="update-form-group">
@@ -60,72 +70,62 @@
                         id="campaign_title"
                         name="campaign_title"
                         class="form-control"
-                        value="<?= htmlspecialchars($fra['campaign_title']) ?>"
+                        value="<?= htmlspecialchars($fra['campaign_title'] ?? '') ?>"
                         required
                     >
                 </div>
 
                 <div class="update-form-group">
-    <label for="category">Category</label>
+                    <label for="category">Category</label>
+                    <select
+                        id="category"
+                        name="category"
+                        class="form-control"
+                        required
+                    >
+                        <option value="">-- Select Category --</option>
 
-    <select
-        id="category"
-        name="category"
-        class="form-control"
-        required
-    >
-        <option value="">-- Select Category --</option>
+                        <?php
+                        $categories = [
+                            'Medical',
+                            'Education',
+                            'Social',
+                            'Disaster Relief',
+                            'Animal Welfare',
+                            'Community',
+                            'Others'
+                        ];
+                        ?>
 
-        <option value="Medical"
-            <?= $fra['category'] === 'Medical' ? 'selected' : '' ?>>
-            Medical
-        </option>
-
-        <option value="Education"
-            <?= $fra['category'] === 'Education' ? 'selected' : '' ?>>
-            Education
-        </option>
-
-        <option value="Social"
-            <?= $fra['category'] === 'Social' ? 'selected' : '' ?>>
-            Social
-        </option>
-
-        <option value="Disaster Relief"
-            <?= $fra['category'] === 'Disaster Relief' ? 'selected' : '' ?>>
-            Disaster Relief
-        </option>
-
-        <option value="Animal Welfare"
-            <?= $fra['category'] === 'Animal Welfare' ? 'selected' : '' ?>>
-            Animal Welfare
-        </option>
-
-        <option value="Community"
-            <?= $fra['category'] === 'Community' ? 'selected' : '' ?>>
-            Community
-        </option>
-
-        <option value="Others"
-            <?= $fra['category'] === 'Others' ? 'selected' : '' ?>>
-            Others
-        </option>
-    </select>
-</div>
+                        <?php foreach ($categories as $category): ?>
+                            <option
+                                value="<?= htmlspecialchars($category) ?>"
+                                <?= (($fra['category'] ?? '') === $category) ? 'selected' : '' ?>
+                            >
+                                <?= htmlspecialchars($category) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
 
                 <div class="update-form-group">
-    <label for="goal_amount">Target Amount</label>
-    <input
-        type="text"
-        id="goal_amount"
-        name="goal_amount"
-        class="form-control"
-        value="<?= htmlspecialchars(number_format((float)$fra['goal_amount'], 0, '.', '')) ?>"
-        required
-        inputmode="decimal"
-        oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
-    >
-            </div>
+                    <label for="goal_amount">Target Amount</label>
+                    <input
+                        type="number"
+                        id="goal_amount"
+                        name="goal_amount"
+                        class="form-control"
+                        value="<?= htmlspecialchars(number_format((float)($fra['goal_amount'] ?? 0), 0, '.', '')) ?>"
+                        required
+                        min="1"
+                        step="1"
+                        placeholder="Enter target amount"
+                        oninput="
+                            this.value = this.value
+                            .replace(/[^0-9]/g, '');
+                        "
+                    >
+                </div>
 
                 <div class="update-form-group">
                     <label for="end_date">End Date</label>
@@ -134,7 +134,8 @@
                         id="end_date"
                         name="end_date"
                         class="form-control"
-                        value="<?= htmlspecialchars($fra['end_date']) ?>"
+                        value="<?= htmlspecialchars($fra['end_date'] ?? '') ?>"
+                        min="<?= date('Y-m-d') ?>"
                         required
                     >
                 </div>
@@ -148,7 +149,7 @@
                     class="form-control"
                     rows="4"
                     required
-                ><?= htmlspecialchars($fra['description']) ?></textarea>
+                ><?= htmlspecialchars($fra['description'] ?? '') ?></textarea>
             </div>
 
             <div class="update-form-grid">
@@ -159,51 +160,55 @@
                         id="donee_name"
                         name="donee_name"
                         class="form-control"
-                        value="<?= htmlspecialchars($fra['donee_name']) ?>"
+                        value="<?= htmlspecialchars($fra['donee_name'] ?? '') ?>"
                         required
                     >
                 </div>
 
                 <div class="update-form-group">
-    <label for="phone">Phone</label>
-    <input
-    type="tel"
-    id="phone"
-    name="phone"
-    class="form-control"
-    value="<?= htmlspecialchars($fra['phone']) ?>"
-    required
-    inputmode="numeric"
-    maxlength="8"
-    placeholder="Enter 8-digit phone number"
-    pattern="[89][0-9]{7}"
-    oninput="
-        this.value = this.value
-            .replace(/[^0-9]/g, '')
-            .slice(0, 8);
+                    <label for="phone">Phone</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        class="form-control"
+                        value="<?= htmlspecialchars($fra['phone'] ?? '') ?>"
+                        required
+                        inputmode="numeric"
+                        maxlength="8"
+                        placeholder="Enter 8-digit phone number"
+                        pattern="[89][0-9]{7}"
+                        oninput="
+                            this.value = this.value
+                                .replace(/[^0-9]/g, '')
+                                .slice(0, 8);
 
-        if (this.value.length > 0 &&
-            this.value[0] !== '8' &&
-            this.value[0] !== '9') {
-            this.value = '';
-        }
-    "
->
-</div>
+                            if (this.value.length === 1 &&
+                                this.value[0] !== '8' &&
+                                this.value[0] !== '9') {
+                                this.value = '';
+                            }
+                        "
+                    >
+                </div>
             </div>
 
             <div class="update-form-actions">
                 <button type="submit" class="update-save-btn">Update</button>
-                <button type="submit" name="cancel_update" value="1" class="update-cancel-btn">Cancel</button>
+                <a href="update_fra.php" class="update-cancel-btn">Cancel</a>
             </div>
         </form>
     </div>
+
 <?php else: ?>
+
     <p>Fundraising activity not found.</p>
+
 <?php endif; ?>
 
 <script>
 const fraAlert = document.getElementById('fraAlert');
+
 if (fraAlert) {
     setTimeout(() => {
         fraAlert.style.display = 'none';

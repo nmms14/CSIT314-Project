@@ -14,17 +14,44 @@ class createFRAPage
         $messageType = '';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $controller = new createFRAController();
 
-            $_POST['fundraiser_name'] = $_SESSION['username'] ?? 'Unknown';
+            $data = [
+                'campaign_title'  => trim($_POST['campaign_title'] ?? ''),
+                'category'        => trim($_POST['category'] ?? ''),
+                'description'     => trim($_POST['description'] ?? ''),
+                'end_date'        => trim($_POST['end_date'] ?? ''),
+                'goal_amount'     => trim($_POST['goal_amount'] ?? ''),
+                'donee_name'      => trim($_POST['donee_name'] ?? ''),
+                'phone'           => trim($_POST['phone'] ?? ''),
+                'fundraiser_name' => $_SESSION['username'] ?? 'Unknown'
+            ];
 
-            $response = $controller->create($_POST, $_FILES);
+            if (
+                $data['campaign_title'] === '' ||
+                $data['category'] === '' ||
+                $data['description'] === '' ||
+                $data['end_date'] === '' ||
+                $data['goal_amount'] === '' ||
+                $data['donee_name'] === '' ||
+                $data['phone'] === '' ||
+                $data['fundraiser_name'] === ''
+            ) {
+                $message = 'All fields are required.';
+                $messageType = 'error';
+            } else {
+                $controller = new createFRAController();
+                $response = $controller->create($data);
 
-            $message = $response['message'] ?? '';
-            $messageType = $response['type'] ?? 'error';
+                $message = $response['message'];
+                $messageType = $response['type'];
+
+                if ($response['type'] === 'success') {
+                    $_POST = [];
+                }
+            }
         }
 
-        $pageTitle = 'Dashboard';
+        $pageTitle = 'Create FRA';
         $activePage = 'create_fra';
         $contentView = __DIR__ . '/views/create_fra.view.php';
 

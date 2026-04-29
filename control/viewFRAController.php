@@ -1,15 +1,14 @@
 <?php
+
 require_once __DIR__ . '/../entity/FundraisingActivity.php';
-require_once __DIR__ . '/../config/DBConnection.php';
 
 class viewFRAController
 {
-    public function getAll(array $query): array
+    public function getAll(): array
     {
         $db = DBConnection::getInstance();
-        $fra = new FundraisingActivity($db);
 
-        $fundRaiserId = (int)($_SESSION['user_id'] ?? 0);
+        $fra = new FundraisingActivity($db);
 
         $fraList = $fra->getAllFRA();
 

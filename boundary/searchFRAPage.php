@@ -31,8 +31,8 @@ class searchFRAPage
     {
         $searchKeyword = $this->searchKeyword;
         $results = $this->results;
-
-        $page = 'search_fra';
+        
+        $activePage = 'search_fra';
         $pageTitle = 'FRA Search';
 
         $contentView = __DIR__ . '/views/search_fra.view.php';

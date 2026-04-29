@@ -41,8 +41,18 @@ class UpdateFRAController
             $category === '' ||
             $goalAmount === '' ||
             $endDate === '' ||
-            $description === ''
+            $description === '' ||
+            $doneeName === '' ||
+            $phone === ''
         ) {
+            return false;
+        }
+
+        if (!ctype_digit($goalAmount) || (int)$goalAmount <= 0) {
+            return false;
+        }
+
+        if (!preg_match('/^[89][0-9]{7}$/', $phone)) {
             return false;
         }
 
@@ -56,13 +66,5 @@ class UpdateFRAController
             $doneeName,
             $phone
         );
-
-        if (!is_numeric($goalAmount) || $goalAmount <= 0) {
-        return false;
-}
-
-        if (!preg_match('/^[89][0-9]{7}$/', $phone)) {
-        return false;
-}
     }
 }

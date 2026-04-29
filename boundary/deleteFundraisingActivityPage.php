@@ -54,7 +54,7 @@ public function render(): void
     $popupType = $this->popupType;
     $fraList = $this->fraList;
 
-    $page = 'delete_fra';
+    $activePage = 'delete_fra';
     $pageTitle = 'Delete FRA';
 
     $contentView = __DIR__ . '/views/delete_fra.view.php';

@@ -1,5 +1,7 @@
+<?php $searchKeyword = $searchKeyword ?? ''; ?>
+
 <?php if (!empty($popupMessage)): ?>
-    <div id="fraAlert" class="alert-popup <?= htmlspecialchars($popupType) ?>">
+    <div id="fraAlert" class="alert-popup <?= htmlspecialchars($popupType ?? '') ?>">
         <span><?= htmlspecialchars($popupMessage) ?></span>
         <button type="button" class="alert-close" onclick="this.parentElement.style.display='none'">&times;</button>
     </div>
@@ -47,28 +49,40 @@
                 <th>Fundraiser</th>
             </tr>
         </thead>
+
         <tbody>
             <?php if (!empty($results)): ?>
+
                 <?php foreach ($results as $fra): ?>
                     <tr>
-                        <td><?= htmlspecialchars($fra['campaign_title']) ?></td>
-                        <td><?= htmlspecialchars($fra['category']) ?></td>
-                        <td>$<?= number_format((float)$fra['goal_amount'], 0) ?></td>
-                        <td><?= htmlspecialchars(date('Y/m/d', strtotime($fra['end_date']))) ?></td>
-                        <td><?= htmlspecialchars($fra['description']) ?></td>
-                        <td><?= htmlspecialchars($fra['donee_name']) ?></td>
-                        <td><?= htmlspecialchars($fra['phone']) ?></td>
+                        <td><?= htmlspecialchars($fra['campaign_title'] ?? '') ?></td>
+                        <td><?= htmlspecialchars($fra['category'] ?? '') ?></td>
+                        <td>$<?= number_format((float)($fra['goal_amount'] ?? 0), 0) ?></td>
+                        <td>
+                            <?= !empty($fra['end_date'])
+                                ? htmlspecialchars(date('Y/m/d', strtotime($fra['end_date'])))
+                                : ''
+                            ?>
+                        </td>
+                        <td><?= htmlspecialchars($fra['description'] ?? '') ?></td>
+                        <td><?= htmlspecialchars($fra['donee_name'] ?? '') ?></td>
+                        <td><?= htmlspecialchars($fra['phone'] ?? '') ?></td>
                         <td><?= htmlspecialchars($fra['fundraiser_name'] ?? '-') ?></td>
                     </tr>
                 <?php endforeach; ?>
+
             <?php elseif ($searchKeyword !== ''): ?>
+
                 <tr>
                     <td colspan="8">No FRA matches your search.</td>
                 </tr>
+
             <?php else: ?>
+
                 <tr>
-                    <td colspan="8" >Enter a keyword to search fundraising activities.</td>
+                    <td colspan="8">Enter a keyword to search fundraising activities.</td>
                 </tr>
+
             <?php endif; ?>
         </tbody>
     </table>
@@ -76,6 +90,7 @@
 
 <script>
 const fraAlert = document.getElementById('fraAlert');
+
 if (fraAlert) {
     setTimeout(() => {
         fraAlert.style.display = 'none';

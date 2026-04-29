@@ -7,7 +7,7 @@ class dashboardFRPage
         $username = $_SESSION['username'] ?? '';
 
         $pageTitle = 'Dashboard';
-        $activePage = '';
+        $activePage = 'dashboard';
         $contentView = __DIR__ . '/views/dashboard_frhome.view.php';
 
         include __DIR__ . '/views/layout_fr.view.php';

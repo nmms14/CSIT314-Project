@@ -62,6 +62,7 @@
                     name="end_date"
                     class="form-control"
                     value="<?= htmlspecialchars($_POST['end_date'] ?? '') ?>"
+                    min="<?= date('Y-m-d') ?>"
                     required
                 >
             </div>

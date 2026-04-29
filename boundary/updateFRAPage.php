@@ -103,7 +103,7 @@ public function render(): void
     $fra = $this->fra;
     $fraList = $this->fraList;
 
-    $page = 'update_fra';
+    $activePage = 'update_fra';
     $pageTitle = 'Update FRA';
 
     $contentView = __DIR__ . '/views/update_fra.view.php';

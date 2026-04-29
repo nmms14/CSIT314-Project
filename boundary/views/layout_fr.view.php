@@ -530,6 +530,12 @@ $contentView = $contentView ?? '';
 .update-cancel-btn {
     background: #d1d5db;
     color: #111827;
+    text-decoration: none;
+
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .update-save-btn {
@@ -685,12 +691,12 @@ $contentView = $contentView ?? '';
         <div class="logo">Avatar</div>
 
         <nav class="menu">
-            <a href="create_fra.php" class="<?= $activePage === 'create_fra' ? 'active' : '' ?>">Create FRA</a>
-            <a href="view_fra.php" class="<?= $activePage === 'view_fra' ? 'active' : '' ?>">View FRA</a>
-            <a href="update_fra.php" class="<?= ($page ?? '') === 'update_fra' ? 'active' : '' ?>">Update FRA</a>
-            <a href="delete_fra.php" class="<?= ($page ?? '') === 'delete_fra' ? 'active' : '' ?>">Delete FRA</a>
-            <a href="search_fra.php" class="<?= ($page ?? '') === 'search_fra' ? 'active' : '' ?>">Search FRA</a>
-            <a href="settings.php" class="<?= ($page ?? '') === 'settings' ? 'active' : '' ?>">Settings</a>
+    <a href="dashboard_fr.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">🏠 Dashboard</a>
+    <a href="create_fra.php" class="<?= $activePage === 'create_fra' ? 'active' : '' ?>">➕ Create FRA</a>
+    <a href="view_fra.php" class="<?= $activePage === 'view_fra' ? 'active' : '' ?>">📄 View FRA</a>
+    <a href="update_fra.php" class="<?= $activePage === 'update_fra' ? 'active' : '' ?>">✏️ Update FRA</a>
+    <a href="delete_fra.php" class="<?= $activePage === 'delete_fra' ? 'active' : '' ?>">🗑️ Delete FRA</a>
+    <a href="search_fra.php" class="<?= $activePage === 'search_fra' ? 'active' : '' ?>">🔍 Search FRA</a>
         </nav>
     </aside>
 

@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../control/viewFRAController.php';
 
 class viewFRAPage
@@ -6,11 +7,12 @@ class viewFRAPage
     public function display(): void
     {
         $controller = new viewFRAController();
-        $data = $controller->getAll($_GET);
+
+        $data = $controller->getAll();
 
         $fraList = $data['fraList'] ?? [];
 
-        $pageTitle = 'Dashboard';
+        $pageTitle = 'View FRA';
         $activePage = 'view_fra';
         $contentView = __DIR__ . '/views/view_fra.view.php';
 
