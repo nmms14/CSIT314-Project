@@ -7,6 +7,7 @@ if (($_SESSION['profile'] ?? null) !== 'platform_manager') {
     exit;
 }
 
-$username = htmlspecialchars($_SESSION['username'] ?? '');
+require_once __DIR__ . '/boundary/dashboardPMPage.php';
 
-include __DIR__ . '/boundary/views/dashboard_pm.view.php';
+$page = new dashboardPMPage();
+$page -> display();
