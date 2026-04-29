@@ -9,7 +9,7 @@ $results = $results ?? [];
     </div>
 
     <div class="search-fra-toolbar">
-        <form method="GET" action="search_dn_fra.php" class="search-fra-form">
+        <form method="GET" action="" class="">
             <div class="search-input-wrapper">
                 <input
                     type="text"
@@ -47,7 +47,7 @@ $results = $results ?? [];
 					<td>
 						<a href="view_dn_fra.php?id=<?= htmlspecialchars($fra['id']) ?>&source=fav" class="view-btn">View</a>
 
-						<button class="save-btn" disabled>Saved</button>
+						<button class="saved-btn" disabled>Saved</button>
 					</td>
 				</tr>
 			<?php endforeach; ?>

@@ -467,6 +467,20 @@ $contentView = $contentView ?? '';
 .back-btn:hover {
     background: #1d4ed8;
 }
+
+.saved-btn {
+	display: inline-block;
+    padding: 7px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 3px;
+    transition: 0.2s ease;
+	border: 1px solid #666;
+    color: #666;
+    background: #ddd;
+}
 </style>
 </head>
 <body>
