@@ -54,6 +54,9 @@ class FundraisingActivity
         ORDER BY id DESC";
 
     $result = $this->db->query($sql);
+    if (!$result) {
+        return [];
+    }
 
     return $result->fetch_all(MYSQLI_ASSOC);
 }
