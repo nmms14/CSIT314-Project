@@ -26,17 +26,30 @@ class searchDNFRAPage
     }
 
     public function render(): void
-    {
-        $searchKeyword = $this->searchKeyword;
-        $results = $this->results;
+{
+    $searchKeyword = $this->searchKeyword;
+    $results = $this->results;
 
-        $activePage = 'browse_fra';
-        $pageTitle = 'Browse FRA';
+    $popupMessage = '';
+    $popupType = '';
 
-        $contentView = __DIR__ . '/views/search_dn_fra.view.php';
-
-        include __DIR__ . '/views/layout_dn.view.php';
+    if (isset($_GET['success']) && $_GET['success'] === 'saved') {
+        $popupMessage = '1 activity successfully saved.';
+        $popupType = 'success';
     }
+
+    if (isset($_GET['error']) && $_GET['error'] === 'exists') {
+        $popupMessage = 'The activity is already in the favourite list.';
+        $popupType = 'error';
+    }
+
+    $activePage = 'browse_fra';
+    $pageTitle = 'FRA Search';
+
+    $contentView = __DIR__ . '/views/search_dn_fra.view.php';
+
+    include __DIR__ . '/views/layout_dn.view.php';
+}
 }
 
 $pageObject = new searchDNFRAPage();

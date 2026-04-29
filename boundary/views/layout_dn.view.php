@@ -498,7 +498,7 @@ $contentView = $contentView ?? '';
 
     <main class="main">
         <header class="topbar">
-            <h2><?= htmlspecialchars($pageTitle) ?></h2>
+            <h2>Dashboard</h2>
 
             <div class="topbar-right">
                 <div class="avatar-small">DN</div>

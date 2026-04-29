@@ -25,4 +25,26 @@ class FavouriteFundraisingActivity {
 		
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function saveFavouriteFRA(string $username, int $fraId): bool
+{
+    $sql = "
+        INSERT INTO favourite_fundraising_activity (username, activity_id)
+        VALUES (?, ?)
+    ";
+
+    $stmt = $this->db->prepare($sql);
+
+    if (!$stmt) {
+        return false;
+    }
+
+    $stmt->bind_param("si", $username, $fraId);
+
+    try {
+    return $stmt->execute();
+} catch (mysqli_sql_exception $e) {
+    return false;
+}
+}
 }
