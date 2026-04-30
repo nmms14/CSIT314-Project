@@ -54,7 +54,7 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS fra_categories (
     id             INT AUTO_INCREMENT PRIMARY KEY,
-    name           VARCHAR(100) NOT NULL,
+    name           VARCHAR(100) NOT NULL UNIQUE,
     description    TEXT NOT NULL,
     created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

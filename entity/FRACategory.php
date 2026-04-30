@@ -10,6 +10,17 @@ class FRACategory
     }
 
     public function createFRACategory(string $name, string $description): array {
+        // check if name already exists
+        $check = $this->db->prepare("SELECT id FROM fra_categories WHERE name = ?");
+        $check->bind_param('s', $name);
+        $check->execute();
+        $check->store_result();
+        
+        if ($check->num_rows > 0) {
+            return ['type' => 'error', 'message' => 'Category name already exists.'];
+        }
+        $check->close();
+
         $stmt = $this->db->prepare(
             "INSERT INTO fra_categories (name, description) VALUES (?, ?)"
         );
@@ -17,13 +28,7 @@ class FRACategory
         if (!$stmt) return ['type' => 'error', 'message' => 'Failed to prepare statement.'];
 
         $stmt->bind_param('ss', $name, $description);
-
-        try {
-            $success = $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
-            return ['type' => 'error', 'message' => 'Category name already exists.'];
-        }
-
+        $success = $stmt->execute();
         $stmt->close();
 
         if ($success) {
