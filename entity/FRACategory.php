@@ -37,4 +37,13 @@ class FRACategory
 
         return ['type' => 'error', 'message' => 'Failed to create category.'];
     }
+
+    public function getAllCategories(): array {
+        $result = $this->db->query("SELECT name FROM fra_categories ORDER BY name ASC");
+        $categories = [];
+        while ($row = $result->fetch_assoc()) {
+            $categories[] = $row['name'];
+        }
+        return $categories;
+    }
 }
