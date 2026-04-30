@@ -58,3 +58,12 @@ CREATE TABLE IF NOT EXISTS fra_categories (
     description    TEXT NOT NULL,
     created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO fra_categories (name, description) VALUES
+('Medical', 'Fundraising activities related to medical needs and healthcare.'),
+('Education', 'Fundraising activities supporting education and learning.'),
+('Social', 'Fundraising activities addressing social issues and community needs.'),
+('Disaster Relief', 'Fundraising activities providing aid during disasters and emergencies.'),
+('Animal Welfare', 'Fundraising activities supporting animal care and protection.'),
+('Community', 'Fundraising activities focused on community development.'),
+('Others', 'Other fundraising activities not covered by existing categories.');
