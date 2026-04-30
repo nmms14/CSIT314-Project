@@ -50,9 +50,13 @@ INSERT INTO fundraising_activity
 (campaign_title, category, description, end_date, goal_amount, donee_name, phone, fundraiser_name)
 VALUES
 ('Food Drive', 'Social', 'Providing food supplies to low-income families', '2026-12-31', 3000.00, 'Stella', '91234567', 'fundraiser'),
-('School Supplier', 'Education', 'Supplying school materials to student', '2026-11-30', 4000.00, 'John Tan', '98765432', 'fundraiser');
+('School Supplier', 'Education', 'Supplying school materials to student', '2026-11-30', 4000.00, 'John Tan', '98765432', 'fundraiser'),
+('Pet Aid', 'Animal Welfare', 'Providing veterinary care, food, and shelter for animals', '2026-10-31', 3000.00, 'Mel', '81234567', 'fundraiser'),
+('Earthquake Relief', 'Disaster Relief', 'Providing emergency aid and supplies to families affected by recent earthquake', '2026-06-30', 5000.00, 'Shi Yan', '87654321', 'fundraiser'),
+('Elderly Care Fund', 'Social', 'Supporting eldery residents in need of care', '2026-05-31', 2000.00, 'Sharon', '82468100', 'fundraiser'),
+('Stray Cat Rescue', 'Animal Welfare', 'Funding shelter and food for rescued cats', '2026-05-31', 1000.00, 'Terence', '91357911', 'fundraiser');
 
-CREATE TABLE favourite_fundraising_activity (
+CREATE TABLE IF NOT EXISTS favourite_fundraising_activity (
     id 			INT AUTO_INCREMENT PRIMARY KEY,
     username 	VARCHAR(50) NOT NULL,
     activity_id INT NOT NULL,
