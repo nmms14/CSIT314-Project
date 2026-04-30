@@ -46,4 +46,57 @@ class FRACategory
         }
         return $categories;
     }
+	
+	public function viewFRACategory(): array {
+		$sql = "
+			SELECT fc.id, fc.name, fc.description, COUNT(fa.id) AS fra_count
+			FROM fra_categories fc
+			LEFT JOIN fundraising_activity fa ON fc.name = fa.category
+			GROUP BY fc.id, fc.name, fc.description
+			ORDER BY fc.name ASC
+		";
+
+		$result = $this->db->query($sql);
+
+		if (!$result) return [];
+
+		return $result->fetch_all(MYSQLI_ASSOC);
+	}
+	
+	public function editFRACategory(string $newName, string $description, string $oldName): bool {
+		$fields = [];
+		$params = [];
+		$types = "";
+
+		if ($newName !== '') {
+			$fields[] = "name = ?";
+			$params[] = $newName;
+			$types .= "s";
+		}
+
+		if ($description !== '') {
+			$fields[] = "description = ?";
+			$params[] = $description;
+			$types .= "s";
+		}
+
+		// ❗ no field to update
+		if (empty($fields)) {
+			return false;
+		}
+
+		$sql = "UPDATE fra_categories SET " . implode(", ", $fields) . " WHERE name = ?";
+		
+		$params[] = $oldName;
+		$types .= "s";
+
+		$stmt = $this->db->prepare($sql);
+
+		if (!$stmt) return false;
+
+		$stmt->bind_param($types, ...$params);
+
+		return $stmt->execute();
+
+	}
 }

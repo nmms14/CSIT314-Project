@@ -195,6 +195,115 @@ $contentView = $contentView ?? '';
             box-sizing: border-box;
         }
         select.form-control { cursor: pointer; }
+		
+		/* View Category */
+		.category-container {
+			background: #ffffff;
+			border-radius: 12px;
+			padding: 16px;
+			margin-top: 10px;
+		}
+
+		.category-header {
+			display: grid;
+			grid-template-columns: 1fr 2fr 1fr;
+			font-weight: bold;
+			padding: 10px;
+			background: #ffffff;
+			border: 1px solid #ccc;
+			border-radius: 8px; 
+		}
+
+		.category-body {
+			max-height: 300px;
+			overflow-y: auto;
+			margin-top: 10px;
+			border-radius: 8px;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			margin-bottom: 8px;
+			background: #fff;
+		}
+
+		.category-row {
+			display: grid;
+			grid-template-columns: 1fr 2fr 1fr;
+			padding: 12px;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.category-row:hover {
+			background: #eee;
+		}
+		
+		.category-header,
+		.category-row {
+			display: grid;
+			grid-template-columns: 1fr 2fr 1fr;
+			align-items: center; 
+			text-align: center; 
+		}
+
+		.no-data {
+			padding: 12px;
+			color: #888;
+		}
+		
+		/*Edit FRA Category*/
+		.edit-category-container {
+			background: #ffffff;
+			border-radius: 12px;
+			padding: 16px;
+			margin-top: 10px;
+		}
+
+		.edit-category-header {
+			display: grid;
+			grid-template-columns: 1fr 2fr 1fr 1fr;
+			font-weight: bold;
+			padding: 10px;
+			background: #ffffff;
+			border: 1px solid #ccc;
+			border-radius: 8px; 
+			margin-right: 17px; 
+		}
+
+		.edit-category-body {
+			max-height: 300px;
+			overflow-y: auto;
+			margin-top: 10px;
+			border-radius: 8px;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			margin-bottom: 8px;
+			background: #fff;
+		}
+
+		.edit-category-row {
+			display: grid;
+			grid-template-columns: 1fr 2fr 1fr 1fr;
+			padding: 12px;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.edit-category-row:hover {
+			background: #eee;
+		}
+		
+		.edit-category-header,
+		.edit-category-row {
+			display: grid;
+			grid-template-columns: 1fr 2fr 1fr 1fr;
+			align-items: center; 
+			text-align: center; 
+		}
+		
+		.edit-category-header span:last-child,
+		.edit-category-row span:last-child {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
     </style>
 </head>
 <body>
