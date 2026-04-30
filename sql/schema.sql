@@ -52,6 +52,19 @@ VALUES
 ('Food Drive', 'Social', 'Providing food supplies to low-income families', '2026-12-31', 3000.00, 'Stella', '91234567', 'fundraiser'),
 ('School Supplier', 'Education', 'Supplying school materials to student', '2026-11-30', 4000.00, 'John Tan', '98765432', 'fundraiser');
 
+CREATE TABLE favourite_fundraising_activity (
+    id 			INT AUTO_INCREMENT PRIMARY KEY,
+    username 	VARCHAR(50) NOT NULL,
+    activity_id INT NOT NULL,
+    created_at 	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (username) REFERENCES user_accounts(username) ON DELETE CASCADE,
+
+    FOREIGN KEY (activity_id) REFERENCES fundraising_activity(id) ON DELETE CASCADE,
+
+    UNIQUE (username, activity_id)
+);
+
 CREATE TABLE IF NOT EXISTS fra_categories (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     name           VARCHAR(100) NOT NULL UNIQUE,
