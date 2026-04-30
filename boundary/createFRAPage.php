@@ -55,6 +55,9 @@ class createFRAPage
         $activePage = 'create_fra';
         $contentView = __DIR__ . '/views/create_fra.view.php';
 
+        $controller = new createFRAController();
+        $categories = $controller->getCategories();
+
         include __DIR__ . '/views/layout_fr.view.php';
     }
 }

@@ -26,13 +26,12 @@
                 <label for="category">Category</label>
                 <select id="category" name="category" class="form-control" required>
                     <option value="">-- Select Category --</option>
-                    <option value="Medical" <?= (($_POST['category'] ?? '') === 'Medical') ? 'selected' : '' ?>>Medical</option>
-                    <option value="Education" <?= (($_POST['category'] ?? '') === 'Education') ? 'selected' : '' ?>>Education</option>
-                    <option value="Social" <?= (($_POST['category'] ?? '') === 'Social') ? 'selected' : '' ?>>Social</option>
-                    <option value="Disaster Relief" <?= (($_POST['category'] ?? '') === 'Disaster Relief') ? 'selected' : '' ?>>Disaster Relief</option>
-                    <option value="Animal Welfare" <?= (($_POST['category'] ?? '') === 'Animal Welfare') ? 'selected' : '' ?>>Animal Welfare</option>
-                    <option value="Community" <?= (($_POST['category'] ?? '') === 'Community') ? 'selected' : '' ?>>Community</option>
-                    <option value="Others" <?= (($_POST['category'] ?? '') === 'Others') ? 'selected' : '' ?>>Others</option>
+                    <?php foreach ($categories as $cat): ?>
+                        <option value="<?= htmlspecialchars($cat) ?>"
+                            <?= (($_POST['category'] ?? '') === $cat) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($cat) ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 

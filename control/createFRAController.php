@@ -31,4 +31,9 @@ class createFRAController
             'type' => 'error'
         ];
     }
+
+    public function getCategories(): array {
+        $entity = new FRACategory();
+        return $entity->getAllCategories();
+    }
 }
