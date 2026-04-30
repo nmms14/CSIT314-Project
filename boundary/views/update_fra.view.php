@@ -33,7 +33,7 @@
                             <td>$<?= number_format((float)($fraItem['goal_amount'] ?? 0), 0) ?></td>
                             <td>
                                 <?= !empty($fraItem['end_date'])
-                                    ? htmlspecialchars(date('Y/m/d', strtotime($fraItem['end_date'])))
+                                    ? htmlspecialchars(date('d M Y', strtotime($fraItem['end_date'])))
                                     : ''
                                 ?>
                             </td>

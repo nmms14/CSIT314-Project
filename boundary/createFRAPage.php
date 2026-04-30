@@ -10,8 +10,10 @@ class createFRAPage
 {
     public function handle(): void
     {
-        $message = '';
-        $messageType = '';
+        $popupMessage = '';
+        $popupType = '';
+
+        $controller = new createFRAController();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -36,17 +38,16 @@ class createFRAPage
                 $data['phone'] === '' ||
                 $data['fundraiser_name'] === ''
             ) {
-                $message = 'All fields are required.';
-                $messageType = 'error';
+                $popupMessage = 'All fields are required.';
+                $popupType = 'error';
             } else {
-                $controller = new createFRAController();
                 $response = $controller->create($data);
 
-                $message = $response['message'];
-                $messageType = $response['type'];
+                $popupMessage = $response['popupMessage'];
+                $popupType = $response['popupType'];
 
-                if ($response['type'] === 'success') {
-                    $_POST = [];
+                if ($response['popupType'] === 'success') {
+                $_POST = [];
                 }
             }
         }
@@ -55,7 +56,6 @@ class createFRAPage
         $activePage = 'create_fra';
         $contentView = __DIR__ . '/views/create_fra.view.php';
 
-        $controller = new createFRAController();
         $categories = $controller->getCategories();
 
         include __DIR__ . '/views/layout_fr.view.php';

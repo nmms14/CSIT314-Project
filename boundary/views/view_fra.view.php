@@ -21,7 +21,7 @@
                         <td><?= htmlspecialchars($row['campaign_title'] ?? '-') ?></td>
                         <td><?= htmlspecialchars($row['category'] ?? '-') ?></td>
                         <td>$<?= number_format((float)($row['goal_amount'] ?? 0), 0) ?></td>
-                        <td><?= date('Y/m/d', strtotime($row['end_date'])) ?></td>
+                        <td><?= date('d M Y', strtotime($row['end_date'])) ?></td>
                         <td><?= htmlspecialchars($row['description'] ?? '-') ?></td>
                         <td><?= htmlspecialchars($row['donee_name'] ?? '-') ?></td>
                         <td><?= htmlspecialchars($row['phone'] ?? '-') ?></td>

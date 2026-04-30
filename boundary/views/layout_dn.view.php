@@ -300,14 +300,10 @@ $contentView = $contentView ?? '';
     background: #f9fafb;
 }
 
-/* description column for search table */
+/* action column */
 .search-fra-table td:nth-child(5),
 .search-fra-table th:nth-child(5) {
-    width: 320px;
-    max-width: 320px;
-    white-space: normal;
-    word-break: break-word;
-    line-height: 1.4;
+    width: 180px;
     text-align: center;
 }
 

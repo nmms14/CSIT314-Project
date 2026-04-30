@@ -22,18 +22,19 @@ class createFRAController
 
         if ($success) {
             return [
-                'message' => 'FRA created successfully.',
-                'type' => 'success'
+                'popupMessage' => 'FRA created successfully.',
+                'popupType' => 'success'
             ];
         }
 
         return [
-            'message' => 'Failed to create FRA.',
-            'type' => 'error'
+            'popupMessage' => 'Failed to create FRA.',
+            'popupType' => 'error'
         ];
     }
 
-    public function getCategories(): array {
+    public function getCategories(): array
+    {
         $entity = new FRACategory();
         return $entity->getAllCategories();
     }

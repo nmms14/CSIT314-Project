@@ -1,7 +1,14 @@
-<?php if (!empty($message)): ?>
-    <div class="alert-popup <?= htmlspecialchars($messageType) ?>" id="fraAlert">
-        <div><?= htmlspecialchars($message) ?></div>
-        <button type="button" class="alert-close" onclick="document.getElementById('fraAlert').style.display='none'">×</button>
+<?php if (!empty($popupMessage)): ?>
+    <div id="fraAlert" class="alert-popup <?= htmlspecialchars($popupType ?? '') ?>">
+        <span><?= htmlspecialchars($popupMessage) ?></span>
+
+        <button
+            type="button"
+            class="alert-close"
+            onclick="this.parentElement.style.display='none'"
+        >
+            &times;
+        </button>
     </div>
 <?php endif; ?>
 

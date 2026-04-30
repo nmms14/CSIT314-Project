@@ -45,10 +45,10 @@ $results = $results ?? [];
     <table class="table-base search-fra-table">
         <thead>
             <tr>
-                <th>Donee</th>
                 <th>Campaign</th>
                 <th>Category</th>
                 <th>Amount</th>
+                <th>End Date</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -56,10 +56,15 @@ $results = $results ?? [];
         <tbody>
             <?php foreach ($results as $fra): ?>
                 <tr>
-                    <td><?= htmlspecialchars($fra['donee_name'] ?? '') ?></td>
                     <td><?= htmlspecialchars($fra['campaign_title'] ?? '') ?></td>
                     <td><?= htmlspecialchars($fra['category'] ?? '') ?></td>
                     <td>$<?= number_format((float)($fra['goal_amount'] ?? 0), 0) ?></td>
+                    <td>
+                            <?= !empty($fra['end_date'])
+                                ? htmlspecialchars(date('d M Y', strtotime($fra['end_date'])))
+                                : ''
+                            ?>
+                        </td>
                     <td>
     <a href="view_dn_fra.php?id=<?= htmlspecialchars($fra['id']) ?>&source=browse" class="view-btn">View</a>
 
