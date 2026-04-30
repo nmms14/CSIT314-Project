@@ -9,7 +9,7 @@
 
 <h1>FRA Search</h1>
 
-<div class="search-fra-toolbar">
+    <div class="search-fra-toolbar">
     <form method="GET" action="search_fra.php" class="search-fra-form">
 
         <div class="search-input-wrapper">
@@ -35,8 +35,8 @@
     </form>
 </div>
 
-<div class="table-wrap">
-    <table class="table-base search-fra-table">
+<div class="search-fra-container">
+    <table class="search-fra-table">
         <thead>
             <tr>
                 <th>Campaign</th>

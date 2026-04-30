@@ -9,8 +9,8 @@
 
 <?php if (($mode ?? '') === 'list'): ?>
 
-    <div class="table-wrap">
-        <table class="table-base update-fra-table">
+    <div class="update-fra-container">
+    <table class="update-fra-table">
             <thead>
                 <tr>
                     <th>Campaign Title</th>

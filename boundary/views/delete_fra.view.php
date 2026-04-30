@@ -12,8 +12,8 @@
 </div>
 
 
-<div class="table-wrap">
-    <table class="table-base delete-fra-table">
+<div class="delete-fra-container">
+    <table class="delete-fra-table">
         <thead>
             <tr>
                 <th>Campaign Title</th>
