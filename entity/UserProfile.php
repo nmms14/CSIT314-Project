@@ -49,25 +49,25 @@ class UserProfile {
     }
 
     public function getAllProfiles(): array {
-        $sql = "SELECT p.profile_id, p.profile_name, p.description,
+        $sql = "SELECT p.profile_id, p.profile_name, p.description, p.status,
                        COUNT(u.id) AS user_count
                 FROM user_profiles p
                 LEFT JOIN user_accounts u ON u.profile = p.profile_name
-                GROUP BY p.profile_id, p.profile_name, p.description
+                GROUP BY p.profile_id, p.profile_name, p.description, p.status
                 ORDER BY p.profile_name";
         $result = $this->db->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-  
+
   public function searchProfiles(string $keywords): array {
     $stmt = $this->db->prepare(
-      "SELECT p.profile_id, p.profile_name, p.description,
+      "SELECT p.profile_id, p.profile_name, p.description, p.status,
           COUNT(u.id) AS user_count
        FROM user_profiles p
        LEFT JOIN user_accounts u ON u.profile = p.profile_name
        WHERE p.profile_name LIKE ? OR p.description LIKE ?
-       GROUP BY p.profile_id, p.profile_name, p.description
+       GROUP BY p.profile_id, p.profile_name, p.description, p.status
        ORDER BY p.profile_name"
     );
 

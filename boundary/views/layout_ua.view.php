@@ -246,7 +246,7 @@ $contentView = $contentView ?? '';
 		}
 		.header-row.prof-row,
 		.user-main.prof-row {
-			grid-template-columns: 1fr 2fr 1fr 1fr;
+			grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
 		}
 		.user-row {
 			border-bottom: 1px solid #e5e7eb;

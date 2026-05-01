@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
     profile_id   INT AUTO_INCREMENT PRIMARY KEY,
     profile_name VARCHAR(50) NOT NULL UNIQUE,
     description  TEXT NOT NULL,
+    status       ENUM('Active','Suspended') NOT NULL DEFAULT 'Active',
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

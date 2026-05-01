@@ -47,6 +47,7 @@
         <span>Profile Name</span>
         <span>Description</span>
         <span>User Count</span>
+        <span>Status</span>
         <span>Actions</span>
     </div>
 </div>
@@ -62,6 +63,9 @@
                     <span><?= htmlspecialchars($p['profile_name']) ?></span>
                     <span><?= htmlspecialchars($p['description']) ?></span>
                     <span><?= (int)$p['user_count'] ?></span>
+                    <span class="<?= strtolower($p['status'] ?? 'active') === 'active' ? 'status-active' : 'status-suspended' ?>">
+                        <?= htmlspecialchars($p['status'] ?? 'Active') ?>
+                    </span>
                     <span>
                         <a class="btn" href="update_prof.php?profile_id=<?= (int)$p['profile_id'] ?>&profile_name=<?= urlencode($p['profile_name']) ?>&description=<?= urlencode($p['description']) ?>">Edit</a>
                         <a class="btn" href="suspend_prof.php?profile_id=<?= (int)$p['profile_id'] ?>">Suspend</a>
