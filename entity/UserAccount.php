@@ -17,6 +17,10 @@ class UserAccount {
     }
 
 	public function createAcc(string $name, string $username, string $email, string $phone, string $password, string $profile, string $status): array {
+		if (!$this->isProfileActive($profile)) {
+			return ['type' => 'error', 'message' => 'Selected profile is suspended or does not exist.'];
+		}
+
 		$stmt = $this->db->prepare(
 			"INSERT INTO user_accounts (name, username, email, phone_number, password, profile, status) VALUES (?, ?, ?, ?, ?, ?, ?)"
 		);
@@ -41,8 +45,21 @@ class UserAccount {
 	}
 
 	public function getProfiles() {
-		$sql = "SELECT profile_name FROM user_profiles";
+		$sql = "SELECT profile_name FROM user_profiles WHERE status = 'Active'";
         return $this->db->query($sql);
+	}
+
+	private function isProfileActive(string $profileName): bool {
+		$stmt = $this->db->prepare(
+			"SELECT 1 FROM user_profiles WHERE profile_name = ? AND status = 'Active' LIMIT 1"
+		);
+		if (!$stmt) return false;
+		$stmt->bind_param('s', $profileName);
+		$stmt->execute();
+		$stmt->store_result();
+		$ok = $stmt->num_rows > 0;
+		$stmt->close();
+		return $ok;
 	}
     
     // Converting the database row to object
@@ -150,6 +167,9 @@ class UserAccount {
 		}
 
 		if (isset($data['profile']) && $data['profile'] !== '') {
+			if (!$this->isProfileActive($data['profile'])) {
+				return ['success' => false, 'message' => 'Selected profile is suspended or does not exist.'];
+			}
 			$fields[] = "profile = ?";
 			$values[] = $data['profile'];
 		}

@@ -63,6 +63,32 @@ class FRACategory
 		return $result->fetch_all(MYSQLI_ASSOC);
 	}
 	
+	public function searchfracategoryid(string $keywords): array {
+		$keywords = trim($keywords);
+
+		$sql = "
+			SELECT fc.id, fc.name, fc.description, COUNT(fa.id) AS fra_count
+			FROM fra_categories fc
+			LEFT JOIN fundraising_activity fa ON fc.name = fa.category
+			WHERE fc.name LIKE ? OR fc.description LIKE ?
+			GROUP BY fc.id, fc.name, fc.description
+			ORDER BY fc.name ASC
+		";
+
+		$stmt = $this->db->prepare($sql);
+		if (!$stmt) return [];
+
+		$like = '%' . $keywords . '%';
+		$stmt->bind_param('ss', $like, $like);
+		$stmt->execute();
+		$result = $stmt->get_result();
+
+		$rows = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+		$stmt->close();
+
+		return $rows;
+	}
+
 	public function deleteFRACategory(int $fracategoryid): bool {
 		$stmt = $this->db->prepare("DELETE FROM fra_categories WHERE id = ?");
 
