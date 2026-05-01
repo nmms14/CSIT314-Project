@@ -10,6 +10,19 @@
     </script>
 <?php endif; ?>
 
+<?php if (isset($_GET['msg'])): ?>
+    <div class="alert-popup <?= htmlspecialchars($_GET['type'] ?? 'success') ?>" id="profMsgAlert">
+        <span><?= htmlspecialchars($_GET['msg']) ?></span>
+        <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+    </div>
+    <script>
+        setTimeout(() => {
+            const el = document.getElementById('profMsgAlert');
+            if (el) el.style.display = 'none';
+        }, 3000);
+    </script>
+<?php endif; ?>
+
 <div class="header-top">
 
   <div>
@@ -68,6 +81,16 @@
                     </span>
                     <span>
                         <a class="btn" href="update_prof.php?profile_id=<?= (int)$p['profile_id'] ?>&profile_name=<?= urlencode($p['profile_name']) ?>&description=<?= urlencode($p['description']) ?>">Edit</a>
+                        <?php if (($p['status'] ?? 'Active') !== 'Suspended'): ?>
+                            <button type="button" class="btn"
+                                onclick="openSuspendModal(<?= (int)$p['profile_id'] ?>, '<?= htmlspecialchars($p['profile_name'], ENT_QUOTES) ?>')">
+                                Suspend
+                            </button>
+                        <?php else: ?>
+                            <button type="button" class="btn" disabled style="opacity:0.5; cursor:not-allowed;">
+                                Suspended
+                            </button>
+                        <?php endif; ?>
                     </span>
                 </div>
             </div>
@@ -80,3 +103,31 @@
         + Create New
     </a>
 </div>
+
+<div id="suspendModal" class="modal">
+    <div class="modal-card">
+        <h3>Confirm Suspension</h3>
+        <p id="suspendModalText"></p>
+
+        <form method="POST" action="view_prof_detail.php">
+            <input type="hidden" name="profile_id" id="suspend_profile_id">
+            <input type="hidden" name="action" value="suspend">
+            <div class="modal-actions">
+                <button type="submit" class="btn btn-danger">Suspend</button>
+                <button type="button" class="btn" onclick="closeSuspendModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openSuspendModal(id, name) {
+        document.getElementById('suspend_profile_id').value = id;
+        document.getElementById('suspendModalText').innerText =
+            'Are you sure you want to suspend "' + name + '"?';
+        document.getElementById('suspendModal').classList.add('open');
+    }
+    function closeSuspendModal() {
+        document.getElementById('suspendModal').classList.remove('open');
+    }
+</script>

@@ -61,6 +61,25 @@ class UserProfile {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function suspendUserProfile(int $profileID): bool {
+        $stmt = $this->db->prepare(
+            "UPDATE user_profiles SET status = 'Suspended' WHERE profile_id = ?"
+        );
+
+        if (!$stmt) return false;
+
+        $stmt->bind_param('i', $profileID);
+
+        try {
+            $success = $stmt->execute() && $stmt->affected_rows > 0;
+        } catch (mysqli_sql_exception $e) {
+            $success = false;
+        }
+
+        $stmt->close();
+        return $success;
+    }
+
   public function searchProfiles(string $keywords): array {
     $stmt = $this->db->prepare(
       "SELECT p.profile_id, p.profile_name, p.description, p.status,
