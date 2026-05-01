@@ -63,6 +63,23 @@ class FRACategory
 		return $result->fetch_all(MYSQLI_ASSOC);
 	}
 	
+	public function deleteFRACategory(int $fracategoryid): bool {
+		$stmt = $this->db->prepare("DELETE FROM fra_categories WHERE id = ?");
+
+		if (!$stmt) return false;
+
+		$stmt->bind_param('i', $fracategoryid);
+
+		try {
+			$success = $stmt->execute() && $stmt->affected_rows > 0;
+		} catch (mysqli_sql_exception $e) {
+			$success = false;
+		}
+
+		$stmt->close();
+		return $success;
+	}
+
 	public function editFRACategory(string $newName, string $description, string $oldName): bool {
 		$fields = [];
 		$params = [];
