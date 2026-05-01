@@ -27,25 +27,26 @@ class UserProfile {
         return $success;
     }
 
-    public function updateProf(int $id, array $data): bool {
-        $fields = [];
-        $values = [];
-
-        if (isset($data['profile_name'])) { $fields[] = "profile_name = ?"; $values[] = $data['profile_name']; }
-        if (isset($data['description']))  { $fields[] = "description = ?";  $values[] = $data['description'];  }
-
-        $values[] = $id;
+    public function updateProf(int $profile_id, string $profile_name, string $description): array {
         $stmt = $this->db->prepare(
-            "UPDATE user_profiles SET " . implode(', ', $fields) . " WHERE profile_id = ?"
+            "UPDATE user_profiles SET profile_name = ?, description = ? WHERE profile_id = ?"
         );
-        $types = str_repeat('s', count($values) - 1) . 'i';
-        $stmt->bind_param($types, ...$values);
+        $stmt->bind_param('ssi', $profile_name, $description, $profile_id);
 
         try {
-            return $stmt->execute();
+            $stmt->execute();
         } catch (mysqli_sql_exception $e) {
-            return false;
+            return [];
         }
+
+        $sel = $this->db->prepare(
+            "SELECT profile_id, profile_name, description, status FROM user_profiles WHERE profile_id = ?"
+        );
+        $sel->bind_param('i', $profile_id);
+        $sel->execute();
+        $row = $sel->get_result()->fetch_assoc();
+
+        return $row ?: [];
     }
 
     public function getAllProfiles(): array {

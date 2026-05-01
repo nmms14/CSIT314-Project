@@ -1,0 +1,36 @@
+<?php if (!empty($message)): ?>
+    <div class="alert-popup <?= htmlspecialchars($messageType) ?>" id="profAlert">
+        <div><?= htmlspecialchars($message) ?></div>
+        <button type="button" class="alert-close" onclick="document.getElementById('profAlert').style.display='none'">×</button>
+    </div>
+<?php endif; ?>
+
+<h1>Edit User Profile</h1>
+
+<form method="POST" class="form-card">
+    <input type="hidden" name="profile_id" value="<?= (int)$profileId ?>">
+
+    <div class="form-group">
+        <label>Profile Name</label>
+        <input type="text" name="profile_name" class="form-control" value="<?= htmlspecialchars($profileName) ?>" required>
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <textarea name="description" rows="5" class="form-control" required><?= htmlspecialchars($description) ?></textarea>
+    </div>
+
+    <div style="display:flex; gap:12px;">
+        <button type="submit" class="btn">Save</button>
+        <a href="view_prof.php" class="btn">Cancel</a>
+    </div>
+</form>
+
+<script>
+    const profAlert = document.getElementById('profAlert');
+    if (profAlert) {
+        setTimeout(() => {
+            profAlert.style.display = 'none';
+        }, 3000);
+    }
+</script>

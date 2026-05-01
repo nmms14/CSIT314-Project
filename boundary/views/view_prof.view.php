@@ -68,7 +68,6 @@
                     </span>
                     <span>
                         <a class="btn" href="update_prof.php?profile_id=<?= (int)$p['profile_id'] ?>&profile_name=<?= urlencode($p['profile_name']) ?>&description=<?= urlencode($p['description']) ?>">Edit</a>
-                        <a class="btn" href="suspend_prof.php?profile_id=<?= (int)$p['profile_id'] ?>">Suspend</a>
                     </span>
                 </div>
             </div>
