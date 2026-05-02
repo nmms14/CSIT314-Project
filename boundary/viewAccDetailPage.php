@@ -1,4 +1,5 @@
 <?php
+	require_once __DIR__ . '/../entity/UserAccount.php';
 	require_once __DIR__ . '/../control/viewAccController.php';
 	require_once __DIR__ . '/../control/suspendAccController.php';
 
@@ -8,11 +9,31 @@
 		{
 			if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'suspend') {
 
-				$controller = new suspendAccController();
-				$result = $controller->suspendAcc($_POST['username']);
+				$username = $_POST['username'] ?? '';
 
-				$msg = urlencode($result['message']);
-				$type = $result['type'];
+				$ua = new UserAccount();
+				$user = $ua->getAccDetail($username);
+
+				if (!$user) {
+					$type = 'error';
+					$msg = 'Account not found.';
+				}
+				elseif ($user->status === 'Suspended') {
+					$type = 'error';
+					$msg = 'Account already suspended.';
+				}
+				else {
+					$controller = new suspendAccController();
+					$success = $controller->suspendAcc($username);
+
+					if ($success) {
+						$type = 'success';
+						$msg = 'Account suspended successfully.';
+					} else {
+						$type = 'error';
+						$msg = 'Unable to suspend user.';
+					}
+				}
 
 				header("Location: view_acc_detail.php?username=" . urlencode($_POST['username']) . "&type=$type&msg=$msg");
 				exit;

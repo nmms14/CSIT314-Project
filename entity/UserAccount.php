@@ -208,27 +208,16 @@ class UserAccount {
 		];
 	}
 	
-	public function suspendAcc(string $username): ?array {
+	public function suspendAcc(string $username): bool {
 		$stmt = $this->db->prepare(
 			"UPDATE user_accounts SET status = 'Suspended' WHERE username = ?"
 		);
 
-		if (!$stmt) return null;
+		if (!$stmt) return false;
 
 		$stmt->bind_param("s", $username);
-		if (!$stmt->execute()) return null;
 
-		$stmt = $this->db->prepare(
-			"SELECT * FROM user_accounts WHERE username = ? LIMIT 1"
-		);
-
-		if (!$stmt) return null;
-
-		$stmt->bind_param("s", $username);
-		$stmt->execute();
-
-		$result = $stmt->get_result();
-		return $result->fetch_assoc();
+		return $stmt->execute();
 	}
 }
 ?>
