@@ -4,6 +4,13 @@ require_once __DIR__ . '/../control/viewFRACategoryController.php';
 class viewFRACategoryPage {
 
     public function display(): void {
+        $message = '';
+        $messageType = '';
+
+        if (isset($_GET['created'])) {
+            $message = 'Category created successfully!';
+            $messageType = 'success';
+        }
 
         $controller = new viewFRACategoryController();
 

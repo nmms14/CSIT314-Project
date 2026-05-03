@@ -1,3 +1,10 @@
+<?php if (!empty($message)): ?>
+    <div class="alert-popup <?= htmlspecialchars($messageType) ?>" id="catAlert">
+        <div><?= htmlspecialchars($message) ?></div>
+        <button type="button" class="alert-close" onclick="document.getElementById('catAlert').style.display='none'">×</button>
+    </div>
+<?php endif; ?>
+
 <h1>FRA Category View</h1>
 
 <div class="category-container">
