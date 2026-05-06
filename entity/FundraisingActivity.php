@@ -172,4 +172,35 @@ public function getMatchingFRA(string $keyword): array
 
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+
+public function getViewedFRA(): array
+{
+    $sql = "SELECT id, campaign_title, category, goal_amount, end_date, view_count
+            FROM fundraising_activity
+            ORDER BY view_count DESC";
+
+    $result = $this->db->query($sql);
+
+    if (!$result) {
+        return [];
+    }
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+public function increaseFRAView(int $id): bool
+{
+    $sql = "UPDATE fundraising_activity
+            SET view_count = view_count + 1
+            WHERE id = ?";
+
+    $stmt = $this->db->prepare($sql);
+
+    if (!$stmt) {
+        return false;
+    }
+
+    $stmt->bind_param("i", $id);
+    return $stmt->execute();
+}
 }

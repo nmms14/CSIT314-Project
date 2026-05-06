@@ -782,6 +782,18 @@ $contentView = $contentView ?? '';
     background: #1f2937;
 }
 
+.view-fra-table tr:hover {
+    background: #f9fafb;
+}
+
+.update-fra-table tr:hover {
+    background: #f9fafb;
+}
+
+.delete-fra-table tr:hover {
+    background: #f9fafb;
+}
+
 .search-clear-btn {
     position: absolute;
     right: 12px;
@@ -854,6 +866,64 @@ $contentView = $contentView ?? '';
     width: 12%;
 }
 
+.stats-summary {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0 24px;
+}
+
+.stats-card {
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    padding: 18px 22px;
+    background: #f9fafb;
+    min-width: 240px;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.submenu-child {
+    margin-left: 4px;
+    margin-top: 6px;
+    width: calc(100% - 16px);
+
+    font-size: 14px;
+    padding: 10px 14px;
+
+    border-radius: 12px;
+}
+
+.submenu-child.active {
+    border: 1px solid #2563eb;
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+.statistics-table th:nth-child(5),
+.statistics-table td:nth-child(5) {
+    width: 100px;
+    text-align: center;
+}
+
+.view-badge {
+    background: #eff6ff;
+    color: #2563eb;
+
+    padding: 6px 12px;
+    border-radius: 999px;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    display: inline-block;
+    min-width: 32px;
+    text-align: center;
+}
+
 </style>
 </head>
 <body>
@@ -864,7 +934,30 @@ $contentView = $contentView ?? '';
         <nav class="menu">
     <a href="dashboard_fr.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">🏠 Dashboard</a>
     <a href="create_fra.php" class="<?= $activePage === 'create_fra' ? 'active' : '' ?>">➕ Create FRA</a>
-    <a href="view_fra.php" class="<?= $activePage === 'view_fra' ? 'active' : '' ?>">📄 View FRA</a>
+    <a href="view_fra.php"
+   <a href="view_fra.php"
+   class="<?= $activePage === 'view_fra' ? 'active' : '' ?>">
+   <span>📄 View FRA</span>
+   <span class="arrow">▼</span>
+</a>
+
+<?php if (
+    $activePage === 'view_fra' ||
+    $activePage === 'view_statistics' ||
+    $activePage === 'view_shortlist'
+): ?>
+
+    <a href="view_num_fra.php"
+       class="submenu-child <?= $activePage === 'view_statistics' ? 'active' : '' ?>">
+       📊 View Statistics
+    </a>
+
+    <a href="view_shortlisted_fra.php"
+       class="submenu-child <?= $activePage === 'view_shortlist' ? 'active' : '' ?>">
+       🔖 View Shortlist
+    </a>
+
+<?php endif; ?>
     <a href="update_fra.php" class="<?= $activePage === 'update_fra' ? 'active' : '' ?>">✏️ Update FRA</a>
     <a href="delete_fra.php" class="<?= $activePage === 'delete_fra' ? 'active' : '' ?>">🗑️ Delete FRA</a>
     <a href="search_fra.php" class="<?= $activePage === 'search_fra' ? 'active' : '' ?>">🔍 Search FRA</a>
@@ -906,6 +999,20 @@ $contentView = $contentView ?? '';
     function hideLogout() {
         document.getElementById('logoutModal').classList.remove('open');
     }
+
+    function toggleSubmenu() {
+
+    const submenu = document.getElementById('fraSubmenu');
+    const arrow = document.getElementById('dropdownArrow');
+
+    submenu.classList.toggle('show');
+
+    if (submenu.classList.contains('show')) {
+        arrow.textContent = '▼';
+    } else {
+        arrow.textContent = '▶';
+    }
+}
 </script>
 </body>
 </html>

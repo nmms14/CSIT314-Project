@@ -47,4 +47,39 @@ class FavouriteFundraisingActivity {
     return false;
 }
 }
+
+public function getShortlistedFRA(): array
+{
+    $sql = "
+        SELECT
+            fa.id,
+            fa.campaign_title,
+            fa.category,
+            fa.goal_amount,
+            fa.end_date,
+            COUNT(ffa.id) AS shortlist_count
+
+        FROM fundraising_activity fa
+
+        LEFT JOIN favourite_fundraising_activity ffa
+            ON fa.id = ffa.activity_id
+
+        GROUP BY
+            fa.id,
+            fa.campaign_title,
+            fa.category,
+            fa.goal_amount,
+            fa.end_date
+
+        ORDER BY shortlist_count DESC
+    ";
+
+    $result = $this->db->query($sql);
+
+    if (!$result) {
+        return [];
+    }
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 }

@@ -17,6 +17,8 @@ class viewDNFRAController
             return null;
         }
 
+        $this->fundraisingActivity->increaseFRAView($fraId);
+
         return $this->fundraisingActivity->getFRAById($fraId);
     }
 }

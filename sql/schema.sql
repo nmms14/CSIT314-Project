@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS fundraising_activity (
     donee_name      VARCHAR(255),
     phone           VARCHAR(20),
     fundraiser_name VARCHAR(255) NOT NULL,
+    view_count      INT NOT NULL DEFAULT 0,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
