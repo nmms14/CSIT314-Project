@@ -19,12 +19,6 @@ class searchFavouriteFRAController
             return [];
         }
 
-        $keywords = trim($keywords);
-
-        if ($keywords === '') {
-            return $this->favouriteFRA->viewFavouriteFRA($username);
-        }
-
-        return $this->favouriteFRA->searchFavouriteFRAid($keywords, $username);
+        return $this->favouriteFRA->searchFavouriteFRAid(trim($keywords), $username);
     }
 }

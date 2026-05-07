@@ -6,8 +6,16 @@ if (($_SESSION['profile'] ?? null) !== 'donee') {
     exit;
 }
 
-require_once __DIR__ . '/boundary/searchFavouriteFRAPage.php';
+$keyword = trim($_GET['keyword'] ?? '');
 
-$page = new searchFavouriteFRAPage();
-$page->display();
-?>
+if ($keyword === '') {
+    require_once __DIR__ . '/boundary/viewFavouriteFRAPage.php';
+
+    $page = new ViewFavouritePage();
+    $page->viewFRA();
+} else {
+    require_once __DIR__ . '/boundary/searchFavouriteFRAPage.php';
+
+    $page = new searchFavouriteFRAPage();
+    $page->display();
+}

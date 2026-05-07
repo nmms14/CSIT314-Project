@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(git branch *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git -C \"c:/xampp/htdocs/CSIT314\" status --short)",
+      "Bash(git *)"
     ]
   }
 }
