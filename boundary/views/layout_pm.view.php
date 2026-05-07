@@ -352,20 +352,20 @@ $contentView = $contentView ?? '';
     <aside class="sidebar">
         <div class="logo">Avatar</div>
         <nav class="menu">
-            <a href="dashboard_pm.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">Dashboard</a>
-            <a href="create_cat.php" class="<?= $activePage === 'create_cat' ? 'active' : '' ?>">Create FRA Category</a>
-            <a href="view_cat.php" class="<?= $activePage === 'view_cat' ? 'active' : '' ?>">View FRA Category</a>
-            <a href="edit_cat.php" class="<?= $activePage === 'edit_cat' ? 'active' : '' ?>">Edit FRA Category</a>
-            <a href="delete_cat.php" class="<?= $activePage === 'delete_cat' ? 'active' : '' ?>">Delete FRA Category</a>
-            <a href="search_cat.php" class="<?= $activePage === 'search_cat' ? 'active' : '' ?>">Search FRA Category</a>
+            <a href="dashboard_pm.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">🏠 Dashboard</a>
+            <a href="create_cat.php" class="<?= $activePage === 'create_cat' ? 'active' : '' ?>">➕ Create FRA Category</a>
+            <a href="view_cat.php" class="<?= $activePage === 'view_cat' ? 'active' : '' ?>">📄 View FRA Category</a>
+            <a href="edit_cat.php" class="<?= $activePage === 'edit_cat' ? 'active' : '' ?>">✏️ Edit FRA Category</a>
+            <a href="delete_cat.php" class="<?= $activePage === 'delete_cat' ? 'active' : '' ?>">🗑️ Delete FRA Category</a>
+            <a href="search_cat.php" class="<?= $activePage === 'search_cat' ? 'active' : '' ?>">🔍 Search FRA Category</a>
 
             <?php $reportOpen = in_array($activePage, ['daily_report', 'weekly_report', 'monthly_report'], true); ?>
             <details class="menu-dropdown" <?= $reportOpen ? 'open' : '' ?>>
-                <summary class="<?= $reportOpen ? 'active' : '' ?>">Generate Report</summary>
+                <summary class="<?= $reportOpen ? 'active' : '' ?>">📊 Generate Report</summary>
                 <div class="submenu">
-                    <a href="daily_report.php" class="<?= $activePage === 'daily_report' ? 'active' : '' ?>">Daily Report</a>
-                    <a href="weekly_report.php" class="<?= $activePage === 'weekly_report' ? 'active' : '' ?>">Weekly Report</a>
-                    <a href="monthly_report.php" class="<?= $activePage === 'monthly_report' ? 'active' : '' ?>">Monthly Report</a>
+                    <a href="daily_report.php" class="<?= $activePage === 'daily_report' ? 'active' : '' ?>">📅 Daily Report</a>
+                    <a href="weekly_report.php" class="<?= $activePage === 'weekly_report' ? 'active' : '' ?>">📆 Weekly Report</a>
+                    <a href="monthly_report.php" class="<?= $activePage === 'monthly_report' ? 'active' : '' ?>">🗓️ Monthly Report</a>
                 </div>
             </details>
         </nav>

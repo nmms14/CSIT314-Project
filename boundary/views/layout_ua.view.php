@@ -420,9 +420,9 @@ $contentView = $contentView ?? '';
     <aside class="sidebar">
         <div class="logo">Avatar</div>
         <nav class="menu">
-            <a href="dashboard_ua.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">Dashboard</a>
-            <a href="view_prof.php" class="<?= $activePage === 'view_prof' ? 'active' : '' ?>">Manage Profiles</a>
-            <a href="view_acc.php" class="<?= $activePage === 'view_accounts' ? 'active' : '' ?>">Manage Accounts</a>
+            <a href="dashboard_ua.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">🏠 Dashboard</a>
+            <a href="view_prof.php" class="<?= $activePage === 'view_prof' ? 'active' : '' ?>">👤 Manage Profiles</a>
+            <a href="view_acc.php" class="<?= $activePage === 'view_accounts' ? 'active' : '' ?>">📇 Manage Accounts</a>
         </nav>
     </aside>
 
