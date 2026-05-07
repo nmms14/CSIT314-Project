@@ -63,6 +63,47 @@ $contentView = $contentView ?? '';
             color: #2563eb;
             font-weight: 600;
         }
+        .menu-dropdown {
+            width: 100%;
+        }
+        .menu-dropdown > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            background: #fff;
+            color: #111827;
+            font-size: 1rem;
+        }
+        .menu-dropdown > summary::-webkit-details-marker { display: none; }
+        .menu-dropdown > summary::after {
+            content: "\25BC";
+            font-size: 0.7rem;
+            color: #6b7280;
+            transition: transform 0.2s ease;
+        }
+        .menu-dropdown[open] > summary::after { transform: rotate(180deg); }
+        .menu-dropdown > summary:hover { background: #f9fafb; }
+        .menu-dropdown > summary.active {
+            border-color: #2563eb;
+            color: #2563eb;
+            font-weight: 600;
+        }
+        .menu-dropdown .submenu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+            padding-left: 12px;
+        }
+        .menu-dropdown .submenu a {
+            font-size: 0.95rem;
+            padding: 10px 14px;
+        }
         .main {
             flex: 1;
             display: flex;
@@ -317,6 +358,16 @@ $contentView = $contentView ?? '';
             <a href="edit_cat.php" class="<?= $activePage === 'edit_cat' ? 'active' : '' ?>">Edit FRA Category</a>
             <a href="delete_cat.php" class="<?= $activePage === 'delete_cat' ? 'active' : '' ?>">Delete FRA Category</a>
             <a href="search_cat.php" class="<?= $activePage === 'search_cat' ? 'active' : '' ?>">Search FRA Category</a>
+
+            <?php $reportOpen = in_array($activePage, ['daily_report', 'weekly_report', 'monthly_report'], true); ?>
+            <details class="menu-dropdown" <?= $reportOpen ? 'open' : '' ?>>
+                <summary class="<?= $reportOpen ? 'active' : '' ?>">Generate Report</summary>
+                <div class="submenu">
+                    <a href="daily_report.php" class="<?= $activePage === 'daily_report' ? 'active' : '' ?>">Daily Report</a>
+                    <a href="weekly_report.php" class="<?= $activePage === 'weekly_report' ? 'active' : '' ?>">Weekly Report</a>
+                    <a href="monthly_report.php" class="<?= $activePage === 'monthly_report' ? 'active' : '' ?>">Monthly Report</a>
+                </div>
+            </details>
         </nav>
     </aside>
 
