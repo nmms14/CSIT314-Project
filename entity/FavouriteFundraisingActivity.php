@@ -48,6 +48,47 @@ class FavouriteFundraisingActivity {
 }
 }
 
+public function searchFavouriteFRAid(string $keywords, string $username): array
+{
+    $sql = "SELECT fa.*
+            FROM fundraising_activity fa
+            JOIN favourite_fundraising_activity f
+              ON fa.id = f.activity_id
+            WHERE f.username = ?
+              AND (
+                    fa.campaign_title LIKE ?
+                 OR fa.category LIKE ?
+                 OR fa.description LIKE ?
+                 OR fa.donee_name LIKE ?
+                 OR fa.phone LIKE ?
+                 OR fa.fundraiser_name LIKE ?
+              )
+            ORDER BY fa.id DESC";
+
+    $stmt = $this->db->prepare($sql);
+
+    if (!$stmt) {
+        return [];
+    }
+
+    $term = '%' . $keywords . '%';
+
+    $stmt->bind_param(
+        "sssssss",
+        $username,
+        $term,
+        $term,
+        $term,
+        $term,
+        $term,
+        $term
+    );
+
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
 public function getShortlistedFRA(): array
 {
     $sql = "

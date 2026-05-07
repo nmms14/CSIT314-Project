@@ -6,8 +6,8 @@ if (($_SESSION['profile'] ?? null) !== 'donee') {
     exit;
 }
 
-require_once __DIR__ . '/boundary/viewFavouriteFRAPage.php';
+require_once __DIR__ . '/boundary/searchFavouriteFRAPage.php';
 
-$page = new ViewFavouritePage();
-$page->viewFRA();
+$page = new searchFavouriteFRAPage();
+$page->display();
 ?>

@@ -1,15 +1,20 @@
 <?php
 $searchKeyword = $searchKeyword ?? '';
-$results = $results ?? [];
+$activities = $activities ?? [];
 ?>
 
 <div class="search-header">
     <div>
-        <h1>Favourite FRA</h1>
+        <?php if ($searchKeyword !== ''): ?>
+            <h1>Result for "<?= htmlspecialchars($searchKeyword) ?>"</h1>
+            <p><?= count($activities) ?> match<?= count($activities) === 1 ? '' : 'es' ?> found</p>
+        <?php else: ?>
+            <h1>Favourite FRA</h1>
+        <?php endif; ?>
     </div>
 
     <div class="search-fra-toolbar">
-        <form method="GET" action="" class="">
+        <form method="GET" action="" class="search-fra-form">
             <div class="search-input-wrapper">
                 <input
                     type="text"
@@ -18,6 +23,10 @@ $results = $results ?? [];
                     placeholder="Enter details"
                     value="<?= htmlspecialchars($searchKeyword) ?>"
                 >
+
+                <?php if ($searchKeyword !== ''): ?>
+                    <a href="view_dn_fav_fra.php" class="search-clear-btn">&times;</a>
+                <?php endif; ?>
             </div>
 
             <button type="submit" class="search-fra-btn">Search</button>
@@ -25,6 +34,7 @@ $results = $results ?? [];
     </div>
 </div>
 
+<?php if (!empty($activities)): ?>
 <div class="table-wrap">
 	<table class="table-base search-fra-table">
 		<thead>
@@ -56,3 +66,11 @@ $results = $results ?? [];
 		</tbody>
 	</table>
 </div>
+
+<?php elseif ($searchKeyword !== ''): ?>
+
+	<p class="no-result-message">
+		No details match your search!
+	</p>
+
+<?php endif; ?>
