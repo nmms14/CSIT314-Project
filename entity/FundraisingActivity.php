@@ -61,146 +61,147 @@ class FundraisingActivity
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
-public function deleteFRA(int $id): bool
-{
-    $sql = "DELETE FROM fundraising_activity WHERE id = ?";
-    $stmt = $this->db->prepare($sql);
+	public function deleteFRA(int $id): bool
+	{
+		$sql = "DELETE FROM fundraising_activity WHERE id = ?";
+		$stmt = $this->db->prepare($sql);
 
-    if (!$stmt) {
-        return false;
-    }
+		if (!$stmt) {
+			return false;
+		}
 
-    $stmt->bind_param("i", $id);
-    return $stmt->execute();
-}
+		$stmt->bind_param("i", $id);
+		return $stmt->execute();
+	}
 
-public function getFRAById(int $id): ?array
-{
-$sql = "SELECT id, campaign_title, category, description, end_date, goal_amount, donee_name, phone, fundraiser_name
-        FROM fundraising_activity
-        WHERE id = ?";
+	public function getFRAById(int $id): ?array
+	{
+	$sql = "SELECT id, campaign_title, category, description, end_date, goal_amount, donee_name, phone, fundraiser_name
+			FROM fundraising_activity
+			WHERE id = ?";
 
-    $stmt = $this->db->prepare($sql);
+		$stmt = $this->db->prepare($sql);
 
-    if (!$stmt) {
-        return null;
-    }
+		if (!$stmt) {
+			return null;
+		}
 
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
 
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
 
-    return $row ?: null;
-}
+		return $row ?: null;
+	}
 
-public function updateFRA(
-    int $id,
-    string $campaignTitle,
-    string $category,
-    string $goalAmount,
-    string $endDate,
-    string $description,
-    string $doneeName,
-    string $phone
-): bool
-{
-    $sql = "UPDATE fundraising_activity
-            SET campaign_title = ?,
-                category = ?,
-                goal_amount = ?,
-                end_date = ?,
-                description = ?,
-                donee_name = ?,
-                phone = ?
-            WHERE id = ?";
+	public function updateFRA(
+		int $id,
+		string $campaignTitle,
+		string $category,
+		string $goalAmount,
+		string $endDate,
+		string $description,
+		string $doneeName,
+		string $phone
+	): bool
+	{
+		$sql = "UPDATE fundraising_activity
+				SET campaign_title = ?,
+					category = ?,
+					goal_amount = ?,
+					end_date = ?,
+					description = ?,
+					donee_name = ?,
+					phone = ?
+				WHERE id = ?";
 
-    $stmt = $this->db->prepare($sql);
+		$stmt = $this->db->prepare($sql);
 
-    if (!$stmt) {
-        return false;
-    }
+		if (!$stmt) {
+			return false;
+		}
 
-    $stmt->bind_param(
-        "sssssssi",
-        $campaignTitle,
-        $category,
-        $goalAmount,
-        $endDate,
-        $description,
-        $doneeName,
-        $phone,
-        $id
-    );
+		$stmt->bind_param(
+			"sssssssi",
+			$campaignTitle,
+			$category,
+			$goalAmount,
+			$endDate,
+			$description,
+			$doneeName,
+			$phone,
+			$id
+		);
 
-    return $stmt->execute();
-}
+		return $stmt->execute();
+	}
 
-public function getMatchingFRA(string $keyword): array
-{
-    $sql = "SELECT id, campaign_title, category, goal_amount, end_date, description, donee_name, phone, fundraiser_name
-        FROM fundraising_activity
-        WHERE campaign_title LIKE ?
-           OR category LIKE ?
-           OR description LIKE ?
-           OR donee_name LIKE ?
-           OR phone LIKE ?
-           OR fundraiser_name LIKE ?
-        ORDER BY id DESC";
+	public function getMatchingFRA(string $keyword): array
+	{
+		$sql = "SELECT id, campaign_title, category, goal_amount, end_date, description, donee_name, phone, fundraiser_name
+			FROM fundraising_activity
+			WHERE campaign_title LIKE ?
+			   OR category LIKE ?
+			   OR description LIKE ?
+			   OR donee_name LIKE ?
+			   OR phone LIKE ?
+			   OR fundraiser_name LIKE ?
+			ORDER BY id DESC";
 
-    $stmt = $this->db->prepare($sql);
+		$stmt = $this->db->prepare($sql);
 
-    if (!$stmt) {
-        return [];
-    }
+		if (!$stmt) {
+			return [];
+		}
 
-    $searchTerm = '%' . $keyword . '%';
+		$searchTerm = '%' . $keyword . '%';
 
-    $stmt->bind_param(
-        "ssssss",
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm,
-        $searchTerm
-    );
+		$stmt->bind_param(
+			"ssssss",
+			$searchTerm,
+			$searchTerm,
+			$searchTerm,
+			$searchTerm,
+			$searchTerm,
+			$searchTerm
+		);
 
-    $stmt->execute();
-    $result = $stmt->get_result();
+		$stmt->execute();
+		$result = $stmt->get_result();
 
-    return $result->fetch_all(MYSQLI_ASSOC);
-}
+		return $result->fetch_all(MYSQLI_ASSOC);
+	}
 
-public function getViewedFRA(): array
-{
-    $sql = "SELECT id, campaign_title, category, goal_amount, end_date, view_count
-            FROM fundraising_activity
-            ORDER BY view_count DESC";
+	public function getViewedFRA(): array
+	{
+		$sql = "SELECT id, campaign_title, category, goal_amount, end_date, view_count
+				FROM fundraising_activity
+				ORDER BY view_count DESC";
 
-    $result = $this->db->query($sql);
+		$result = $this->db->query($sql);
 
-    if (!$result) {
-        return [];
-    }
+		if (!$result) {
+			return [];
+		}
 
-    return $result->fetch_all(MYSQLI_ASSOC);
-}
+		return $result->fetch_all(MYSQLI_ASSOC);
+	}
 
-public function increaseFRAView(int $id): bool
-{
-    $sql = "UPDATE fundraising_activity
-            SET view_count = view_count + 1
-            WHERE id = ?";
+	public function increaseFRAView(int $id): bool
+	{
+		$sql = "UPDATE fundraising_activity
+				SET view_count = view_count + 1
+				WHERE id = ?";
 
-    $stmt = $this->db->prepare($sql);
+		$stmt = $this->db->prepare($sql);
 
-    if (!$stmt) {
-        return false;
-    }
+		if (!$stmt) {
+			return false;
+		}
 
-    $stmt->bind_param("i", $id);
-    return $stmt->execute();
-}
+		$stmt->bind_param("i", $id);
+		return $stmt->execute();
+	}
+
 }

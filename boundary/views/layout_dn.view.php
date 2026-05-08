@@ -458,6 +458,8 @@ $contentView = $contentView ?? '';
     text-decoration: none;
     font-weight: 600;
     transition: 0.2s ease;
+	border: none;
+	cursor: pointer;
 }
 
 .back-btn:hover {
@@ -477,6 +479,13 @@ $contentView = $contentView ?? '';
     color: #666;
     background: #ddd;
 }
+
+.fra-detail-actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
 </style>
 </head>
 <body>
@@ -489,6 +498,7 @@ $contentView = $contentView ?? '';
             <a href="dashboard_dn.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">🏠 Dashboard</a>
             <a href="search_dn_fra.php" class="<?= $activePage === 'browse_fra' ? 'active' : '' ?>">🔍 Browse FRA</a>
             <a href="view_dn_fav_fra.php" class="<?= $activePage === 'favourite_fra' ? 'active' : '' ?>">⭐ Saved FRA</a>
+			<a href="search_donate_history.php" class="<?= $activePage === 'donation_history' ? 'active' : '' ?>">💰 Donation History</a>
         </nav>
     </aside>
 

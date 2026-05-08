@@ -25,6 +25,29 @@
     </div>
 
     <div class="fra-detail-actions">
+		<button class="back-btn" onclick="openDonateModal()">
+			Donate
+		</button>
+
+		<div id="donatePopup" style="display:none;">
+
+			<form method="POST">
+
+				<input type="number"
+					   name="amount"
+					   placeholder="Enter amount"
+					   min="1"
+					   step="0.01"
+					   required>
+
+				<button type="submit">
+					Confirm Donation
+				</button>
+
+			</form>
+
+		</div>
+		
 		<?php
 			$source = $_GET['source'] ?? 'browse';
 
@@ -34,7 +57,45 @@
 		?>
 
 		<a href="<?= $backUrl ?>" class="back-btn">Back</a>
+
     </div>
 </div>
 
 <?php endif; ?>
+
+<div id="donateModal" class="modal">
+    <div class="modal-card">
+
+        <h3>FRA Donation</h3>
+
+        <form method="POST">
+            <input type="number" name="amount" placeholder="Enter donation amount" min="1" step="0.01" 
+					required style="width:100%; padding:10px; margin-top:15px;">
+
+            <div class="modal-actions">
+                <button type="button"
+                        class="btn"
+                        onclick="closeDonateModal()">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="back-btn">
+                    Confirm
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+	function openDonateModal() {
+		document.getElementById('donateModal')
+				.classList.add('open');
+	}
+
+	function closeDonateModal() {
+		document.getElementById('donateModal')
+				.classList.remove('open');
+	}
+</script>

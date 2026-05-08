@@ -86,3 +86,23 @@ INSERT INTO fra_categories (name, description) VALUES
 ('Animal Welfare', 'Fundraising activities supporting animal care and protection.'),
 ('Community', 'Fundraising activities focused on community development.'),
 ('Others', 'Other fundraising activities not covered by existing categories.');
+
+CREATE TABLE donation (
+    donation_id INT AUTO_INCREMENT PRIMARY KEY,
+    fra_id INT NOT NULL,
+    donee_name VARCHAR(100),
+    amount DECIMAL(10,2) NOT NULL,
+    donation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (fra_id)
+    REFERENCES fundraising_activity(id)
+);
+
+CREATE TABLE completed_fra (
+    completed_id INT AUTO_INCREMENT PRIMARY KEY,
+    fra_id INT NOT NULL,
+    completed_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (fra_id)
+    REFERENCES fundraising_activity(id)
+);
