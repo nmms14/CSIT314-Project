@@ -905,7 +905,7 @@ $contentView = $contentView ?? '';
 
 .statistics-table th:nth-child(5),
 .statistics-table td:nth-child(5) {
-    width: 100px;
+    width: 140px;
     text-align: center;
 }
 
@@ -944,7 +944,8 @@ $contentView = $contentView ?? '';
 <?php if (
     $activePage === 'view_fra' ||
     $activePage === 'view_statistics' ||
-    $activePage === 'view_shortlist'
+    $activePage === 'view_shortlist' ||
+	$activePage === 'view_completed'
 ): ?>
 
     <a href="view_num_fra.php"
@@ -955,6 +956,11 @@ $contentView = $contentView ?? '';
     <a href="view_shortlisted_fra.php"
        class="submenu-child <?= $activePage === 'view_shortlist' ? 'active' : '' ?>">
        🔖 View Shortlist
+    </a>
+	
+	<a href="view_completed_fra.php"
+       class="submenu-child <?= $activePage === 'view_completed' ? 'active' : '' ?>">
+       🔖 View Completed
     </a>
 
 <?php endif; ?>

@@ -1,3 +1,14 @@
+<?php if (!empty($popupMessage)): ?>
+
+    <div class="alert-popup
+         <?= $popupType ?>">
+
+        <?= htmlspecialchars($popupMessage) ?>
+
+    </div>
+
+<?php endif; ?>
+
 <?php if (empty($fra)): ?>
 
     <h1>FRA Not Found</h1>

@@ -239,253 +239,327 @@ $contentView = $contentView ?? '';
             overflow-x: auto;
         }
 
-/* shared base table style */
-.table-base {
-    width: 100%;
-    border-collapse: collapse;
-    background: #ffffff;
-}
+	/* shared base table style */
+	.table-base {
+		width: 100%;
+		border-collapse: collapse;
+		background: #ffffff;
+	}
 
-.table-base th,
-.table-base td {
-    border: 1px solid #111827;
-    padding: 12px;
-    text-align: center;
-    vertical-align: middle;
-}
+	.table-base th,
+	.table-base td {
+		border: 1px solid #111827;
+		padding: 12px;
+		text-align: center;
+		vertical-align: middle;
+	}
 
-.table-base th {
-    font-weight: 700;
-}
+	.table-base th {
+		font-weight: 700;
+	}
 
 
-.search-fra-toolbar {
-    margin: 18px 0 20px;
-}
+	.search-fra-toolbar {
+		margin: 18px 0 20px;
+	}
 
-.search-fra-form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+	.search-fra-form {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
 
-.search-fra-input {
-    width: 260px;
-    padding: 10px 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font: inherit;
-    background: #ffffff;
-}
+	.search-fra-input {
+		width: 260px;
+		padding: 10px 14px;
+		border: 1px solid #d1d5db;
+		border-radius: 8px;
+		font: inherit;
+		background: #ffffff;
+	}
 
-.search-fra-btn {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    background: #111827;
-    color: #ffffff;
-    font-weight: 600;
-    cursor: pointer;
-}
+	.search-fra-btn {
+		padding: 10px 16px;
+		border: none;
+		border-radius: 8px;
+		background: #111827;
+		color: #ffffff;
+		font-weight: 600;
+		cursor: pointer;
+	}
 
-.search-fra-btn:hover {
-    background: #1f2937;
-}
+	.search-fra-btn:hover {
+		background: #1f2937;
+	}
 
-.search-fra-table td {
-    vertical-align: middle;
-}
+	.search-fra-table td {
+		vertical-align: middle;
+	}
 
-.search-fra-table tr:hover {
-    background: #f9fafb;
-}
+	.search-fra-table tr:hover {
+		background: #f9fafb;
+	}
 
-/* action column */
-.search-fra-table td:nth-child(5),
-.search-fra-table th:nth-child(5) {
-    width: 180px;
-    text-align: center;
-}
+	/* action column */
+	.search-fra-table td:nth-child(5),
+	.search-fra-table th:nth-child(5) {
+		width: 180px;
+		text-align: center;
+	}
 
-.search-input-wrapper {
-    position: relative;
-    display: inline-block;
-}
+	.search-input-wrapper {
+		position: relative;
+		display: inline-block;
+	}
 
-.search-fra-input {
-    width: 260px;
-    padding: 10px 38px 10px 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font: inherit;
-    background: #ffffff;
-}
+	.search-fra-input {
+		width: 260px;
+		padding: 10px 38px 10px 14px;
+		border: 1px solid #d1d5db;
+		border-radius: 8px;
+		font: inherit;
+		background: #ffffff;
+	}
 
-.search-clear-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    text-decoration: none;
-    color: #6b7280;
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1;
-}
+	.search-clear-btn {
+		position: absolute;
+		right: 12px;
+		top: 50%;
+		transform: translateY(-50%);
+		text-decoration: none;
+		color: #6b7280;
+		font-size: 1.2rem;
+		font-weight: 700;
+		line-height: 1;
+	}
 
-.search-clear-btn:hover {
-    color: #111827;
-}
+	.search-clear-btn:hover {
+		color: #111827;
+	}
 
-.action-btn {
-    display: inline-block;
-    padding: 5px 10px;
-    margin: 2px;
-    border: 1px solid #111827;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #111827;
-    background: #ffffff;
-    font-size: 0.85rem;
-}
+	.action-btn {
+		display: inline-block;
+		padding: 5px 10px;
+		margin: 2px;
+		border: 1px solid #111827;
+		border-radius: 5px;
+		text-decoration: none;
+		color: #111827;
+		background: #ffffff;
+		font-size: 0.85rem;
+	}
 
-.action-btn:hover {
-    background: #f3f4f6;
-}
+	.action-btn:hover {
+		background: #f3f4f6;
+	}
 
-.search-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 1100px;
-    margin-bottom: 20px;
-}
+	.search-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		width: 1100px;
+		margin-bottom: 20px;
+	}
 
-.no-result-message {
-    width: 1100px;
-    margin: 40px auto 0;
-    text-align: center;
-    font-size: 1rem;
-}
+	.no-result-message {
+		width: 1100px;
+		margin: 40px auto 0;
+		text-align: center;
+		font-size: 1rem;
+	}
 
-.view-btn,
-.save-btn {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin: 2px;
-    transition: 0.2s ease;
-}
+	.view-btn,
+	.save-btn {
+		display: inline-block;
+		padding: 6px 12px;
+		border-radius: 6px;
+		text-decoration: none;
+		font-size: 0.85rem;
+		font-weight: 600;
+		margin: 2px;
+		transition: 0.2s ease;
+	}
 
-.view-btn {
-    border: 1px solid #2563eb;
-    color: #2563eb;
-    background: #eff6ff;
-}
+	.view-btn {
+		border: 1px solid #2563eb;
+		color: #2563eb;
+		background: #eff6ff;
+	}
 
-.view-btn:hover {
-    background: #dbeafe;
-}
+	.view-btn:hover {
+		background: #dbeafe;
+	}
 
-.save-btn {
-    border: 1px solid #16a34a;
-    color: #16a34a;
-    background: #f0fdf4;
-}
+	.save-btn {
+		border: 1px solid #16a34a;
+		color: #16a34a;
+		background: #f0fdf4;
+	}
 
-.save-btn:hover {
-    background: #dcfce7;
-}
+	.save-btn:hover {
+		background: #dcfce7;
+	}
 
-.fra-detail-card {
-    max-width: 760px;
-    margin-top: 24px;
-    padding: 28px;
-    border: 1px solid #d1d5db;
-    border-radius: 16px;
-    background: #ffffff;
-}
+	.fra-detail-card {
+		max-width: 760px;
+		margin-top: 24px;
+		padding: 28px;
+		border: 1px solid #d1d5db;
+		border-radius: 16px;
+		background: #ffffff;
+	}
 
-.fra-detail-card h2 {
-    margin: -28px -28px 24px;
-    padding: 18px 28px;
-    background: #eff6ff;
-    border-bottom: 1px solid #bfdbfe;
-    border-radius: 16px 16px 0 0;
-    color: #1d4ed8;
-    font-size: 1.5rem;
-    font-weight: 800;
-}
+	.fra-detail-card h2 {
+		margin: -28px -28px 24px;
+		padding: 18px 28px;
+		background: #eff6ff;
+		border-bottom: 1px solid #bfdbfe;
+		border-radius: 16px 16px 0 0;
+		color: #1d4ed8;
+		font-size: 1.5rem;
+		font-weight: 800;
+	}
 
-.fra-detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 28px;
-}
+	.fra-detail-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 14px 28px;
+	}
 
-.fra-detail-card p {
-    margin: 0;
-    line-height: 1.5;
-}
+	.fra-detail-card p {
+		margin: 0;
+		line-height: 1.5;
+	}
 
-.fra-description-box {
-    margin-top: 24px;
-    padding: 16px;
-    border-radius: 12px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-}
+	.fra-description-box {
+		margin-top: 24px;
+		padding: 16px;
+		border-radius: 12px;
+		background: #f8fafc;
+		border: 1px solid #e2e8f0;
+	}
 
-.fra-description-box p {
-    margin-top: 10px;
-}
+	.fra-description-box p {
+		margin-top: 10px;
+	}
 
-.fra-detail-actions {
-    margin-top: 24px;
-    display: flex;
-    justify-content: flex-end;
-}
+	.fra-detail-actions {
+		margin-top: 24px;
+		display: flex;
+		justify-content: flex-end;
+	}
 
-.back-btn {
-    display: inline-block;
-    padding: 10px 18px;
-    border-radius: 8px;
-    background: #2563eb;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.2s ease;
-	border: none;
-	cursor: pointer;
-}
+	.back-btn {
+		display: inline-block;
+		padding: 10px 18px;
+		border-radius: 8px;
+		background: #2563eb;
+		color: #ffffff;
+		text-decoration: none;
+		font-weight: 600;
+		transition: 0.2s ease;
+		border: none;
+		cursor: pointer;
+	}
 
-.back-btn:hover {
-    background: #1d4ed8;
-}
+	.back-btn:hover {
+		background: #1d4ed8;
+	}
 
-.saved-btn {
-	display: inline-block;
-    padding: 7px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin: 3px;
-    transition: 0.2s ease;
-	border: 1px solid #666;
-    color: #666;
-    background: #ddd;
-}
+	.saved-btn {
+		display: inline-block;
+		padding: 7px 12px;
+		border-radius: 6px;
+		text-decoration: none;
+		font-size: 0.85rem;
+		font-weight: 600;
+		margin: 3px;
+		transition: 0.2s ease;
+		border: 1px solid #666;
+		color: #666;
+		background: #ddd;
+	}
 
-.fra-detail-actions {
-    margin-top: 24px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-}
+	.fra-detail-actions {
+		margin-top: 24px;
+		display: flex;
+		justify-content: flex-end;
+		gap: 12px;
+	}
+	
+	/* Dropdown */
+	.dropdown-content {
+		display: none;
+		flex-direction: column;
+		gap: 10px;
+		margin-top: 10px;
+		margin-left: 3px;
+	}
+
+	.dropdown-content.show {
+		display: flex;
+	}
+
+	.submenu-link {
+		white-space: nowrap;
+		width: 100%;
+	}
+	
+	/* View Donation Progress Page */
+	.progress-card {
+		background: white;
+		border-radius: 18px;
+		padding: 24px;
+		margin-top: 20px;
+		border: 1px solid #d1d5db;
+	}
+
+	.progress-header {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.progress-header h2 {
+		margin: 0;
+	}
+
+	.category-tag {
+		font-size: 14px;
+		color: gray;
+	}
+	
+	.progress-info-row {
+		display: flex;
+		align-items: center;
+		gap: 28px;
+		margin-top: 18px;
+		margin-bottom: 18px;
+		flex-wrap: wrap;
+	}
+
+	.progress-row {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.progress-bar {
+		width: 300px;
+		height: 14px;
+		background: #e5e7eb;
+		border-radius: 999px;
+		overflow: hidden;
+	}
+
+	.progress-fill {
+		height: 100%;
+		background: #60a5fa;
+	}
+
+	.progress-percent {
+		font-weight: 600;
+	}
 </style>
 </head>
 <body>
@@ -498,8 +572,27 @@ $contentView = $contentView ?? '';
             <a href="dashboard_dn.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">🏠 Dashboard</a>
             <a href="search_dn_fra.php" class="<?= $activePage === 'browse_fra' ? 'active' : '' ?>">🔍 Browse FRA</a>
             <a href="view_dn_fav_fra.php" class="<?= $activePage === 'favourite_fra' ? 'active' : '' ?>">⭐ Saved FRA</a>
-			<a href="search_donate_history.php" class="<?= $activePage === 'donation_history' ? 'active' : '' ?>">💰 Donation History</a>
+			
+			<div class="dropdown-menu">
+				<a href="javascript:void(0);" class="dropdown-btn" onclick="toggleDonationMenu()">
+					💰 My Donations ▼
+				</a>
+
+				<div id="donationDropdown" class="dropdown-content">
+
+					<a href="search_donate_history.php" class="submenu-link">
+						🧾 Donation History
+					</a>
+
+					<a href="view_donate_progress.php" class="submenu-link">
+						📈 View Progress
+					</a>
+
+				</div>
+			</div>
+			
         </nav>
+	
     </aside>
 
     <main class="main">
@@ -533,6 +626,17 @@ $contentView = $contentView ?? '';
     <script>
         function showLogout() { document.getElementById('logoutModal').classList.add('open'); }
         function hideLogout() { document.getElementById('logoutModal').classList.remove('open'); }
+
+		function toggleDonationMenu() {
+
+			document
+				.getElementById('donationDropdown')
+				.classList
+				.toggle('show');
+		}
     </script>
+	
 </body>
 </html>
+
+

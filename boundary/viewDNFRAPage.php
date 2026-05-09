@@ -24,11 +24,13 @@ class viewDNFRAPage
 
 			$amount = (float) $_POST['amount'];
 
-			$this->donateController->donateToFRA(
-				$fra['id'],
-				$_SESSION['username'],
-				$amount
-			);
+			$success = $this->donateController->donateToFRA($fra['id'],$_SESSION['username'],$amount);
+
+			if (!$success) {
+				$popupMessage =
+					"Donation amount exceeds goal amount.";
+				$popupType = "error";
+			}
 		}
 
         $contentView = __DIR__ . '/views/view_dn_fra.view.php';

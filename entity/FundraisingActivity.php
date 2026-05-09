@@ -204,4 +204,28 @@ class FundraisingActivity
 		return $stmt->execute();
 	}
 
+	public function viewCompletedFRA(): array
+	{
+		$sql = "SELECT fa.*, cf.completed_date,
+					(
+						SELECT SUM(d.amount)
+						FROM donation d
+						WHERE d.fra_id = fa.id
+					) AS total_raised
+
+				FROM completed_fra cf
+
+				JOIN fundraising_activity fa
+				ON cf.fra_id = fa.id
+
+				ORDER BY cf.completed_date DESC";
+
+		$result = $this->db->query($sql);
+
+		if (!$result) {
+			return [];
+		}
+
+		return $result->fetch_all(MYSQLI_ASSOC);
+	}
 }
