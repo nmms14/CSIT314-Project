@@ -72,3 +72,28 @@ INSERT INTO favourite_fundraising_activity (username, activity_id, created_at)
 SELECT 'donee6', id, '2026-03-22 14:00:00' FROM fundraising_activity WHERE campaign_title = 'Cancer Research';
 INSERT INTO favourite_fundraising_activity (username, activity_id, created_at)
 SELECT 'donee',  id, '2026-03-10 11:45:00' FROM fundraising_activity WHERE campaign_title = 'Earthquake Relief 2';
+
+
+-- =========================================================
+-- Completed FRA
+-- =========================================================
+
+INSERT INTO completed_fra (fra_id, completed_date)
+SELECT id, '2026-05-07'
+FROM fundraising_activity
+WHERE campaign_title = 'Hospital Fund';
+
+INSERT INTO completed_fra(fra_id, completed_date)
+SELECT id, '2026-05-06'
+FROM fundraising_activity
+WHERE campaign_title = 'College Scholarship';
+
+INSERT INTO completed_fra(fra_id, completed_date)
+SELECT id, '2026-05-05'
+FROM fundraising_activity
+WHERE campaign_title = 'Flood Relief';
+
+INSERT INTO completed_fra(fra_id, completed_date)
+SELECT id, '2026-05-03'
+FROM fundraising_activity
+WHERE campaign_title = 'Animal Shelter Fund';
