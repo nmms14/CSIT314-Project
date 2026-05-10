@@ -1088,6 +1088,37 @@ $contentView = $contentView ?? '';
     z-index: 2;
 }
 
+/* Dashboard polish effects */
+.stat-card,
+.panel,
+.welcome-card {
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover,
+.panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.activity-item {
+    transition: background 0.2s ease;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.activity-item:hover {
+    background: #f8fafc;
+}
+
+.fra-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.fra-table tbody tr:hover {
+    background: #f8fafc;
+}
+
 </style>
 </head>
 <body>

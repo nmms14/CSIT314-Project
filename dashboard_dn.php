@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if (($_SESSION['profile'] ?? null) !== 'donee') {
@@ -6,8 +7,7 @@ if (($_SESSION['profile'] ?? null) !== 'donee') {
     exit;
 }
 
-$activePage = 'dashboard';
-$pageTitle = 'Dashboard';
-$contentView = __DIR__ . '/boundary/views/dashboard_dn.view.php';
+require_once __DIR__ . '/boundary/dashboardDNPage.php';
 
-include __DIR__ . '/boundary/views/layout_dn.view.php';
+$page = new dashboardDNPage();
+$page->display();

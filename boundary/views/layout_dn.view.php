@@ -560,6 +560,154 @@ $contentView = $contentView ?? '';
 	.progress-percent {
 		font-weight: 600;
 	}
+
+	.dashboard-content {
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.welcome-card,
+.stat-card,
+.panel {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+}
+
+.welcome-card {
+    padding: 28px;
+    margin-bottom: 28px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+
+    margin-top: 22px;
+    margin-bottom: 28px;
+}
+
+.stat-card {
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.stat-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.stat-card p {
+    margin: 0;
+    color: #64748b;
+}
+
+.stat-card h2 {
+    margin: 6px 0 0;
+    font-size: 28px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.donee-dashboard-container {
+    background: #f8fafc;
+    min-height: 100vh;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 24px 14px 32px;
+}
+
+.panel {
+    padding: 24px 28px;
+    height: 520px;
+    overflow-y: auto;
+}
+
+.panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.panel::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 999px;
+}
+
+.activity-item {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.activity-item {
+    transition: background 0.2s ease;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.activity-item:hover {
+    background: #f8fafc;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-item p {
+    margin: 4px 0 0;
+    color: #64748b;
+}
+
+.activity-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+.donation-icon {
+    background: #dcfce7;
+}
+
+.trending-icon {
+    background: #fef3c7;
+}
+
+.stat-card,
+.panel,
+.welcome-card {
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover,
+.panel:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 24px rgba(15,23,42,0.06);
+}
+
+
 </style>
 </head>
 <body>
