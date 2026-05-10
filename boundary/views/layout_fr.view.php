@@ -941,6 +941,153 @@ $contentView = $contentView ?? '';
     justify-content: flex-end;
 }
 
+.dashboard-content {
+    padding: 32px;
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.welcome-card {
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 28px;
+}
+
+.welcome-card h1 {
+    margin: 0 0 8px;
+    font-size: 36px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.stat-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.stat-card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.stat-card h2 {
+    margin: 6px 0 0;
+    font-size: 28px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
+.panel {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+.panel h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.fra-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fra-table th,
+.fra-table td {
+    padding: 16px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.progress-bar {
+    width: 120px;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.progress-bar div {
+    height: 100%;
+    background: #2563eb;
+    border-radius: 999px;
+}
+
+.status-active {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.activity-item {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-item p {
+    margin: 4px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.table-scroll {
+    max-height: 420px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.fra-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fra-table thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+}
+
 </style>
 </head>
 <body>
