@@ -13,9 +13,9 @@ class viewCompletedFRAPage
 
     public function display(): void
     {
-        $results =
-            $this->controller
-                 ->viewCompletedFRA();
+        $keyword = trim($_GET['keyword'] ?? '');
+
+        $results = $this->controller->viewCompletedFRA($keyword);
 
         $contentView = __DIR__ . '/views/view_completed_fra.view.php';
 
@@ -24,5 +24,4 @@ class viewCompletedFRAPage
 }
 
 $page = new viewCompletedFRAPage();
-
 $page->display();

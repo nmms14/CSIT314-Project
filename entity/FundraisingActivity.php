@@ -204,28 +204,59 @@ class FundraisingActivity
 		return $stmt->execute();
 	}
 
-	public function viewCompletedFRA(): array
-	{
-		$sql = "SELECT fa.*, cf.completed_date,
-					(
-						SELECT SUM(d.amount)
-						FROM donation d
-						WHERE d.fra_id = fa.id
-					) AS total_raised
+	public function viewCompletedFRA(string $keyword = ''): array
+{
+    $sql = "SELECT fa.*, cf.completed_date,
+                (
+                    SELECT SUM(d.amount)
+                    FROM donation d
+                    WHERE d.fra_id = fa.id
+                ) AS total_raised
 
-				FROM completed_fra cf
+            FROM completed_fra cf
 
-				JOIN fundraising_activity fa
-				ON cf.fra_id = fa.id
+            JOIN fundraising_activity fa
+            ON cf.fra_id = fa.id";
 
-				ORDER BY cf.completed_date DESC";
+    $params = [];
+    $types = '';
 
-		$result = $this->db->query($sql);
+    if ($keyword !== '') {
 
-		if (!$result) {
-			return [];
-		}
+        $sql .= " WHERE (
+            fa.campaign_title LIKE ?
+            OR fa.category LIKE ?
+            OR fa.description LIKE ?
+            OR fa.fundraiser_name LIKE ?
+        )";
 
-		return $result->fetch_all(MYSQLI_ASSOC);
-	}
+        $search = '%' . $keyword . '%';
+
+        $params = [$search, $search, $search, $search];
+        $types = 'ssss';
+    }
+
+    $sql .= " ORDER BY cf.completed_date DESC";
+
+    $stmt = $this->db->prepare($sql);
+
+    if (!$stmt) {
+        return [];
+    }
+
+    if (!empty($params)) {
+        $stmt->bind_param($types, ...$params);
+    }
+
+    $stmt->execute();
+
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+	public function getCompletedFRA(array $query = []): array
+{
+    $keyword = trim($query['keyword'] ?? '');
+
+    return $this->viewCompletedFRA($keyword);
+}
 }

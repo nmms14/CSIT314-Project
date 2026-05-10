@@ -1,17 +1,18 @@
 <?php
-	require_once __DIR__ . '/../entity/FundraisingActivity.php';
-	
-	class viewCompletedFRAController {
-	
-		private FundraisingActivity $fra;
 
-		public function __construct()
-		{
-			$this->fra = new FundraisingActivity();
-		}
+require_once __DIR__ . '/../entity/FundraisingActivity.php';
 
-		public function viewCompletedFRA(): array {
-			return $this->fra ->viewCompletedFRA();
-		}
+class viewCompletedFRAController
+{
+    private FundraisingActivity $fra;
+
+    public function __construct()
+    {
+        $this->fra = new FundraisingActivity();
+    }
+
+    public function viewCompletedFRA(string $keyword = ''): array
+	{
+        return $this->fra->viewCompletedFRA($keyword);
 	}
-?>	
+}

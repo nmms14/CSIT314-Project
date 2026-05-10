@@ -924,6 +924,23 @@ $contentView = $contentView ?? '';
     text-align: center;
 }
 
+/* Completed FRA page header */
+.completed-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 90px;
+    margin-bottom: 24px;
+    box-sizing: border-box;
+}
+
+/* Right align search */
+.completed-search-toolbar {
+    display: flex;
+    justify-content: flex-end;
+}
+
 </style>
 </head>
 <body>
@@ -960,7 +977,7 @@ $contentView = $contentView ?? '';
 	
 	<a href="view_completed_fra.php"
        class="submenu-child <?= $activePage === 'view_completed' ? 'active' : '' ?>">
-       🔖 View Completed
+       📚  View Completed
     </a>
 
 <?php endif; ?>
