@@ -11,9 +11,9 @@ class viewDonationHistoryController
         $this->donation = new Donation();
     }
 	
-	public function getAllDonationHistory(): array
+	public function getAllDonationHistory(string $username): array
 	{
 		return $this->donation
-					->getAllDonationHistory();
+					->getAllDonationHistory($username);
 	}
 }

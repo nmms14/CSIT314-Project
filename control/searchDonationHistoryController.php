@@ -11,8 +11,8 @@ class searchDonationHistoryController
         $this->donation = new Donation();
     }
 
-    public function searchDonationHistory(string $keyword): array
+    public function searchDonationHistory(string $username, string $keyword): array
     {
-        return $this->donation->searchDonationHistory($keyword);
+        return $this->donation->searchDonationHistory($username, $keyword);
     }
 }

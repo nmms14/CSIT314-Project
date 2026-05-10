@@ -101,7 +101,7 @@ class Donation
 		return $success;
 	}
 	
-	public function getAllDonationHistory(): array
+	public function getAllDonationHistory(string $username): array
 	{
 		$sql = "SELECT d.*,
                fa.campaign_title,
@@ -115,18 +115,28 @@ class Donation
                ) AS total_donation
         FROM donation d
         JOIN fundraising_activity fa
-        ON d.fra_id = fa.id";
+        ON d.fra_id = fa.id
+		WHERE d.donee_name = ?";
 
-		$result = $this->db->query($sql);
-
-		if (!$result) {
+		$stmt = $this->db->prepare($sql);
+		
+		if (!$stmt) {
 			return [];
 		}
+
+		$stmt->bind_param(
+			"s",
+			$username
+		);
+
+		$stmt->execute();
+
+		$result = $stmt->get_result();
 
 		return $result->fetch_all(MYSQLI_ASSOC);
 	}
 	
-	public function searchDonationHistory(string $keyword): array
+	public function searchDonationHistory(string $username, string $keyword): array
 	{
 		$sql = "SELECT d.*,
 				   fa.campaign_title,
@@ -141,6 +151,7 @@ class Donation
 			FROM donation d
 			JOIN fundraising_activity fa
 			ON d.fra_id = fa.id
+			WHERE d.donee_name = ?
 			ORDER BY d.donation_date DESC";
 
 		$stmt = $this->db->prepare($sql);
@@ -148,6 +159,11 @@ class Donation
 		if (!$stmt) {
 			return [];
 		}
+		
+		$stmt->bind_param(
+			"s",
+			$username
+		);
 
 		$stmt->execute();
 

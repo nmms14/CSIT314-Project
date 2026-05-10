@@ -22,13 +22,13 @@ class donationHistoryPage
 
             $results =
                 $this->searchController
-                     ->searchDonationHistory($keyword);
+                     ->searchDonationHistory($_SESSION['username'], $keyword);
 
         } else {
 
             $results =
                 $this->viewController
-                     ->getAllDonationHistory();
+                     ->getAllDonationHistory($_SESSION['username']);
         }
 
         $searchKeyword = $keyword;
