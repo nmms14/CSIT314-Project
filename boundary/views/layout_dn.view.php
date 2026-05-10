@@ -35,18 +35,30 @@ $contentView = $contentView ?? '';
             display: flex;
             flex-direction: column;
             gap: 24px;
+            box-shadow: 2px 0 12px rgba(15, 23, 42, 0.03);
         }
 
         .logo {
-            width: 64px;
-            height: 64px;
-            border: 1px solid #d1d5db;
+            width: 72px;
+            height: 72px;
+
             border-radius: 50%;
+
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
-            color: #6b7280;
+
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+
+            color: white;
+
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
+
+            flex-shrink: 0;
         }
 
         .menu {
@@ -92,11 +104,16 @@ $contentView = $contentView ?? '';
 
         .topbar {
             height: 68px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             padding: 0 28px;
+
             border-bottom: 1px solid #e5e7eb;
+
+            background: #f8fafc;
         }
 
         .topbar h2 {
@@ -112,16 +129,41 @@ $contentView = $contentView ?? '';
         }
 
         .avatar-small {
-            width: 36px;
-            height: 36px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
-            border: 1px solid #d1d5db;
+
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+            border: 1px solid #bfdbfe;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
-            color: #6b7280;
-            background: #ffffff;
+
+            font-size: 0.9rem;
+            font-weight: 700;
+
+            color: #2563eb;
+
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+        }
+
+        .btn-logout {
+            padding: 11px 16px;
+
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+
+            border-radius: 12px;
+
+            font-weight: 600;
+
+            transition: all 0.2s ease;
+        }
+
+        .btn-logout:hover {
+            background: #fee2e2;
         }
 
         .btn {
@@ -159,10 +201,15 @@ $contentView = $contentView ?? '';
         .modal {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.4);
+
+            background: rgba(15, 23, 42, 0.35);
+
+            backdrop-filter: blur(4px);
+
             display: none;
             align-items: center;
             justify-content: center;
+
             z-index: 1000;
         }
 
@@ -171,28 +218,72 @@ $contentView = $contentView ?? '';
         }
 
         .modal-card {
-            width: 320px;
+            width: 360px;
+
             background: #ffffff;
-            border-radius: 14px;
-            padding: 22px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+            border-radius: 20px;
+
+            padding: 30px 28px;
+
+            box-shadow:
+                0 20px 40px rgba(15, 23, 42, 0.12),
+                0 2px 10px rgba(15, 23, 42, 0.06);
+
+            text-align: center;
+
+            animation: modalPop 0.18s ease;
         }
 
         .modal-card h3 {
-            margin: 0 0 8px;
-            font-size: 1.05rem;
+            margin: 0 0 10px;
+
+            font-size: 1.3rem;
+            font-weight: 700;
+
+            color: #111827;
         }
 
         .modal-card p {
             margin: 0;
-            color: #4b5563;
+
+            color: #6b7280;
+
+            line-height: 1.5;
         }
 
         .modal-actions {
-            margin-top: 18px;
+            margin-top: 24px;
+
             display: flex;
-            gap: 10px;
+            gap: 12px;
+
             justify-content: center;
+        }
+
+        .modal-actions .btn,
+        .modal-actions .btn-danger {
+            min-width: 92px;
+
+            padding: 10px 16px;
+
+            border-radius: 12px;
+
+            font-weight: 600;
+
+            transition: all 0.2s ease;
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .btn-danger {
@@ -716,6 +807,24 @@ $contentView = $contentView ?? '';
             box-shadow:
                 0 8px 24px rgba(15, 23, 42, 0.06);
         }
+
+        .logout-icon {
+            width: 64px;
+            height: 64px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 18px;
+
+            background: #fef2f2;
+            color: #dc2626;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+        }
     </style>
 </head>
 
@@ -763,7 +872,7 @@ $contentView = $contentView ?? '';
 
                 <div class="topbar-right">
                     <div class="avatar-small">DN</div>
-                    <button type="button" class="btn" onclick="showLogout()">Logout</button>
+                    <button type="button" class="btn-logout" onclick="showLogout()">Logout</button>
                 </div>
             </header>
 
@@ -776,6 +885,7 @@ $contentView = $contentView ?? '';
 
     <div class="modal" id="logoutModal">
         <div class="modal-card">
+            <div class="logout-icon">↩</div>
             <h3>Logout Confirmation</h3>
             <p>Are you sure you want to logout?</p>
             <div class="modal-actions">
