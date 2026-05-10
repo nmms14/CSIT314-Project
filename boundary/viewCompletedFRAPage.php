@@ -16,6 +16,8 @@ class viewCompletedFRAPage
         $keyword = trim($_GET['keyword'] ?? '');
 
         $results = $this->controller->viewCompletedFRA($keyword);
+		
+		$activePage = 'view_completed';
 
         $contentView = __DIR__ . '/views/view_completed_fra.view.php';
 

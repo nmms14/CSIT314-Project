@@ -952,7 +952,6 @@ $contentView = $contentView ?? '';
     <a href="dashboard_fr.php" class="<?= $activePage === 'dashboard' ? 'active' : '' ?>">🏠 Dashboard</a>
     <a href="create_fra.php" class="<?= $activePage === 'create_fra' ? 'active' : '' ?>">➕ Create FRA</a>
     <a href="view_fra.php"
-   <a href="view_fra.php"
    class="<?= $activePage === 'view_fra' ? 'active' : '' ?>">
    <span>📄 View FRA</span>
    <span class="arrow">▼</span>
