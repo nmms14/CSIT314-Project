@@ -7,6 +7,3 @@ if (($_SESSION['profile'] ?? null) !== 'user_admin') {
 }
 
 require_once __DIR__ . '/boundary/viewAccPage.php';
-
-$page = new viewAccPage();
-$page->display();
