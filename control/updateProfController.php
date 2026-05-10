@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../config/DBConnection.php';
 require_once __DIR__ . '/../entity/UserProfile.php';
 
 class updateProfController {
@@ -8,8 +7,7 @@ class updateProfController {
             return ['type' => 'error', 'message' => 'All fields are required.'];
         }
 
-        $db      = DBConnection::getInstance();
-        $up      = new UserProfile($db);
+        $up      = new UserProfile();
         $updated = $up->updateProf($profile_id, $profile_name, $description);
 
         if (!empty($updated)) {

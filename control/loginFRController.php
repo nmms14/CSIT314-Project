@@ -7,8 +7,7 @@ class loginFRController {
             return false;
         }
 
-        $db = DBConnection::getInstance();
-        $fr = new FundRaiser($db);
+        $fr = new FundRaiser();
 
         if (!$fr->login($username, $password)) {
             return false;

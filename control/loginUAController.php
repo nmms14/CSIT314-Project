@@ -7,8 +7,7 @@ class loginUAController {
             return false;
         }
 
-        $db = DBConnection::getInstance();
-        $ua = new UserAdmin($db);
+        $ua = new UserAdmin();
 
         if (!$ua->login($username, $password)) {
             return false;

@@ -64,7 +64,7 @@ class UserAccount {
     
     // Converting the database row to object
 	private function dbRowToUser(array $row): UserAccount {
-		$user = new UserAccount($this->db);
+		$user = new UserAccount();
 
 		$user->id = $row['id'];
 		$user->name = $row['name'];

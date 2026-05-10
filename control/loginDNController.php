@@ -7,8 +7,7 @@ class loginDNController {
             return false;
         }
 
-        $db = DBConnection::getInstance();
-        $dn = new Donee($db);
+        $dn = new Donee();
 
         if (!$dn->login($username, $password)) {
             return false;

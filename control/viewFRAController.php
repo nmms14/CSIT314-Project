@@ -6,9 +6,7 @@ class viewFRAController
 {
     public function getAll(): array
     {
-        $db = DBConnection::getInstance();
-
-        $fra = new FundraisingActivity($db);
+        $fra = new FundraisingActivity();
 
         $fraList = $fra->getAllFRA();
 

@@ -1,12 +1,14 @@
 <?php
 
+require_once __DIR__ . '/../config/DBConnection.php';
+
 class Donee {
     private mysqli $db;
     public ?int $id = null;
     public ?string $username = null;
 
-    public function __construct(mysqli $db) {
-        $this->db = $db;
+    public function __construct() {
+        $this->db = DBConnection::getInstance();
     }
 
     public function login(string $username, string $password): bool {

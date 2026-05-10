@@ -7,8 +7,7 @@ class loginPMController {
             return false;
         }
 
-        $db = DBConnection::getInstance();
-        $pm = new PlatformManager($db);
+        $pm = new PlatformManager();
 
         if (!$pm->login($username, $password)) {
             return false;

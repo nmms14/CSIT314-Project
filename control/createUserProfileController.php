@@ -1,13 +1,11 @@
 <?php
-require_once __DIR__ . '/../config/DBConnection.php';
 require_once __DIR__ . '/../entity/UserProfile.php';
 
 class createUserProfileController {
     private UserProfile $up;
 
     public function __construct() {
-        $db = DBConnection::getInstance();
-        $this->up = new UserProfile($db);
+        $this->up = new UserProfile();
     }
 
     public function createUserProfile(string $profileName, string $description): bool {

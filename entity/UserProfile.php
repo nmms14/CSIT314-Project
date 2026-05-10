@@ -4,8 +4,8 @@ require_once __DIR__ . '/../config/DBConnection.php';
 class UserProfile {
     private mysqli $db;
 
-    public function __construct(mysqli $db) {
-        $this->db = $db;
+    public function __construct() {
+        $this->db = DBConnection::getInstance();
     }
 
     public function createUserProfile(string $profileName, string $description): bool {
