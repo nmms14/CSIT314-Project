@@ -2,9 +2,15 @@
 require_once __DIR__ . '/../entity/UserAccount.php';
 
 class searchAccController {
+	
+	private UserAccount $ua;
+	
+	public function __construct() {
+		$this->ua = new UserAccount();
+	}
+	
     public function searchAcc(string $keywords): array {
-        $ua = new UserAccount();
-        return $ua->searchAcc($keywords);
+        return $this->ua->searchAcc($keywords);
     }
 }
 ?>

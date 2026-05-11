@@ -2,10 +2,15 @@
 	require_once __DIR__ . '/../entity/UserAccount.php';
 
 	class updateAccController {
+		
+		private UserAccount $ua;
+	
+		public function __construct() {
+			$this->ua = new UserAccount();
+		}
+		
 		public function updateAcc(string $currUsername, array $data): array {
-			$ua = new UserAccount();
-
-			$user = $ua->getAccDetail($currUsername);
+			$user = $this->ua->getAccDetail($currUsername);
 
 			if (!$user) {
 				return ['type' => 'error', 'message' => 'User not found.'];
@@ -15,7 +20,7 @@
 				return ['type' => 'error', 'message' => 'Suspended users cannot be edited.'];
 			}
 
-			$result = $ua->updateAcc($currUsername, $data);
+			$result = $this->ua->updateAcc($currUsername, $data);
 
 			if ($result['success']) {
 				return [
@@ -31,13 +36,11 @@
 		}
 
 		public function loadProfiles() {
-			$ua = new UserAccount();
-			return $ua->getProfiles();
+			return $this->ua->getProfiles();
 		}
 		
 		public function getAccDetail(string $username) {
-			$ua = new UserAccount();
-			return $ua->getAccDetail($username);
+			return $this->ua->getAccDetail($username);
 		}
 	}
 ?>

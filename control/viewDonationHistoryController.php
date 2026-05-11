@@ -13,7 +13,6 @@ class viewDonationHistoryController
 	
 	public function getAllDonationHistory(string $username): array
 	{
-		return $this->donation
-					->getAllDonationHistory($username);
+		return $this->donation->getAllDonationHistory($username);
 	}
 }

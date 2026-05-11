@@ -3,10 +3,13 @@ require_once __DIR__ . '/../entity/FRACategory.php';
 
 class createFRACategoryController
 {
-    public function __construct() {}
+	private FRACategory $entity;
+	
+    public function __construct() {
+		$this->entity = new FRACategory();
+	}
 
     public function createFRACategory(string $name, string $description): array {
-        $entity = new FRACategory();
-        return $entity->createFRACategory($name, $description);
+        return $this->entity->createFRACategory($name, $description);
     }
 }
