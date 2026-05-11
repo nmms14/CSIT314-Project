@@ -10,14 +10,29 @@
         <?php endif; ?>
     </div>
 
-    <form method="GET" class="search-form">
-    <div class="search-wrapper">
-        <input type="text" name="keywords" id="searchInput" placeholder="Search users..." value="<?= htmlspecialchars($_GET['keywords'] ?? '') ?>">
-        <?php if (!empty($_GET['keywords'])): ?>
-            <span class="clear-btn" onclick="window.location.href='view_acc.php'">×</span>
-        <?php endif; ?>
-    </div>
-    <button type="submit">🔍</button>
+    <div class="search-fra-toolbar">
+		<form method="GET" class="search-fra-form">
+			<div class="search-input-wrapper">
+				<input
+					type="text"
+					name="keywords"
+					class="search-fra-input"
+					placeholder="Search users..."
+					value="<?= htmlspecialchars($_GET['keywords'] ?? '') ?>"
+				>
+				<?php if (!empty($_GET['keywords'])): ?>
+
+					<span class="search-clear-btn" onclick="window.location.href='view_acc.php'">
+						&times;
+					</span>
+				<?php endif; ?>
+			</div>
+			<button type="submit" class="search-fra-btn">
+				Search
+			</button>
+		</form>
+
+</div>
 </form>
 </div>
 

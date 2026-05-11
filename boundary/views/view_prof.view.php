@@ -40,19 +40,33 @@
     <?php endif; ?>
   </div>
 
-  <form method="GET" class="search-form">
-    <div class="search-wrapper">
-      <input type="text" name="keywords" id="searchInput"
-        placeholder="Search profiles..."
-        value="<?= htmlspecialchars($_GET['keywords'] ?? '') ?>">
+	<div class="search-fra-toolbar">
+		<form method="GET" class="search-fra-form">
+			<div class="search-input-wrapper">
+				<input
+					type="text"
+					name="keywords"
+					class="search-fra-input"
+					placeholder="Search profiles..."
+					value="<?= htmlspecialchars($_GET['keywords'] ?? '') ?>"
+				>
 
-      <?php if (!empty($_GET['keywords'])): ?>
-        <a href="view_prof.php" class="clear-btn">×</a>
-      <?php endif; ?>
-    </div>
+				<?php if (!empty($_GET['keywords'])): ?>
 
-    <button type="submit">🔍</button>
-  </form>
+					<a href="view_prof.php"
+					   class="search-clear-btn">
+
+						&times;
+
+					</a>
+				<?php endif; ?>
+			</div>
+
+			<button type="submit" class="search-fra-btn">
+				Search
+			</button>
+		</form>
+	</div>
 </div>
 
 <div class="header-box">
