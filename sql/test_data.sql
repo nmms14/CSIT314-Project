@@ -14,7 +14,7 @@ VALUES
 ('Platform Manager', 'manager', 'manager@example.com', '91234567', 'manager123', 'Platform Manager', 'Active'),
 ('Fund Raiser', 'fundraiser', 'fundraiser@example.com', '92345678', 'fundraiser123', 'Fundraiser', 'Active'),
 ('Donee', 'donee', 'donee@example.com', '93456789', 'donee123', 'Donee', 'Active'),
-('User Admin', 'useradmin', 'useradmin@example.com', '94567890', 'useradmin123', 'User Admin', 'Active');
+('User Admin', 'useradmin', 'useradmin@example.com', '94567890', 'useradmin123', 'User Admin', 'Active'),
 ('Donee 1', 'donee1', 'donee1@gmail.com', '90000001', '1234', 'Donee', 'Active'),
 ('Donee 2', 'donee2', 'donee2@gmail.com', '90000002', '1234', 'Donee', 'Active'),
 ('Donee 3', 'donee3', 'donee3@gmail.com', '90000003', '1234', 'Donee', 'Active'),
