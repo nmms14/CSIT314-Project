@@ -18,10 +18,6 @@ class UpdateFRAController
 
     public function getFRAById(int $id): ?array
     {
-        if ($id <= 0) {
-            return null;
-        }
-
         return $this->fundraisingActivity->getFRAById($id);
     }
 
@@ -35,27 +31,6 @@ class UpdateFRAController
         string $doneeName,
         string $phone
     ): bool {
-        if (
-            $id <= 0 ||
-            $campaignTitle === '' ||
-            $category === '' ||
-            $goalAmount === '' ||
-            $endDate === '' ||
-            $description === '' ||
-            $doneeName === '' ||
-            $phone === ''
-        ) {
-            return false;
-        }
-
-        if (!ctype_digit($goalAmount) || (int)$goalAmount <= 0) {
-            return false;
-        }
-
-        if (!preg_match('/^[89][0-9]{7}$/', $phone)) {
-            return false;
-        }
-
         return $this->fundraisingActivity->updateFRA(
             $id,
             $campaignTitle,

@@ -13,12 +13,6 @@ class SearchFRAController
 
     public function processSearch(string $keyword): array
     {
-        $keyword = trim($keyword);
-
-        if ($keyword === '') {
-            return [];
-        }
-
         return $this->fundraisingActivity->getMatchingFRA($keyword);
     }
 }

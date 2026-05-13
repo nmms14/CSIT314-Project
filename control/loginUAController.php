@@ -2,11 +2,6 @@
 
 class loginUAController {
     public function login(string $username, string $password): bool {
-        $username = trim($username);
-        if ($username === '' || $password === '') {
-            return false;
-        }
-
         $ua = new UserAdmin();
 
         if (!$ua->login($username, $password)) {

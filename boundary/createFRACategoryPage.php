@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../control/createFRACategoryController.php';
-require_once __DIR__ . '/../config/DBConnection.php';
 
 class createFRACategoryPage
 {
@@ -17,8 +16,7 @@ class createFRACategoryPage
                 $message     = 'Category name is required.';
                 $messageType = 'error';
             } else {
-                $db = DBConnection::getInstance();
-                $controller = new createFRACategoryController($db);
+                $controller = new createFRACategoryController();
                 $result = $controller->createFRACategory($name, $description);
 
                 $message     = $result['message'] ?? '';

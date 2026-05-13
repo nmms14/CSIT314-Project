@@ -9,10 +9,6 @@ class createUserProfileController {
     }
 
     public function createUserProfile(string $profileName, string $description): bool {
-        if ($profileName === '' || $description === '') {
-            return false;
-        }
-
         return $this->up->createUserProfile($profileName, $description);
     }
 }

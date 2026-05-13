@@ -2,11 +2,6 @@
 
 class loginFRController {
     public function login(string $username, string $password): bool {
-        $username = trim($username);
-        if ($username === '' || $password === '') {
-            return false;
-        }
-
         $fr = new FundRaiser();
 
         if (!$fr->login($username, $password)) {

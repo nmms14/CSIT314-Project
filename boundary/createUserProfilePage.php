@@ -10,15 +10,20 @@ class createUserProfilePage {
             $profileName = trim($_POST['profile_name'] ?? '');
             $description = trim($_POST['description'] ?? '');
 
-            $controller = new createUserProfileController();
-            $success = $controller->createUserProfile($profileName, $description);
-
-            if ($success) {
-                $message = 'User profile created successfully.';
-                $messageType = 'success';
-            } else {
-                $message = 'Failed to create user profile. Check inputs or duplicate profile.';
+            if ($profileName === '' || $description === '') {
+                $message = 'All fields are required.';
                 $messageType = 'error';
+            } else {
+                $controller = new createUserProfileController();
+                $success = $controller->createUserProfile($profileName, $description);
+
+                if ($success) {
+                    $message = 'User profile created successfully.';
+                    $messageType = 'success';
+                } else {
+                    $message = 'Failed to create user profile. Check inputs or duplicate profile.';
+                    $messageType = 'error';
+                }
             }
         }
 

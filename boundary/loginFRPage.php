@@ -6,6 +6,11 @@ class loginFRPage {
     }
 
     public function login(string $username, string $password): ?string {
+        $username = trim($username);
+        if ($username === '' || $password === '') {
+            return null;
+        }
+
         $controller = new loginFRController();
         if ($controller->login($username, $password)) {
             return 'dashboard_fr.php';

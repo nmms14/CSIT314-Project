@@ -2,11 +2,6 @@
 
 class loginDNController {
     public function login(string $username, string $password): bool {
-        $username = trim($username);
-        if ($username === '' || $password === '') {
-            return false;
-        }
-
         $dn = new Donee();
 
         if (!$dn->login($username, $password)) {

@@ -6,10 +6,13 @@ class loginDNPage {
     }
 
     public function login(string $username, string $password): ?string {
+        $username = trim($username);
+        if ($username === '' || $password === '') {
+            return null;
+        }
+
         $controller = new loginDNController();
         if ($controller->login($username, $password)) {
-			$_SESSION['username'] = $username;
-			
             return 'dashboard_dn.php';
         }
         return null;

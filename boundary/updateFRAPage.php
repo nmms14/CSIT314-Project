@@ -36,23 +36,27 @@ class updateFRAPage
             $doneeName = trim($_POST['donee_name'] ?? '');
             $phone = trim($_POST['phone'] ?? '');
 
-            $updated = $this->controller->updateFRA(
-                $id,
-                $campaignTitle,
-                $category,
-                $goalAmount,
-                $endDate,
-                $description,
-                $doneeName,
-                $phone
-            );
+            $error = null;
 
-            if ($updated) {
-                $this->displayMessage('FRA updated successfully.', 'success');
-                $this->mode = 'list';
-                $this->fraList = $this->controller->getAllFRA();
-            } else {
-                $this->displayMessage('Failed to update FRA.', 'error');
+            if (
+                $id <= 0 ||
+                $campaignTitle === '' ||
+                $category === '' ||
+                $goalAmount === '' ||
+                $endDate === '' ||
+                $description === '' ||
+                $doneeName === '' ||
+                $phone === ''
+            ) {
+                $error = 'All fields are required.';
+            } elseif (!ctype_digit($goalAmount) || (int)$goalAmount <= 0) {
+                $error = 'Goal amount must be a positive number.';
+            } elseif (!preg_match('/^[89][0-9]{7}$/', $phone)) {
+                $error = 'Phone number must be 8 digits starting with 8 or 9.';
+            }
+
+            if ($error !== null) {
+                $this->displayMessage($error, 'error');
                 $this->mode = 'form';
 
                 $this->fra = [
@@ -65,6 +69,37 @@ class updateFRAPage
                     'donee_name' => $doneeName,
                     'phone' => $phone
                 ];
+            } else {
+                $updated = $this->controller->updateFRA(
+                    $id,
+                    $campaignTitle,
+                    $category,
+                    $goalAmount,
+                    $endDate,
+                    $description,
+                    $doneeName,
+                    $phone
+                );
+
+                if ($updated) {
+                    $this->displayMessage('FRA updated successfully.', 'success');
+                    $this->mode = 'list';
+                    $this->fraList = $this->controller->getAllFRA();
+                } else {
+                    $this->displayMessage('Failed to update FRA.', 'error');
+                    $this->mode = 'form';
+
+                    $this->fra = [
+                        'id' => $id,
+                        'campaign_title' => $campaignTitle,
+                        'category' => $category,
+                        'goal_amount' => $goalAmount,
+                        'end_date' => $endDate,
+                        'description' => $description,
+                        'donee_name' => $doneeName,
+                        'phone' => $phone
+                    ];
+                }
             }
 
         } else {
