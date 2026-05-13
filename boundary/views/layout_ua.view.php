@@ -409,6 +409,20 @@ $contentView = $contentView ?? '';
             color: #111827;
         }
 		
+		/* Scroll bar */ 
+		.user-list {
+			max-height: 500px;
+			overflow-y: auto;
+			overflow-x: hidden;
+			scrollbar-gutter: stable;
+		}
+		.profile-list {
+			max-height: 500px;
+			overflow-y: auto;
+			overflow-x: hidden;
+			scrollbar-gutter: stable;
+		}
+		
 		/*View Account CSS*/
 		.header-top {
 			display: flex;
@@ -452,9 +466,15 @@ $contentView = $contentView ?? '';
 		.header-row {
 			display: grid;
 			grid-template-columns: 1fr 2fr 1fr 1fr;
-			padding: 12px;
+			padding: 12px 24px 12px 12px;
+			box-sizing: border-box;
 			font-weight: bold;
-			background: #f9fafb;
+		}
+		
+		.user-list {
+			max-height: 500px;
+			overflow-y: auto;
+			overflow-x: hidden;
 		}
 
 		.user-main {

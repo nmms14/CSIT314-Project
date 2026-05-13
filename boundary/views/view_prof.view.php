@@ -81,35 +81,37 @@
 <br>
 
 <div class="body-box">
-    <?php if (empty($profiles)): ?>
-        <p style="padding:14px;">No user profiles found.</p>
-    <?php else: ?>
-        <?php foreach ($profiles as $p): ?>
-            <div class="user-row">
-                <div class="user-main prof-row">
-                    <span><?= htmlspecialchars($p['profile_name']) ?></span>
-                    <span><?= htmlspecialchars($p['description']) ?></span>
-                    <span><?= (int)$p['user_count'] ?></span>
-                    <span class="<?= strtolower($p['status'] ?? 'active') === 'active' ? 'status-active' : 'status-suspended' ?>">
-                        <?= htmlspecialchars($p['status'] ?? 'Active') ?>
-                    </span>
-                    <span>
-                        <a class="btn" href="update_prof.php?profile_id=<?= (int)$p['profile_id'] ?>&profile_name=<?= urlencode($p['profile_name']) ?>&description=<?= urlencode($p['description']) ?>">Edit</a>
-                        <?php if (($p['status'] ?? 'Active') !== 'Suspended'): ?>
-                            <button type="button" class="btn"
-                                onclick="openSuspendModal(<?= (int)$p['profile_id'] ?>, '<?= htmlspecialchars($p['profile_name'], ENT_QUOTES) ?>')">
-                                Suspend
-                            </button>
-                        <?php else: ?>
-                            <button type="button" class="btn" disabled style="opacity:0.5; cursor:not-allowed;">
-                                Suspended
-                            </button>
-                        <?php endif; ?>
-                    </span>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+	<div class="profile-list">
+		<?php if (empty($profiles)): ?>
+			<p style="padding:14px;">No user profiles found.</p>
+		<?php else: ?>
+			<?php foreach ($profiles as $p): ?>
+				<div class="user-row">
+					<div class="user-main prof-row">
+						<span><?= htmlspecialchars($p['profile_name']) ?></span>
+						<span><?= htmlspecialchars($p['description']) ?></span>
+						<span><?= (int)$p['user_count'] ?></span>
+						<span class="<?= strtolower($p['status'] ?? 'active') === 'active' ? 'status-active' : 'status-suspended' ?>">
+							<?= htmlspecialchars($p['status'] ?? 'Active') ?>
+						</span>
+						<span>
+							<a class="btn" href="update_prof.php?profile_id=<?= (int)$p['profile_id'] ?>&profile_name=<?= urlencode($p['profile_name']) ?>&description=<?= urlencode($p['description']) ?>">Edit</a>
+							<?php if (($p['status'] ?? 'Active') !== 'Suspended'): ?>
+								<button type="button" class="btn"
+									onclick="openSuspendModal(<?= (int)$p['profile_id'] ?>, '<?= htmlspecialchars($p['profile_name'], ENT_QUOTES) ?>')">
+									Suspend
+								</button>
+							<?php else: ?>
+								<button type="button" class="btn" disabled style="opacity:0.5; cursor:not-allowed;">
+									Suspended
+								</button>
+							<?php endif; ?>
+						</span>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		<?php endif; ?>
+	</div>
 </div>
 
 <div class="create-container">

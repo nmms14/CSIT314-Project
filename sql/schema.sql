@@ -9,12 +9,6 @@ CREATE TABLE IF NOT EXISTS user_profiles (
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO user_profiles (profile_name, description) VALUES
-('Platform Manager', 'Manages the platform and oversees system operations.'),
-('User Admin', 'Creates and manages user accounts and user profiles.'),
-('Fundraiser', 'Creates and manages fundraising activities.'),
-('Donee', 'Receives funds and searches for fundraising activities.');
-
 CREATE TABLE IF NOT EXISTS user_accounts (
     id           INT AUTO_INCREMENT PRIMARY KEY,
     name         VARCHAR(100) NOT NULL,
@@ -27,12 +21,6 @@ CREATE TABLE IF NOT EXISTS user_accounts (
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (profile) REFERENCES user_profiles(profile_name)
 );
-
-INSERT INTO user_accounts (name, username, email, phone_number, password, profile, status) VALUES
-('Platform Manager', 'manager', 'manager@example.com', '91234567', 'manager123', 'Platform Manager', 'Active'),
-('Fund Raiser', 'fundraiser', 'fundraiser@example.com', '92345678', 'fundraiser123', 'Fundraiser', 'Active'),
-('Donee', 'donee', 'donee@example.com', '93456789', 'donee123', 'Donee', 'Active'),
-('User Admin', 'useradmin', 'useradmin@example.com', '94567890', 'useradmin123', 'User Admin', 'Active');
 
 CREATE TABLE IF NOT EXISTS fundraising_activity (
     id              INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,16 +35,6 @@ CREATE TABLE IF NOT EXISTS fundraising_activity (
     view_count      INT NOT NULL DEFAULT 0,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-INSERT INTO fundraising_activity
-(campaign_title, category, description, end_date, goal_amount, donee_name, phone, fundraiser_name)
-VALUES
-('Food Drive', 'Social', 'Providing food supplies to low-income families', '2026-12-31', 3000.00, 'Stella', '91234567', 'fundraiser'),
-('School Supplier', 'Education', 'Supplying school materials to student', '2026-11-30', 4000.00, 'John Tan', '98765432', 'fundraiser'),
-('Pet Aid', 'Animal Welfare', 'Providing veterinary care, food, and shelter for animals', '2026-10-31', 3000.00, 'Mel', '81234567', 'fundraiser'),
-('Earthquake Relief', 'Disaster Relief', 'Providing emergency aid and supplies to families affected by recent earthquake', '2026-06-30', 5000.00, 'Shi Yan', '87654321', 'fundraiser'),
-('Elderly Care Fund', 'Social', 'Supporting eldery residents in need of care', '2026-05-31', 2000.00, 'Sharon', '82468100', 'fundraiser'),
-('Stray Cat Rescue', 'Animal Welfare', 'Funding shelter and food for rescued cats', '2026-05-31', 1000.00, 'Terence', '91357911', 'fundraiser');
 
 CREATE TABLE IF NOT EXISTS favourite_fundraising_activity (
     id 			INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,15 +55,6 @@ CREATE TABLE IF NOT EXISTS fra_categories (
     description    TEXT NOT NULL,
     created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-INSERT INTO fra_categories (name, description) VALUES
-('Medical', 'Fundraising activities related to medical needs and healthcare.'),
-('Education', 'Fundraising activities supporting education and learning.'),
-('Social', 'Fundraising activities addressing social issues and community needs.'),
-('Disaster Relief', 'Fundraising activities providing aid during disasters and emergencies.'),
-('Animal Welfare', 'Fundraising activities supporting animal care and protection.'),
-('Community', 'Fundraising activities focused on community development.'),
-('Others', 'Other fundraising activities not covered by existing categories.');
 
 CREATE TABLE donation (
     donation_id INT AUTO_INCREMENT PRIMARY KEY,
