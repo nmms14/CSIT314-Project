@@ -62,22 +62,44 @@ class UserProfile {
     }
 
     public function suspendUserProfile(int $profileID): bool {
-        $stmt = $this->db->prepare(
-            "UPDATE user_profiles SET status = 'Suspended' WHERE profile_id = ?"
-        );
-
-        if (!$stmt) return false;
-
-        $stmt->bind_param('i', $profileID);
+        $this->db->begin_transaction();
 
         try {
-            $success = $stmt->execute() && $stmt->affected_rows > 0;
-        } catch (mysqli_sql_exception $e) {
-            $success = false;
-        }
+            $stmt = $this->db->prepare(
+                "UPDATE user_profiles SET status = 'Suspended' WHERE profile_id = ?"
+            );
+            if (!$stmt) {
+                $this->db->rollback();
+                return false;
+            }
+            $stmt->bind_param('i', $profileID);
+            $stmt->execute();
+            $profileUpdated = $stmt->affected_rows > 0;
+            $stmt->close();
 
-        $stmt->close();
-        return $success;
+            if (!$profileUpdated) {
+                $this->db->rollback();
+                return false;
+            }
+
+            $cascade = $this->db->prepare(
+                "UPDATE user_accounts SET status = 'Suspended'
+                 WHERE profile = (SELECT profile_name FROM user_profiles WHERE profile_id = ?)"
+            );
+            if (!$cascade) {
+                $this->db->rollback();
+                return false;
+            }
+            $cascade->bind_param('i', $profileID);
+            $cascade->execute();
+            $cascade->close();
+
+            $this->db->commit();
+            return true;
+        } catch (mysqli_sql_exception $e) {
+            $this->db->rollback();
+            return false;
+        }
     }
 
   public function searchProfiles(string $keywords): array {
