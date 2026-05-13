@@ -50,7 +50,7 @@
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="5" style="text-align:center;">No fundraising activities found.</td>
+                    <td colspan="6" style="text-align:center;">No fundraising activities found.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
