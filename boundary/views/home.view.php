@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FundRaise — Empower Causes That Matter</title>
+    <title>Avatar — Empower Causes That Matter</title>
 
     <style>
         * {
@@ -673,7 +673,7 @@
                     <span class="highlight">that move you forward.</span>
                 </h1>
                 <p class="lead">
-                    FundRaise connects fundraisers, donees, and donors on one secure platform.
+                    Avatar connects fundraisers, donees, and donors on one secure platform.
                     Launch campaigns, track progress, and turn generosity into real impact —
                     all in a few clicks.
                 </p>
