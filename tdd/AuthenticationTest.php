@@ -4,97 +4,135 @@ use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-require_once __DIR__ . '/../control/loginDNController.php';
-require_once __DIR__ . '/../control/loginFRController.php';
-require_once __DIR__ . '/../control/loginPMController.php';
-require_once __DIR__ . '/../control/loginUAController.php';
-require_once __DIR__ . '/../control/LogoutController.php';
+require_once __DIR__ . '/../boundary/loginDNPage.php';
+require_once __DIR__ . '/../boundary/loginFRPage.php';
+require_once __DIR__ . '/../boundary/loginPMPage.php';
+require_once __DIR__ . '/../boundary/loginUAPage.php';
+require_once __DIR__ . '/../boundary/LogoutPage.php';
 
 class AuthenticationTest extends TestCase
 {
 	// Success Login Test
     public function testDNLoginSuccess()
     {
-        $controller = new loginDNController();
+		echo "Testing DN successful login..." . PHP_EOL;
+		
+        $page = new loginDNPage();
 
-        $result = $controller->login("donee1", "1234");
+		$result = $page->login("donee", "donee123");
 
-        $this->assertTrue($result);
+		$this->assertEquals('dashboard_dn.php', $result);
+		
+		echo "Passed" . PHP_EOL;
     }
 
     public function testFRLoginSuccess()
     {
-        $controller = new loginFRController();
+		echo "Testing FR successful login..." . PHP_EOL;
+		
+        $page = new loginFRPage();
 
-        $result = $controller->login("fundraiser1", "1234");
+		$result = $page->login("fundraiser", "fundraiser123");
 
-        $this->assertTrue($result);
+		$this->assertEquals('dashboard_fr.php', $result);
+		
+		echo "Passed" . PHP_EOL;
     }
 
     public function testPMLoginSuccess()
     {
-        $controller = new loginPMController();
+		echo "Testing PM successful login..." . PHP_EOL;
+		
+        $page = new loginPMPage();
 
-        $result = $controller->login("pm1", "1234");
+		$result = $page->login("manager", "manager123");
 
-        $this->assertTrue($result);
+		$this->assertEquals('dashboard_pm.php', $result);
+		
+		echo "Passed" . PHP_EOL;
     }
 
     public function testUALoginSuccess()
     {
-        $controller = new loginUAController();
+		echo "Testing UA successful login..." . PHP_EOL;
+		
+        $page = new loginUAPage();
 
-        $result = $controller->login("useradmin1", "1234");
+        $result = $page->login("useradmin", "useradmin123");
 
-        $this->assertTrue($result);
+        $this->assertEquals('dashboard_ua.php', $result);
+		
+		echo "Passed" . PHP_EOL;
     }
 	
 	// Fail Login Test
     public function testDNLoginFail()
     {
-        $controller = new loginDNController();
+		echo "Testing Donee fail login..." . PHP_EOL;
+		
+        $page = new loginDNPage();
 
-        $result = $controller->login("ua1", "1234");
+        $result = $page->login("invaliddn", "1234");
 
-        $this->assertFalse($result);
+        $this->assertNull($result);
+		
+		echo "Passed" . PHP_EOL;
     }
 
     public function testFRLoginFail()
     {
-        $controller = new loginFRController();
+		echo "Testing FR fail login..." . PHP_EOL;
+		
+        $page = new loginFRPage();
 
-        $result = $controller->login("fr1", "5432");
+        $result = $page->login("invalidfr", "5432");
 
-        $this->assertFalse($result);
+        $this->assertNull($result);
+		
+		echo "Passed" . PHP_EOL;
     }
 
     public function testPMLoginFail()
     {
-        $controller = new loginPMController();
+		echo "Testing PM fail login..." . PHP_EOL;
+		
+        $page = new loginPMPage();
 
-        $result = $controller->login("fguser1", "1234");
+        $result = $page->login("invalidpm", "1234");
 
-        $this->assertFalse($result);
+		$this->assertNull($result);
+		
+		echo "Passed" . PHP_EOL;
     }
 
     public function testUALoginFail()
     {
-        $controller = new loginUAController();
+		echo "Testing UA fail login..." . PHP_EOL;
+		
+        $page = new loginUAPage();
 
-        $result = $controller->login("uauser1", "1144");
+        $result = $page->login("invalidua", "1144");
 
-        $this->assertFalse($result);
+		$this->assertNull($result);
+		
+		echo "Passed" . PHP_EOL;
     }
 	
 	// Success Logout Test
     public function testLogout()
 	{
+		echo "Testing successful logout..." . PHP_EOL;
+		
 		$_SESSION['user_id'] = 1;
 
-		$controller = new LogoutController();
+		$page = new LogoutPage();
 
-		$controller->logout();
+		$result = $page->requestLogout();
 
 		$this->assertEmpty($_SESSION);
+
+		$this->assertEquals('index.php?logged_out=1', $result);
+		
+		echo "Passed" . PHP_EOL;
 	}
 }

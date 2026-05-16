@@ -6,7 +6,7 @@ class TestRunner
 {
     public static function main()
     {
-        $command = "C:\\xampp\\php\\php.exe vendor\\bin\\phpunit tdd";
+        $command = "C:\\xampp\\php\\php.exe vendor\\bin\\phpunit tdd\\Test.php";
 
         $output = [];
         $resultCode = 0;
