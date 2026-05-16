@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS user_accounts (
 CREATE TABLE IF NOT EXISTS fundraising_activity (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     campaign_title  VARCHAR(255) NOT NULL,
-    category        VARCHAR(100) NOT NULL,
+    category        INT NOT NULL,
     description     TEXT NOT NULL,
     end_date        DATE NOT NULL,
     goal_amount     DECIMAL(12,2) NOT NULL,
@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS fundraising_activity (
     fundraiser_name VARCHAR(255) NOT NULL,
     view_count      INT NOT NULL DEFAULT 0,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+    FOREIGN KEY (category) REFERENCES fra_categories(name)
 );
 
 CREATE TABLE IF NOT EXISTS favourite_fundraising_activity (
