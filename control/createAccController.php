@@ -10,12 +10,10 @@ class createAccController {
 	}
 	
 	public function createAcc(string $name, string $username, string $email, string $phone, string $password, string $profile): array {
-		$status = 'Active';
 		return $this->ua->createAcc($name, $username, $email, $phone, $password, $profile, 'Active');
 	}
 
 	public function loadProfiles() {
-		$ua = new UserAccount();
 		return $this->ua->getProfiles();
 	}
 }

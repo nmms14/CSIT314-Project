@@ -32,7 +32,7 @@ class UserAccount {
 		try {
 			$success = $stmt->execute();
 		} catch (mysqli_sql_exception $e) {
-			return ['type' => 'error', 'message' => 'Username already exists.'];
+			return ['type' => 'error', 'message' => 'Username or email already exists.'];
 		}
 
 		$stmt->close();
