@@ -22,10 +22,18 @@ CREATE TABLE IF NOT EXISTS user_accounts (
     FOREIGN KEY (profile) REFERENCES user_profiles(profile_name)
 );
 
+CREATE TABLE IF NOT EXISTS fra_categories (
+    id             INT AUTO_INCREMENT PRIMARY KEY,
+    name           VARCHAR(100) NOT NULL UNIQUE,
+    description    TEXT NOT NULL,
+    created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 CREATE TABLE IF NOT EXISTS fundraising_activity (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     campaign_title  VARCHAR(255) NOT NULL,
-    category        INT NOT NULL,
+    category VARCHAR(100) NOT NULL,
     description     TEXT NOT NULL,
     end_date        DATE NOT NULL,
     goal_amount     DECIMAL(12,2) NOT NULL,
@@ -33,7 +41,7 @@ CREATE TABLE IF NOT EXISTS fundraising_activity (
     phone           VARCHAR(20),
     fundraiser_name VARCHAR(255) NOT NULL,
     view_count      INT NOT NULL DEFAULT 0,
-    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (category) REFERENCES fra_categories(name)
 );
@@ -44,36 +52,35 @@ CREATE TABLE IF NOT EXISTS favourite_fundraising_activity (
     activity_id INT NOT NULL,
     created_at 	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (username) REFERENCES user_accounts(username) ON DELETE CASCADE,
+    FOREIGN KEY (username) 
+	REFERENCES user_accounts(username) 
+	ON DELETE CASCADE,
 
-    FOREIGN KEY (activity_id) REFERENCES fundraising_activity(id) ON DELETE CASCADE,
+    FOREIGN KEY (activity_id) 
+	REFERENCES fundraising_activity(id) 
+	ON DELETE CASCADE,
 
     UNIQUE (username, activity_id)
 );
 
-CREATE TABLE IF NOT EXISTS fra_categories (
-    id             INT AUTO_INCREMENT PRIMARY KEY,
-    name           VARCHAR(100) NOT NULL UNIQUE,
-    description    TEXT NOT NULL,
-    created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE donation (
-    donation_id INT AUTO_INCREMENT PRIMARY KEY,
-    fra_id INT NOT NULL,
-    donee_name VARCHAR(100),
-    amount DECIMAL(10,2) NOT NULL,
-    donation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE IF NOT EXISTS donation (
+    donation_id 	INT AUTO_INCREMENT PRIMARY KEY,
+    fra_id 			INT NOT NULL,
+    donee_name 		VARCHAR(100),
+    amount 			DECIMAL(10,2) NOT NULL,
+    donation_date 	DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (fra_id)
     REFERENCES fundraising_activity(id)
+	ON DELETE CASCADE
 );
 
-CREATE TABLE completed_fra (
-    completed_id INT AUTO_INCREMENT PRIMARY KEY,
-    fra_id INT NOT NULL,
-    completed_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE IF NOT EXISTS completed_fra (
+    completed_id 	INT AUTO_INCREMENT PRIMARY KEY,
+    fra_id 			INT NOT NULL,
+    completed_date 	DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (fra_id)
     REFERENCES fundraising_activity(id)
+	ON DELETE CASCADE
 );
