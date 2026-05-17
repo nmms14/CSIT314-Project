@@ -138,6 +138,23 @@ class UserAccount {
 	}
 
 	public function updateAcc(string $username, array $data): array {
+		
+		$user = $this->getAccDetail($username);
+
+		if (!$user) {
+			return [
+				'success' => false,
+				'message' => 'User not found.'
+			];
+		}
+
+		if ($user->status === 'Suspended') {
+			return [
+				'success' => false,
+				'message' => 'Suspended users cannot be edited.'
+			];
+		}
+		
 		$fields = [];
 		$values = [];
 
@@ -175,7 +192,10 @@ class UserAccount {
 		}
 
 		if (empty($fields)) {
-			return false;
+			return [
+				'success' => false,
+				'message' => 'No fields to update'
+			];
 		}
 		
 		$sql = "UPDATE user_accounts SET " . implode(", ", $fields) . " WHERE username = ?";

@@ -58,10 +58,13 @@ require_once __DIR__ . '/../control/updateAccController.php';
 					// Call controller with data
 					$result = $controller->updateAcc($currUsername, $data);
 
-					$message     = $result['message'] ?? '';
-					$messageType = $result['type'] ?? 'error';
+						$message = $result['message'] ?? '';
 
-					if ($messageType === 'success') {
+						$messageType = ($result['success'] ?? false)
+							? 'success'
+							: 'error';
+
+						if ($result['success']) {
 						$newUsername = $data['username'] ?? $currUsername;
 
 						header("Location: view_acc_detail.php?username=" . urlencode($newUsername) . "&type=success&msg=" . urlencode($message));

@@ -10,29 +10,7 @@
 		}
 		
 		public function updateAcc(string $currUsername, array $data): array {
-			$user = $this->ua->getAccDetail($currUsername);
-
-			if (!$user) {
-				return ['type' => 'error', 'message' => 'User not found.'];
-			}
-
-			if ($user->status === 'Suspended') {
-				return ['type' => 'error', 'message' => 'Suspended users cannot be edited.'];
-			}
-
-			$result = $this->ua->updateAcc($currUsername, $data);
-
-			if ($result['success']) {
-				return [
-					'type' => 'success',
-					'message' => $result['message']
-				];
-			}
-
-			return [
-				'type' => 'error',
-				'message' => $result['message']
-			];
+			return $this->ua->updateAcc($currUsername, $data);
 		}
 
 		public function loadProfiles() {
