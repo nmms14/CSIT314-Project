@@ -13,10 +13,6 @@ class saveFRAController
 
     public function saveFavouriteFRA(string $username, int $fraId): bool
     {
-        if ($username === '' || $fraId <= 0) {
-            return false;
-        }
-
         return $this->favouriteFRA->saveFavouriteFRA($username, $fraId);
     }
 }

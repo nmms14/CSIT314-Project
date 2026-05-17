@@ -16,6 +16,11 @@ class saveFRAPage
         $fraId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
         $username = $_SESSION['username'] ?? '';
+		
+		if ($username === '' || $fraId <= 0) {
+            return;
+        }
+		
         $success = $this->controller->saveFavouriteFRA($username, $fraId);
 
         if ($success) {

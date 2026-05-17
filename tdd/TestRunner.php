@@ -6,7 +6,7 @@ class TestRunner
 {
     public static function main()
     {
-        $command = "C:\\xampp\\php\\php.exe vendor\\bin\\phpunit tdd\\Test.php";
+        $command = "C:\\xampp\\php\\php.exe vendor\\bin\\phpunit tdd\\AuthenticationTest.php";
 
         $output = [];
         $resultCode = 0;
